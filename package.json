@@ -17,7 +17,9 @@
     "qrcode": "^1.5.3",
     "react": "latest",
     "react-dom": "latest",
-    "react-icons": "^4.11.0"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "latest",

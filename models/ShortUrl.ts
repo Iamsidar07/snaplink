@@ -11,12 +11,12 @@ const shortUrlSchema = new Schema({
         type: Number,
         default: 0
     },
-    date: {
+    qrcode: String,
+    userId: String,
+    createdAt: {
         type: Date,
         default: new Date()
-    },
-    qrcode: String,
-    userId: String
+    }
 })
 
 const ShortUrl = models.shorturl || model("shorturl", shortUrlSchema);

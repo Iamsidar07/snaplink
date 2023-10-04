@@ -1,18 +1,25 @@
-import Form from '@/components/Form'
-import History from '@/components/History'
-import ToggleButton from '@/components/ToggleButton'
-import { getHistory } from '@/utils/getHistory'
-import Image from 'next/image'
+import Hero from "@/components/Hero";
+import { auth } from "@clerk/nextjs";
+interface HomeProps {
+  searchParams: { [key: string]: string };
+}
 
-export default async function Home() {
+export const revalidate = 900;
 
+async function fetchHistory(userId: string, sortby: string) {
+  let url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/all?userId=${userId}`;
+  if (sortby) url = url.concat(`&sortby=${sortby}`);
+  const res = await fetch(url);
+  return (await res.json()).result;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { userId } = auth();
+  const { sortby } = searchParams;
+  const history = await fetchHistory(userId as string, sortby);
   return (
-    <main className="flex min-h-screen flex-col items-center px-4 py-24 gap-6 text-center max-w-[1440px] mx-auto">
-      <h1 className="text-lg sm:text-2xl lg:text-5xl gradient-text font-semibold">Shorten your Loooong Links :) </h1>
-      <p >SnapLink is an efficient and easy-to-use URL shortening service that streamlines your <br className='hidden sm:block' /> online experience.</p>
-      <Form />
-      <History/>
-
-    </main>
-  )
+    <>
+      <Hero historyData={history} />
+    </>
+  );
 }

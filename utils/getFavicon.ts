@@ -20,17 +20,3 @@ export async function getFaviconUrl(url: string) {
         return null;
     }
 }
-
-// Example usage:
-const url = 'https://example.com';
-getFaviconUrl(url)
-    .then((faviconUrl) => {
-        if (faviconUrl) {
-            console.log('Favicon URL:', faviconUrl);
-        } else {
-            console.log('No favicon found for the URL.');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });

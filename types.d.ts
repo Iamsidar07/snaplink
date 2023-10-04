@@ -2,7 +2,7 @@ export interface History {
     _id: string,
     original_url: string,
     clicks: number,
-    date: Date,
+    createdAt: Date,
     userId: string,
     short_url: string,
     qrcode: string

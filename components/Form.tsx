@@ -3,6 +3,7 @@ import { BsLink45Deg } from "react-icons/bs";
 import Button from "./Button";
 import { useEffect, useState } from "react";
 import ToggleButton from "./ToggleButton";
+import { AiOutlineArrowRight } from "react-icons/ai";
 const Form = () => {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -47,37 +48,53 @@ const Form = () => {
       setIsLoading(false);
     }
   };
-
+  //
   return (
-    <div className="flex items-center flex-col gap-2 sm:gap-6">
+    <div className="flex items-center flex-col gap-2 sm:w-full">
       <form
         onSubmit={handleFormSubmit}
-        className="flex items-stretch py-2 pr-2 w-full   bg-[#181E29] rounded-full ring-2 mt-6 ring-[#353C4A] focus-within:brightness-125 duration-200"
+        className="flex items-stretch p-1.5 sm:p-2  sm:w-full bg-[#181E29] rounded-full ring-2 mt-6 ring-[#353C4A] focus-within:brightness-125 duration-200"
       >
-        <div className="flex items-center flex-1 px-4">
-          <BsLink45Deg size={25} />
+        <div className="flex items-center sm:w-full">
+          <BsLink45Deg size={25} className="mx-2" />
           <input
             value={shortenUrl ? shortenUrl : url}
             onChange={(e) => setUrl(e.target.value)}
             type="text"
-            className="flex-1 rounded-full px-4 bg-transparent outline-none"
+            className="flex-1 pl-2 rounded-full bg-transparent outline-none"
             placeholder="Shorten a link here..."
           />
         </div>
-        <Button
-          loading={isLoading}
-          text={shortenUrl ? (isLoading ? "Copied" : "Copy url") : (isLoading ? "Shortening" : "Shoten Now!")}
-          variant="primary"
-          type="submit"
-          onClick={() => {
-            console.log("Hello", shortenUrl);
-            if (shortenUrl) {
-              setIsLoading(true);
-              navigator.clipboard.writeText(shortenUrl);
-              setTimeout(() => setIsLoading(false), 500)
+        <div className="hidden sm:flex">
+          <Button
+            loading={isLoading}
+            text={
+              shortenUrl
+                ? isLoading
+                  ? "Copied"
+                  : "Copy url"
+                : isLoading
+                ? "Shortening"
+                : "Shoten Now!"
             }
-          }}
-        />
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              if (shortenUrl) {
+                setIsLoading(true);
+                navigator.clipboard.writeText(shortenUrl);
+                setTimeout(() => setIsLoading(false), 500);
+              }
+            }}
+          />
+        </div>
+        <div className="sm:hidden">
+          <Button
+            text=""
+            variant="primary"
+            icon={<AiOutlineArrowRight size={25} />}
+          />
+        </div>
       </form>
       {errorMsg && (
         <p className="text-red-400 text-xs text-center">{errorMsg}</p>
@@ -87,7 +104,7 @@ const Form = () => {
           setIsAutoPaste={setIsAutoPaste}
           isAutoPaste={isAutoPaste}
         />
-        <p>Auto paste from clipboard.</p>
+        <p className="text-xs">Auto paste from clipboard.</p>
       </div>
     </div>
   );

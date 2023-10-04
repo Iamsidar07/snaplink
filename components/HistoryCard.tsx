@@ -1,25 +1,17 @@
-"use client";
+
 import { History } from "@/types";
-import { AiOutlineCopy } from "react-icons/ai";
 import Image from "next/image";
-import { useState } from "react";
-import { TiTick } from "react-icons/ti";
 import Link from "next/link";
+import CopyUrlComponent from "./CopyUrlComponent";
 
 const HistoryCard = ({
   _id,
   clicks,
-  date,
+  createdAt,
   original_url,
   short_url,
   qrcode,
 }: History) => {
-  const [isCopied, setIsCopied] = useState(false);
-  const handleUrlCopy = (url: string) => {
-    navigator.clipboard.writeText(url);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 700);
-  };
 
   const getFaviconUrl = (url: string) => {
     const urlObject = new URL(url);
@@ -35,16 +27,7 @@ const HistoryCard = ({
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200 max-w-sm">
         <div className="flex items-center gap-2">
           <span className="truncate">{short_url}</span>
-          <div
-            className="flex items-center justify-center bg-secondary rounded-full w-8 h-8 cursor-pointer"
-            onClick={() => handleUrlCopy(short_url)}
-          >
-            {isCopied ? (
-              <TiTick size={15} className="text-teal-500" />
-            ) : (
-              <AiOutlineCopy size="15" />
-            )}
-          </div>
+          <CopyUrlComponent shortUrl={short_url} />
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 max-w-lg">
@@ -76,7 +59,7 @@ const HistoryCard = ({
         {clicks}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-        {new Date(date).toDateString()}
+        {new Date(createdAt).toDateString()}
       </td>
     </tr>
   );
