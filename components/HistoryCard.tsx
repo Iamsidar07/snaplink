@@ -1,4 +1,3 @@
-
 import { History } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +11,6 @@ const HistoryCard = ({
   short_url,
   qrcode,
 }: History) => {
-
   const getFaviconUrl = (url: string) => {
     const urlObject = new URL(url);
     const hostname = urlObject.hostname;

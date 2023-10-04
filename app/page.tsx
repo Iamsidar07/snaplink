@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 interface HomeProps {
   searchParams: { [key: string]: string };
 }

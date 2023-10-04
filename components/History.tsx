@@ -2,10 +2,9 @@ import { History } from "@/types";
 import HistoryCard from "./HistoryCard";
 import HistoryAction from "./HistoryAction";
 interface HistoryProps {
-  historyData: History[]
+  historyData: History[];
 }
 const HistoryComponent = ({ historyData }: HistoryProps) => {
-
   return (
     <div className="min-w-full">
       <div className="flex items-stretch justify-between p-2">

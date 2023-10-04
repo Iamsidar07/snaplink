@@ -7,7 +7,7 @@ interface ButtonProps {
   text: string;
   icon?: ReactNode;
   onClick?: () => void;
-  variant: "primary" | "secondary" | "danger" | "warning" | "success" | "info";
+  variant: "primary" | "secondary";
   type?: "submit" | "button" | "reset";
   loading?: boolean;
 }
@@ -30,7 +30,7 @@ const Button = ({
             : "bg-secondary border border-secondary"
         }`}
     >
-      {loading && <ImSpinner2 size={25} className="animate-spin" />}
+      {loading && <ImSpinner2 size={20} className="animate-spin" />}
       <span>{text}</span>
       {icon && icon}
     </button>

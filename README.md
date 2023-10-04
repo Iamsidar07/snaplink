@@ -1,3 +1,29 @@
+# Snaplink
+
+Snaplink is an url shortner for your looooong urls.
+
+## Performances
+
+Lighthouse statstics of the [https:snaplink.vercel.app](snaplink)
+![https:snaplink.vercel.app/lightouse](lighthouse snaplink)
+
+## TechStacks
+
+- Nextjs
+- tailwindcss
+- typescript
+- mongodb
+- swr
+- clerk
+
+## Features
+
+- Clerk Authentication (username,email,password and Google)
+- Url shortner
+- url validation
+- user history
+- sorting and clear history
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

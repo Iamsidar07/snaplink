@@ -1,12 +1,11 @@
-"use client";
 import Link from "next/link";
 import Button from "./Button";
 import { CiLogin } from "react-icons/ci";
 import { UserButton } from "@clerk/nextjs";
-import { useAuth } from "@clerk/nextjs";
 import Form from "./Form";
+import { auth } from "@clerk/nextjs/server";
 const Navbar = () => {
-  const { userId } = useAuth();
+  const { userId } = auth();
   return (
     <header className="px-4 py-5 max-w-[1440px] mx-auto">
       <nav className="flex items-center gap-2 sm:gap-6 justify-between">
