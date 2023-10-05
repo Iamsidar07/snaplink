@@ -4,7 +4,7 @@
 
 ## Performances
 
-Lighthouse statstics of the [Snaplink](https:snaplink.vercel.app)
+[Performance statstics](https://tools.pingdom.com/#62bf6dbae5800000) of the [Snaplink](https:snaplink.vercel.app)
 
 
 ## TechStacks
