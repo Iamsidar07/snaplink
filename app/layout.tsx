@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     "color-scheme": "dark",
     "twitter:card": "summary_large_image",
     "twitter:image":
-      "https://pbs.twimg.com/profile_images/1663775518427344897/x_E7ceTt_400x400.jpg",
+      "https://snaplink.vercel.app/twitter.png",
     "og:image":
-      "https://pbs.twimg.com/profile_images/1663775518427344897/x_E7ceTt_400x400.jpg",
+      "https://snaplink.vercel.app/twitter.png",
     "og:type": "website",
-    "og:url": "https://snaplink.vercel.app",
+    "og:url": "https://snaplink.vercel.app/",
   },
 };
 

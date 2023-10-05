@@ -10,7 +10,7 @@ async function fetchHistory(userId: string, sortby: string) {
   let url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/all?userId=${userId}`;
   if (sortby) url = url.concat(`&sortby=${sortby}`);
   const res = await fetch(url);
-  return (await res.json()).result;
+  return (await res.json())?.result;
 }
 
 export default async function Home({ searchParams }: HomeProps) {

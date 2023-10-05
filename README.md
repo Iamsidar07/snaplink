@@ -5,7 +5,7 @@ Snaplink is an url shortner for your looooong urls.
 ## Performances
 
 Lighthouse statstics of the [https:snaplink.vercel.app](snaplink)
-![https:snaplink.vercel.app/lightouse](lighthouse snaplink)
+
 
 ## TechStacks
 
