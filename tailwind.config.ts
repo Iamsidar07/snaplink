@@ -27,6 +27,9 @@ const config: Config = {
       borderColor: {
         'secondary': '#353C4A',
       },
+      fontFamily: {
+        "syne": "var(--font-syne)",
+      }
     },
   },
   plugins: [],

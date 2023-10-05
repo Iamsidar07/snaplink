@@ -1,12 +1,18 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Syne } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const syne = Syne({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-syne",
+  weight: ["400", "600", "600"],
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: "SnapLink",
@@ -37,7 +43,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${inter.className} bg-[#0B101B] text-[#C9CED6]`}>
+        <body className={`${syne.variable} font-syne bg-[#0B101B] text-[#C9CED6]`}>
           <Toaster position="top-center" reverseOrder={false} />
           <Navbar />
           {children}
