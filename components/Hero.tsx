@@ -36,7 +36,9 @@ const Hero = ({ historyData }: HeroProps) => {
           streamlines your <br className="hidden sm:block" /> online experience.
         </p>
         <Form />
+        <div className="mt-12">
         {userId && <HistoryComponent historyData={historyData} />}
+        </div>
       </div>
     </main>
   );
