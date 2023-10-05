@@ -53,18 +53,15 @@ const HistoryComponent = ({ historyData }: HistoryProps) => {
                   </thead>
                   <tbody className=" text-left bg-[#0B101B]">
                     {historyData.map(
-                      (
-                        {
-                          short_url,
-                          _id,
-                          clicks,
-                          createdAt,
-                          original_url,
-                          userId,
-                          qrcode,
-                        },
-                        index,
-                      ) => (
+                      ({
+                        short_url,
+                        _id,
+                        clicks,
+                        createdAt,
+                        original_url,
+                        userId,
+                        qrcode,
+                      }) => (
                         <HistoryCard
                           qrcode={qrcode}
                           key={_id}
