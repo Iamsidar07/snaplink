@@ -2,6 +2,7 @@ import { History } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import CopyUrlComponent from "./CopyUrlComponent";
+import DeleteShortlink from "./DeleteShortlink";
 
 const HistoryCard = ({
   _id,
@@ -58,6 +59,9 @@ const HistoryCard = ({
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
         {new Date(createdAt).toDateString()}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+        <DeleteShortlink id={_id} />
       </td>
     </tr>
   );

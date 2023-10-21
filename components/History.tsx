@@ -49,6 +49,12 @@ const HistoryComponent = ({ historyData }: HistoryProps) => {
                       >
                         Date
                       </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-5 text-left text-lg font-medium"
+                      >
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody className=" text-left bg-[#0B101B]">
