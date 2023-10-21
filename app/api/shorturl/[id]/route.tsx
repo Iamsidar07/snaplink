@@ -34,7 +34,7 @@ export const GET = async (
 ) => {
   const { shorturl } = params;
   try {
-    await connectToDB();
+    await connectToDatabase();
     const document = await ShortUrl.findOne({
       short_url: `${process.env.NEXT_PUBLIC_BASE_URL}/s/${shorturl}`,
     });
