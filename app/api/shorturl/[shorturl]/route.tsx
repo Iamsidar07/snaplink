@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const DELETE = async (
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: { shorturl: string } },
 ) => {
-  const { id } = params;
+  const { shorturl: id } = params;
   try {
     await connectToDatabase();
     const document = await ShortUrl.findByIdAndDelete(id);
