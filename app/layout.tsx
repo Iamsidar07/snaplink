@@ -1,18 +1,9 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Syne } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "react-hot-toast";
-
-const syne = Syne({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-syne",
-  weight: ["400", "600", "600"],
-  preload: true,
-});
 
 export const metadata: Metadata = {
   title: "SnapLink",
@@ -22,10 +13,8 @@ export const metadata: Metadata = {
     "theme-color": "#0B101B",
     "color-scheme": "dark",
     "twitter:card": "summary_large_image",
-    "twitter:image":
-      "https://snaplink.vercel.app/twitter.png",
-    "og:image":
-      "https://snaplink.vercel.app/twitter.png",
+    "twitter:image": "https://snaplink.vercel.app/twitter.png",
+    "og:image": "https://snaplink.vercel.app/twitter.png",
     "og:type": "website",
     "og:url": "https://snaplink.vercel.app/",
   },
@@ -43,7 +32,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${syne.variable} font-syne bg-[#0B101B] text-[#C9CED6]`}>
+        <body className={`bg-[#0B101B] text-[#C9CED6]`}>
           <Toaster position="top-center" reverseOrder={false} />
           <Navbar />
           {children}

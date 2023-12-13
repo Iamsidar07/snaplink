@@ -36,9 +36,19 @@ const Hero = ({ historyData }: HeroProps) => {
           streamlines your <br className="hidden sm:block" /> online experience.
         </p>
         <Form />
-        <div className="mt-12">
-        {userId && <HistoryComponent historyData={historyData} />}
-        </div>
+        {
+          userId ? <div className="mt-12">
+            <HistoryComponent historyData={historyData} />
+          </div> : null
+        }
+
+        {
+          !userId ? <div className="mt-12">
+
+          </div> : null
+        }
+
+
       </div>
     </main>
   );
