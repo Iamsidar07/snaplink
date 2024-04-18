@@ -43,7 +43,7 @@ const ShortUrlForm = () => {
           e.preventDefault();
           mutate();
         }}
-        className="flex items-stretch gap-2"
+        className="flex flex-col sm:flex-row items-stretch gap-2"
       >
         <Input
           disabled={isPending}

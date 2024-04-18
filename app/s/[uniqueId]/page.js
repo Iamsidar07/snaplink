@@ -39,7 +39,6 @@ const Page = () => {
       setUrl(window.location.href);
     }
   }, [url]);
-  console.log(url);
 
   useEffect(() => {
     if (url) {
@@ -49,7 +48,7 @@ const Page = () => {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center  p-24">
+      <main className="flex min-h-screen flex-col items-center pt-32">
         <div className="z-10 max-w-3xl w-full mx-auto ">
           <h1 className="max-w-3xl mx-auto headline">
             Redirecting towards your destination...

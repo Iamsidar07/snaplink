@@ -3,6 +3,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Provider from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const fontSans = PlusJakartaSans({
   subsets: ["latin"],
@@ -20,7 +22,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Provider>
         <body className={cn("font-sans antialiased", fontSans.variable)}>
-          {children}
+          <div className="main">
+            <div className="gradient"></div>
+          </div>
+          <div className="app">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
           <Toaster />
         </body>
       </Provider>

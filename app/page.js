@@ -2,7 +2,7 @@ import ShortUrlForm from "@/components/ShortUrlForm";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center  p-24">
+    <main className="flex min-h-screen flex-col items-center sm:px-16 px-6 pt-36">
       <div className="z-10 max-w-3xl w-full mx-auto ">
         <h1 className="max-w-3xl mx-auto headline">
           Simple and Fast URL <br /> 🔗Shortner
