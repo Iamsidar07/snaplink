@@ -76,7 +76,7 @@
 }
 
 .headline {
-  @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-400 bg-clip-text text-center text-4xl font-bold tracking-tight text-transparent drop-shadow-sm dark:from-gray-100 dark:to-gray-800 md:text-6xl leading-[3.5rem] md:leading-tight;
+  @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent drop-shadow-sm dark:from-gray-100 dark:to-gray-800 md:text-6xl leading-[3.5rem] md:leading-tight;
 }
 
 .main {
@@ -133,7 +133,7 @@
   height: 100%;
   filter: blur(100px) saturate(150%);
   top: 80px;
-  opacity: 0.1;
+  opacity: 0.01;
 }
 
 .app {

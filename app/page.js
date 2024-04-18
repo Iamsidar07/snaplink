@@ -1,10 +1,11 @@
 import ShortUrlForm from "@/components/ShortUrlForm";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center sm:px-16 px-6 pt-36">
-      <div className="z-10 max-w-3xl w-full mx-auto ">
-        <h1 className="max-w-3xl mx-auto headline">
+    <main className="min-h-screen sm:px-16 px-4 pt-36">
+      <div className="max-w-3xl w-full mx-auto ">
+        <h1 className="max-w-3xl mx-auto headline text-center">
           Simple and Fast URL <br /> 🔗Shortner
         </h1>
         <div className="mt-6 bg-white w-full p-6 border rounded text-center">
@@ -15,6 +16,8 @@ export default function Home() {
           </p>
         </div>
       </div>
+
+      <WhyChooseUs />
     </main>
   );
 }
