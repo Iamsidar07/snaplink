@@ -1,7 +1,14 @@
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans as PlusJakartaSans } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import Provider from "@/components/Provider";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = PlusJakartaSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +18,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Provider>
+        <body className={cn("font-sans antialiased", fontSans.variable)}>
+          {children}
+          <Toaster />
+        </body>
+      </Provider>
     </html>
   );
 }
