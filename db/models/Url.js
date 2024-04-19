@@ -14,6 +14,10 @@ const urlSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+    },
   },
   { timestamps: true },
 );

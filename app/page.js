@@ -3,7 +3,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
   return (
-    <main className="min-h-screen sm:px-16 px-4 pt-36">
+    <main>
       <div className="max-w-3xl w-full mx-auto ">
         <h1 className="max-w-3xl mx-auto headline text-center">
           Simple and Fast URL <br /> 🔗Shortner
