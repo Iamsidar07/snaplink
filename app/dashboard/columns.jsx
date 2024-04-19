@@ -10,6 +10,10 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import RenderQrCode from "@/components/RenderQrCode";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Input } from "@/components/ui/input";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -38,11 +42,11 @@ export const columns = [
     enableHiding: false,
   },
   {
-    accessorKey: "shortLink",
+    accessorKey: "shortUrl",
     header: "Short Link",
   },
   {
-    accessorKey: "originalLink",
+    accessorKey: "originalUrl",
     header: "Original Link",
   },
   {
@@ -76,6 +80,25 @@ export const columns = [
   {
     accessorKey: "qrCode",
     header: "QR Code",
+    cell: ({ row }) => {
+      const history = row.original;
+      return (
+        <>
+          <Dialog>
+            <DialogTrigger>
+              <RenderQrCode url={history.shortUrl} className="" />
+            </DialogTrigger>
+            <DialogContent className="py-12 flex items-center justify-center">
+              <RenderQrCode
+                url={history.shortUrl}
+                className="w-full h-full max-w-sm mx-auto"
+                isCustom
+              />
+            </DialogContent>
+          </Dialog>
+        </>
+      );
+    },
   },
   {
     id: "actions",
