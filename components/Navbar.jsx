@@ -33,10 +33,17 @@ const Navbar = async () => {
               signup
             </Link>
           </SignedOut>
+          <SignedIn>
+            <Link
+              className={buttonVariants({ variant: "link" })}
+              href="/dashboard"
+            >
+              dashboard
+            </Link>
+
+            <UserButton />
+          </SignedIn>
         </div>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
       </div>
     </nav>
   );
