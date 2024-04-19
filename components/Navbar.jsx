@@ -14,7 +14,7 @@ const Navbar = async () => {
             width={40}
             height={40}
             alt="Snaplink logo"
-            className="object-cover border rounded-xl"
+            className="object-cover border rounded-xl pointer-events-none"
           />
           <span className="headline text-lg md:text-3xl">Snaplink</span>
         </Link>

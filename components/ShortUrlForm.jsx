@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
+import Image from "next/image";
 
 const ShortUrlForm = () => {
   const queryClient = useQueryClient();
@@ -39,7 +40,14 @@ const ShortUrlForm = () => {
   };
 
   return (
-    <div className="mt-6 bg-white w-full p-6 border rounded text-center">
+    <div className="mt-6 bg-white w-full p-6 border rounded text-center relative">
+      <Image
+        src={"/try-it.png"}
+        alt="try it"
+        width={382}
+        height={419}
+        className="w-20 obkect-contain absolute -right-2 -top-14 sm:-right-12 sm:-top-16 pointer-events-none"
+      />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -59,7 +67,7 @@ const ShortUrlForm = () => {
       </form>
       {shortenUrl && (
         <div
-          className="mt-4 cursor-pointer text-sm underline-offset-2 flex items-center justify-center underline gap-2"
+          className="mt-4 cursor-pointer text-sm underline-offset-2 flex items-center kustify-center underline gap-2"
           onClick={copyShortUrl}
         >
           <CopyIcon className="w-4 h-4 text-blue-500" />
