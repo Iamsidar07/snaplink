@@ -1,9 +1,8 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowUpDown, MoreHorizontal, Trash } from "lucide-react";
+import { ArrowUpDown, Copy, MoreHorizontal, Trash } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -13,10 +12,15 @@ import {
 import RenderQrCode from "@/components/RenderQrCode";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
+
+const deleteUrl = async (url) => {
+  const res = await axios.delete("/api/url", { url });
+  console.log(res.data);
+};
 
 export const columns = [
   {
@@ -44,10 +48,38 @@ export const columns = [
   {
     accessorKey: "shortUrl",
     header: "Short Link",
+    cell: ({ row }) => {
+      const url = row.original.shortUrl;
+      return (
+        <div className="flex items-center gap-2">
+          <Copy
+            className="w-4 h-4 cursor-pointer text-blue-500 active:scale-90"
+            onClick={() => {
+              navigator.clipboard.writeText(url);
+            }}
+          />
+          <span>{url}</span>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "originalUrl",
     header: "Original Link",
+    cell: ({ row }) => {
+      const url = row.original.originalUrl;
+      return (
+        <div className="flex items-center gap-2">
+          <Copy
+            className="w-4 h-4 cursor-pointer text-blue-500 active:scale-90"
+            onClick={() => {
+              navigator.clipboard.writeText(url);
+            }}
+          />
+          <span>{url}</span>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "clicks",
@@ -58,20 +90,6 @@ export const columns = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Clicks
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "date",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -101,10 +119,30 @@ export const columns = [
     },
   },
   {
-    id: "actions",
+    accessorKey: "date",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const history = row.original;
-      console.log(history);
+      const date = new Date(history.date);
+
+      return date.toLocaleDateString("en-US");
+    },
+  },
+
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const { shortUrl } = row.original;
 
       return (
         <DropdownMenu>
@@ -119,7 +157,10 @@ export const columns = [
               className="text-red-500"
               onClick={() => navigator.clipboard.writeText(history.id)}
             >
-              <Trash className="w-4 h-4 mr-2" />
+              <Trash
+                onClick={() => deleteUrl(shortUrl)}
+                className="w-4 h-4 mr-2"
+              />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
