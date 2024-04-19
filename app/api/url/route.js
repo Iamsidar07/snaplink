@@ -5,14 +5,12 @@ import { auth } from "@clerk/nextjs";
 // get all url of a user
 export const GET = async (request) => {
   const { userId } = auth();
-  console.log({ userId });
   if (!userId) {
     return Response.json("Unauthorized", { status: 401 });
   }
   try {
     await dbConnect();
     const urls = await UrlModel.find({ userId });
-    console.log({ urls });
     return Response.json(urls, { status: 200 });
   } catch (err) {
     return Response.json(err.message, { status: 500 });

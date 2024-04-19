@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
 
 const ShortUrlForm = () => {
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const [actualUrl, setActualURL] = useState("");
   const [shortenUrl, setShortenUrl] = useState(null);
@@ -20,6 +21,7 @@ const ShortUrlForm = () => {
     },
     onSuccess: ({ shortUrl }) => {
       setShortenUrl(shortUrl);
+      queryClient.invalidateQueries(["history"]);
     },
     onError: (error) => {
       return toast({
@@ -37,7 +39,7 @@ const ShortUrlForm = () => {
   };
 
   return (
-    <>
+    <div className="mt-6 bg-white w-full p-6 border rounded text-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -66,7 +68,11 @@ const ShortUrlForm = () => {
           </span>
         </div>
       )}
-    </>
+      <p className="mt-6 text-muted-foreground">
+        ShortURL is a free tool to shorten URLs and generate short links URL
+        shortener allows to create a shortened link making it easy to share
+      </p>
+    </div>
   );
 };
 

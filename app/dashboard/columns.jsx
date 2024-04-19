@@ -2,24 +2,37 @@
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowUpDown, Copy, MoreHorizontal, Trash } from "lucide-react";
+import {
+  ArrowUpDown,
+  BarChart2,
+  Copy,
+  MoreHorizontal,
+  Trash,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import RenderQrCode from "@/components/RenderQrCode";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import axios from "axios";
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+import Statstics from "@/components/Statstics";
 
 const deleteUrl = async (url) => {
   const res = await axios.delete("/api/url", { url });
-  console.log(res.data);
 };
 
 export const columns = [
@@ -136,6 +149,47 @@ export const columns = [
       const date = new Date(history.date);
 
       return date.toLocaleDateString("en-US");
+    },
+  },
+  {
+    accessorKey: "visualize",
+    header: "Visualize",
+    cell: ({ row }) => {
+      const data = row.original.dailyClicks;
+      const formattedData = {
+        labels: data.map((url) =>
+          new Date(url.date).toLocaleDateString("en-US"),
+        ),
+        datasets: [
+          {
+            label: "Clicks per day",
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(75, 192, 192, 0.4)",
+            hoverBorderColor: "rgba(75, 192, 192, 1)",
+            data: data.map((url) => url.count),
+          },
+        ],
+      };
+
+      return (
+        <Drawer>
+          <DrawerTrigger>
+            <BarChart2 className="w-4 h-4 active:scale-95" />
+          </DrawerTrigger>
+          <DrawerContent className="max-h-[75vh] flex flex-col items-center gap-6">
+            <DrawerHeader>
+              <DrawerTitle>
+                Showing Statstics for {row.original.originalUrl}
+              </DrawerTitle>
+              <DrawerDescription>
+                <Statstics data={formattedData} className="h-64 md:h-96" />
+              </DrawerDescription>
+            </DrawerHeader>
+          </DrawerContent>
+        </Drawer>
+      );
     },
   },
 

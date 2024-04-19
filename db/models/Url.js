@@ -18,6 +18,18 @@ const urlSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    dailyClicks: [
+      {
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+        count: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
   },
   { timestamps: true },
 );

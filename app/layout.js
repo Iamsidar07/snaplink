@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children, pageProps }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <Provider pageProps={pageProps}>
           <body className={cn("font-sans antialiased", fontSans.variable)}>
             <div className="main">

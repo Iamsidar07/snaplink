@@ -17,6 +17,17 @@ export const POST = async (req) => {
       { $inc: { clicks: 1 } },
       { new: true },
     );
+    const today = new Date().setHours(0, 0, 0, 0);
+    await UrlModel.updateOne(
+      {
+        shortUrl: url,
+        "dailyClicks.date": today,
+      },
+      {
+        $inc: { "dailyClicks.$.count": 1 },
+      },
+      { upsert: true },
+    );
     return Response.json(newUrl, { status: 201 });
   } catch (error) {
     console.error(error);
