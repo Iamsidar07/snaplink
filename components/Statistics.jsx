@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
-const Statstics = ({ data, className }) => {
+const Statistics = ({ data, className }) => {
   return (
     <div className={className}>
       <Line
@@ -24,4 +24,4 @@ const Statstics = ({ data, className }) => {
   );
 };
 
-export default Statstics;
+export default Statistics;

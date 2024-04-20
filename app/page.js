@@ -1,7 +1,9 @@
 import ShortUrlForm from "@/components/ShortUrlForm";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import UrlCount from "@/components/UrlCount";
 
-export default function Home() {
+
+export default async function Home() {
   return (
     <main className="py-16 md:py-32">
       <div className="max-w-3xl w-full mx-auto">
@@ -11,6 +13,7 @@ export default function Home() {
         <ShortUrlForm />
       </div>
       <WhyChooseUs />
+<UrlCount/>
     </main>
   );
 }

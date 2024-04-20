@@ -20,9 +20,9 @@ const ShortUrlForm = () => {
       });
       return res.data;
     },
-    onSuccess: ({ shortUrl }) => {
+    onSuccess: async ({ shortUrl }) => {
       setShortenUrl(shortUrl);
-      queryClient.invalidateQueries(["history"]);
+      await queryClient.invalidateQueries(["history", "urlCount"]);
     },
     onError: (error) => {
       return toast({
@@ -32,8 +32,8 @@ const ShortUrlForm = () => {
       });
     },
   });
-  const copyShortUrl = () => {
-    navigator.clipboard.writeText(shortenUrl);
+  const copyShortUrl = async() => {
+    await navigator.clipboard.writeText(shortenUrl);
     toast({
       description: "🔗 Url copied to your clipboard.",
     });

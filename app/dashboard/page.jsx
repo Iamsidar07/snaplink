@@ -3,7 +3,7 @@ import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import RenderQrCode from "@/components/RenderQrCode";
-import Statstics from "@/components/Statstics";
+import Statistics from "@/components/Statistics";
 import { useQuery } from "@tanstack/react-query";
 import MyLoader from "@/components/Loader";
 import { useToast } from "@/components/ui/use-toast";
@@ -30,6 +30,7 @@ export default function Page() {
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["history"],
     queryFn: getData,
+    retry: true,
     retryDelay: 5,
   });
   if (isError) {
@@ -71,7 +72,7 @@ export default function Page() {
       {data?.length > 0 ? (
         <div>
           <DataTable columns={columns} data={data} />
-          <Statstics data={formattedData} />
+          <Statistics data={formattedData} />
         </div>
       ) : null}
     </div>

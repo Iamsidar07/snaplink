@@ -29,7 +29,7 @@ import RenderQrCode from "@/components/RenderQrCode";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import axios from "axios";
-import Statstics from "@/components/Statstics";
+import Statistics from "@/components/Statistics";
 
 const deleteUrl = async (url) => {
   const res = await axios.delete("/api/url", { url });
@@ -184,7 +184,7 @@ export const columns = [
                 Showing Statstics for {row.original.originalUrl}
               </DrawerTitle>
               <DrawerDescription>
-                <Statstics data={formattedData} className="h-64 md:h-96" />
+                <Statistics data={formattedData} className="h-64 md:h-96" />
               </DrawerDescription>
             </DrawerHeader>
           </DrawerContent>
