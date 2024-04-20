@@ -14,8 +14,8 @@ const RenderQrCode = ({ url, className, isCustom }) => {
   //TODO: complete this function
   const downloadQRCode = () => {};
   return (
-    <div className="w-full h-full">
-      <div className={cn("h-10 w-10 bg-primary", className)}>
+    <div className="">
+      <div className="w-full flex-1">
         <QRCode
           ref={qrCodeRef}
           size={50}
@@ -24,13 +24,12 @@ const RenderQrCode = ({ url, className, isCustom }) => {
           style={{ height: "auto", maxWidth: "100%", width: "100%" }}
           value={url}
           viewBox={`0 0 100 100`}
+          className={className}
         />
       </div>
       {isCustom ? (
-        <div className="space-y-3 mt-4">
-          <div>
-            {" "}
-            <h3>Foreground</h3>
+        <div className="mt-4 flex gap-3">
+          <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <Label
                 className="w-12 h-12 rounded-xl p-2 border cursor-pointer"
@@ -46,34 +45,28 @@ const RenderQrCode = ({ url, className, isCustom }) => {
                 type="color"
                 value={fgColor}
                 onChange={(v) => setFgColor(v.target.value)}
-                className="w-16 h-16 rounded-xl p-2 invisible"
+                className="w-16 h-16 rounded-xl p-2 hidden"
               />{" "}
             </div>
           </div>
-          <div>
-            <h3>Background</h3>
-            <div className="flex items-center gap-2">
-              <Label
-                className="w-12 h-12 rounded-xl p-2 border cursor-pointer"
-                htmlFor="bgColor"
-              >
-                <div
-                  style={{ background: bgColor }}
-                  className="w-full h-full rounded-lg"
-                />
-              </Label>
-              <Input
-                id="bgColor"
-                type="color"
-                value={bgColor}
-                onChange={(v) => setBgColor(v.target.value)}
-                className="w-16 h-16 rounded-xl p-2 invisible"
-              />{" "}
-            </div>
+          <div className="flex items-center gap-2">
+            <Label
+              className="w-12 h-12 rounded-xl p-2 border cursor-pointer"
+              htmlFor="bgColor"
+            >
+              <div
+                style={{ background: bgColor }}
+                className="w-full h-full rounded-lg"
+              />
+            </Label>
+            <Input
+              id="bgColor"
+              type="color"
+              value={bgColor}
+              onChange={(v) => setBgColor(v.target.value)}
+              className="w-16 h-16 rounded-xl p-2 hidden"
+            />{" "}
           </div>
-          <Button onClick={downloadQRCode} className="w-full">
-            Download
-          </Button>
         </div>
       ) : null}
     </div>

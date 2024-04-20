@@ -32,7 +32,7 @@ const ShortUrlForm = () => {
       });
     },
   });
-  const copyShortUrl = async() => {
+  const copyShortUrl = async () => {
     await navigator.clipboard.writeText(shortenUrl);
     toast({
       description: "🔗 Url copied to your clipboard.",
@@ -67,7 +67,7 @@ const ShortUrlForm = () => {
       </form>
       {shortenUrl && (
         <div
-          className="mt-4 cursor-pointer text-sm underline-offset-2 flex items-center kustify-center underline gap-2"
+          className="mt-4 cursor-pointer text-sm underline-offset-2 flex items-center justify-center underline gap-2 "
           onClick={copyShortUrl}
         >
           <CopyIcon className="w-4 h-4 text-blue-500" />

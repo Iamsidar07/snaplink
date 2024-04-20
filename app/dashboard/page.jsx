@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import MyLoader from "@/components/Loader";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import Card from "@/components/Card";
 export default function Page() {
   const { toast } = useToast();
   async function getData() {
@@ -27,7 +28,7 @@ export default function Page() {
     return formattedData?.length > 0 ? formattedData : [];
   }
 
-  const { isLoading, isError, data, refetch } = useQuery({
+  const { isLoading, isError, data, refetch, error } = useQuery({
     queryKey: ["history"],
     queryFn: getData,
     retry: true,
@@ -69,6 +70,13 @@ export default function Page() {
         <ShortUrlForm />
       </div>
       {isLoading ? <MyLoader /> : null}
+      {data?.length > 0 ? (
+        <div className="flex items-center gap-4">
+          {data.map((card) => (
+            <Card {...card} key={card.id} />
+          ))}
+        </div>
+      ) : null}
       {data?.length > 0 ? (
         <div>
           <DataTable columns={columns} data={data} />

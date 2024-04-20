@@ -5,7 +5,6 @@ export const POST = async (req) => {
   const reqBody = await req.json();
   const { url } = reqBody;
 
-  // connect to db
   try {
     await dbConnect();
     const existingUrl = await UrlModel.findOne({ shortUrl: url });
@@ -17,17 +16,24 @@ export const POST = async (req) => {
       { $inc: { clicks: 1 } },
       { new: true },
     );
-    const today = new Date().setHours(0, 0, 0, 0);
-    await UrlModel.updateOne(
-      {
-        shortUrl: url,
-        "dailyClicks.date": today,
-      },
-      {
-        $inc: { "dailyClicks.$.count": 1 },
-      },
-      { upsert: true },
-    );
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (newUrl.dailyClicks.length === 0) {
+      newUrl.dailyClicks.push({ date: today, count: 1 });
+    } else {
+      const todayIndex = newUrl.dailyClicks.findIndex(
+        (item) =>
+          item.date.toString().split("T")[0] == today.toString().split("T")[0],
+      );
+      if (todayIndex === -1) {
+        newUrl.dailyClicks.push({ date: today, count: 1 });
+      } else {
+        newUrl.dailyClicks[todayIndex].count++;
+      }
+    }
+    await newUrl.save();
     return Response.json(newUrl, { status: 201 });
   } catch (error) {
     console.error(error);

@@ -20,6 +20,7 @@ const Page = () => {
     mutationKey: [url],
     mutationFn: fetchUrl,
     onSuccess: (data) => {
+      console.log("data", data);
       if (data?.actualUrl) {
         router.replace(data.actualUrl);
       }

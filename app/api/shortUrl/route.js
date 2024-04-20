@@ -22,7 +22,7 @@ export const POST = async (req) => {
     const newUrl = await UrlModel.findOneAndUpdate(
       { actualUrl: url },
       {
-        shortUrl: `${process.env.DOMAIN}/s/${uniqueId}`,
+        shortUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/s/${uniqueId}`,
         userId: userId ?? null,
       },
       { upsert: true, new: true },

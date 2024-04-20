@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import DownArrow from "./DownArrow";
 
 const WhyChooseUs = () => {
   const features = [
@@ -23,7 +24,7 @@ const WhyChooseUs = () => {
     },
   ];
   return (
-    <div className="pt-16 md:pt-32 max-w-5xl mx-auto">
+    <div className="pt-16 md:pt-32 max-w-5xl mx-auto md:mb-32">
       <h2 className="headline capitalize text-left relative inline-block text-3xl">
         Why choose snaplink?
         <span>
@@ -36,7 +37,7 @@ const WhyChooseUs = () => {
           />
         </span>
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-16 md:mt-28 md:mb-32">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-16 md:mt-28 ">
         {features.map(({ feature, description, icon }) => (
           <div
             key={icon}
@@ -50,6 +51,8 @@ const WhyChooseUs = () => {
           </div>
         ))}
       </div>
+
+      <DownArrow />
     </div>
   );
 };

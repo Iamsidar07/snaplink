@@ -16,22 +16,3 @@ export const GET = async (request) => {
     return Response.json(err.message, { status: 500 });
   }
 };
-
-export const DELETE = async (request) => {
-  const requestBody = await request.json();
-  const { url } = requestBody;
-  if (!url) {
-    return Response.json("Id's required.", { status: 400 });
-  }
-  const { userId } = auth();
-  if (!userId) {
-    return Response.json("Unauthorized", { status: 401 });
-  }
-  try {
-    await dbConnect();
-    await UrlModel.deleteOne({ shortUrl: url, userId });
-    return Response.json(true, { status: 200 });
-  } catch (err) {
-    return Response.json(err.message, { status: 500 });
-  }
-};

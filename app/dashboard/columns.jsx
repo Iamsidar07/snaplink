@@ -17,10 +17,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -28,50 +26,30 @@ import {
 import RenderQrCode from "@/components/RenderQrCode";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import axios from "axios";
 import Statistics from "@/components/Statistics";
-
-const deleteUrl = async (url) => {
-  const res = await axios.delete("/api/url", { url });
-};
+import Link from "next/link";
 
 export const columns = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: "shortUrl",
     header: "Short Link",
     cell: ({ row }) => {
       const url = row.original.shortUrl;
       return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 group">
           <Copy
             className="w-4 h-4 cursor-pointer text-blue-500 active:scale-90"
             onClick={() => {
               navigator.clipboard.writeText(url);
             }}
           />
-          <span>{url}</span>
+          <Link
+            href={url}
+            target="_blank"
+            className="group-hover:underline group-hover:underline-offset-2 truncate"
+          >
+            {url}
+          </Link>
         </div>
       );
     },
@@ -81,15 +59,26 @@ export const columns = [
     header: "Original Link",
     cell: ({ row }) => {
       const url = row.original.originalUrl;
+      const newUrl = new URL(row.original.originalUrl);
+      const origin = newUrl.origin;
+
       return (
-        <div className="flex items-center gap-2">
-          <Copy
-            className="w-4 h-4 cursor-pointer text-blue-500 active:scale-90"
-            onClick={() => {
-              navigator.clipboard.writeText(url);
-            }}
+        <div className="flex items-center gap-2 group">
+          <img
+            className="rounded"
+            width={30}
+            height={30}
+            alt="logo"
+            src={`${origin}/favicon.ico`}
           />
-          <span>{url}</span>
+
+          <Link
+            href={url}
+            target="_blank"
+            className="group-hover:underline group-hover:underline-offset-2 truncate"
+          >
+            {url}
+          </Link>
         </div>
       );
     },
@@ -189,36 +178,6 @@ export const columns = [
             </DrawerHeader>
           </DrawerContent>
         </Drawer>
-      );
-    },
-  },
-
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const { shortUrl } = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              className="text-red-500"
-              onClick={() => navigator.clipboard.writeText(history.id)}
-            >
-              <Trash
-                onClick={() => deleteUrl(shortUrl)}
-                className="w-4 h-4 mr-2"
-              />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
       );
     },
   },
