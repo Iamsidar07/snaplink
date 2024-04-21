@@ -30,6 +30,25 @@ const urlSchema = new mongoose.Schema(
         },
       },
     ],
+    metadata: {
+      title: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      image: {
+        type: String,
+      },
+    },
+    qrCodeFgColor: {
+      type: String,
+      default: "black",
+    },
+    qrCodeBgColor: {
+      type: String,
+      default: "white",
+    },
   },
   { timestamps: true },
 );

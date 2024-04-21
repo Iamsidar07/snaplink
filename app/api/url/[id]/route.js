@@ -48,3 +48,51 @@ export const GET = async (request, { params }) => {
     return Response.json(err.message, { status: 500 });
   }
 };
+
+export const PATCH = async (request, { params }) => {
+  const { qrCodeFgColor, qrCodeBgColor, title, description, image } =
+    await request.json();
+
+  //TODO: upload image
+  const query = {
+    metadata: {},
+  };
+  if (qrCodeBgColor) {
+    query["qrCodeBgColor"] = qrCodeBgColor;
+  }
+  if (qrCodeFgColor) {
+    query["qrCodeFgColor"] = qrCodeFgColor;
+  }
+  if (title) {
+    query.metadata["title"] = title;
+  }
+  if (description) {
+    query.metadata["description"] = description;
+  }
+  if (image) {
+    query.metadata["image"] = image;
+  }
+
+  const { id } = params;
+  if (!id) {
+    return Response.json("Id's required.", { status: 400 });
+  }
+  const { userId } = auth();
+  if (!userId) {
+    return Response.json("Unauthorized", { status: 401 });
+  }
+  try {
+    await dbConnect();
+    const url = await UrlModel.findOne({ _id: id, userId });
+    if (!url) {
+      return Response.json("Not found", { status: 400 });
+    }
+    const updatedUrl = await UrlModel.findByIdAndUpdate(id, query, {
+      upsert: true,
+    });
+    return Response.json(updatedUrl, { status: 200 });
+  } catch (err) {
+    console.log(err);
+    return Response.json(err.message, { status: 500 });
+  }
+};
