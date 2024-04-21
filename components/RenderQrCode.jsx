@@ -8,18 +8,32 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { Loader } from "lucide-react";
+import axios from "axios";
 
-const RenderQrCode = ({ url, className, isCustom, fg, bg, id }) => {
+const RenderQrCode = ({
+  shortUrl,
+  className,
+  isCustom,
+  qrCodeFgColor,
+  qrCodeBgColor,
+  _id: id,
+}) => {
   const queryClient = useQueryClient();
-  const [fgColor, setFgColor] = useState(fg);
-  const [bgColor, setBgColor] = useState(bg);
+  const [fgColor, setFgColor] = useState(qrCodeFgColor);
+  const [bgColor, setBgColor] = useState(qrCodeBgColor);
   const qrCodeRef = useRef();
   const { toast } = useToast();
   const { mutate, isPending } = useMutation({
     mutationKey: ["qrcode"],
-    mutationFn: async () => {},
+    mutationFn: async (formdata) => {
+      const res = await axios.patch(`/api/url/${id}`, formdata);
+      return res.data;
+    },
     onSuccess: async () => {
       await queryClient.invalidateQueries([id]);
+      toast({
+        title: "Successfully saved!",
+      });
     },
     onError: (err) => {
       console.error(err);
@@ -34,6 +48,13 @@ const RenderQrCode = ({ url, className, isCustom, fg, bg, id }) => {
     },
   });
 
+  const handleSubmit = () => {
+    const data = new FormData();
+    data.append("qrCodeFgColor", fgColor);
+    data.append("qrCodeBgColor", bgColor);
+    mutate(data);
+  };
+
   return (
     <div className="">
       <div className="w-full flex-1">
@@ -43,7 +64,7 @@ const RenderQrCode = ({ url, className, isCustom, fg, bg, id }) => {
           fgColor={fgColor}
           bgColor={bgColor}
           style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-          value={url}
+          value={shortUrl}
           viewBox={`0 0 100 100`}
           className={className}
         />
@@ -91,8 +112,14 @@ const RenderQrCode = ({ url, className, isCustom, fg, bg, id }) => {
               />
             </div>
           </div>
-          <Button disabled={isPending} onClick={mutate}>
-            {isPending ? <Loader className="w-4 h-4 animate-spin" /> : null}
+          <Button
+            onClick={handleSubmit}
+            disabled={isPending}
+            className="w-full mt-2"
+          >
+            {isPending ? (
+              <Loader className="w-4 h-4 animate-spin mr-2" />
+            ) : null}
             Save
           </Button>
         </div>

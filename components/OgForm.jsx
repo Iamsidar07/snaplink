@@ -11,7 +11,7 @@ import { ToastAction } from "./ui/toast";
 import { Loader } from "lucide-react";
 import axios from "axios";
 
-const OgFormAndPreview = ({ shortUrl, id }) => {
+const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { mutate, isPending } = useMutation({
@@ -22,6 +22,9 @@ const OgFormAndPreview = ({ shortUrl, id }) => {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries([id]);
+      toast({
+        title: "Metadata updated!",
+      });
     },
     onError: (err) => {
       console.error(err);
@@ -36,10 +39,13 @@ const OgFormAndPreview = ({ shortUrl, id }) => {
     },
   });
   const [og, setOg] = useState({
-    title: "OpenGraph - Preview Social Media Share and Generate Metatags",
+    title:
+      metadata?.title ??
+      "OpenGraph - Preview Social Media Share and Generate Metatags",
     description:
+      metadata?.description ??
       "OpenGraph is the easiest way to preview and generate open graph meta tags for any website.",
-    image: "/og.png",
+    image: metadata?.ogCover ?? "/og.png",
     file: null,
   });
   const handleImageChange = (e) => {
@@ -52,7 +58,6 @@ const OgFormAndPreview = ({ shortUrl, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
     if (!og.title || !og.description || !og.file) return;
     const formData = new FormData();
     formData.append("title", og.title);
@@ -105,7 +110,7 @@ const OgFormAndPreview = ({ shortUrl, id }) => {
           />
         </div>
         <Button disabled={isPending} type="submit">
-          {isPending ? <Loader className="w-4 h-4 animate-spin" /> : null}
+          {isPending ? <Loader className="w-4 h-4 animate-spin mr-2" /> : null}
           Submit
         </Button>
       </form>

@@ -2,8 +2,8 @@
 import MyLoader from "@/components/Loader";
 import RenderQrCode from "@/components/RenderQrCode";
 import Statistics from "@/components/Statistics";
-import {useQuery} from "@tanstack/react-query";
-import {notFound} from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 import OgFormAndPreview from "@/components/OgForm";
 
 const Page = ({ params }) => {
@@ -44,18 +44,11 @@ const Page = ({ params }) => {
               <Statistics data={formattedData} className={"h-full"} />
             </div>
             <div className="w-full !h-[90%] max-w-sm ">
-              <RenderQrCode
-                isCustom
-                url={data.shortUrl}
-                fg={data.qrCodeFgColor}
-                bg={data.qrCodeBgColor}
-                className="w-full "
-                id={id}
-              />
+              <RenderQrCode isCustom {...data} className="w-full " />
             </div>
           </div>
           <div className="flex flex-col md:flex-row md:items-start my-12 gap-6">
-            <OgFormAndPreview id={id} shortUrl={data.shortUrl} />
+            <OgFormAndPreview {...data} />
           </div>
         </div>
       ) : (

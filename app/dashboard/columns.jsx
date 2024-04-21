@@ -1,20 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  ArrowUpDown,
-  BarChart2,
-  Copy,
-  MoreHorizontal,
-  Trash,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
+import { ArrowUpDown, BarChart2, Copy } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -106,11 +93,12 @@ export const columns = [
         <>
           <Dialog>
             <DialogTrigger>
-              <RenderQrCode url={history.shortUrl} className="" />
+              <RenderQrCode {...history} _id={history.id} className="" />
             </DialogTrigger>
             <DialogContent className="py-12 flex items-center justify-center">
               <RenderQrCode
-                url={history.shortUrl}
+                {...history}
+                _id={history.id}
                 className="w-full h-full max-w-sm mx-auto"
                 isCustom
               />

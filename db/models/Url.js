@@ -37,7 +37,7 @@ const urlSchema = new mongoose.Schema(
       description: {
         type: String,
       },
-      image: {
+      ogCover: {
         type: String,
       },
     },

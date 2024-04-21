@@ -3,6 +3,7 @@ import UrlModel from "@/db/models/Url";
 import cloudinary from "@/utils/cloudinary";
 import { auth } from "@clerk/nextjs";
 import fs from "fs/promises";
+import path from "path";
 
 export const DELETE = async (request, { params }) => {
   const { id } = params;
@@ -27,7 +28,6 @@ export const DELETE = async (request, { params }) => {
   }
 };
 export const GET = async (request, { params }) => {
-  console.log("hello get");
   const { id } = params;
   if (!id) {
     return Response.json("Id's required.", { status: 400 });
@@ -52,13 +52,13 @@ export const GET = async (request, { params }) => {
 };
 
 export const PATCH = async (request, { params }) => {
-  const { qrCodeFgColor, qrCodeBgColor, title, description } =
-    await request.json();
-  console.log("PATCH:", request.file, request.body, request.files);
-  // TODO: verifiy
-  const file = request.file;
+  const data = await request.formData();
+  const title = data.get("title");
+  const description = data.get("description");
+  const file = data.get("file");
+  const qrCodeFgColor = data.get("qrCodeFgColor");
+  const qrCodeBgColor = data.get("qrCodeBgColor");
 
-  //TODO: upload image
   const query = {
     metadata: {},
   };
@@ -86,13 +86,24 @@ export const PATCH = async (request, { params }) => {
   try {
     let uploadedFile = null;
     if (file) {
-      uploadedFile = await cloudinary.uploader.upload(file.path, {
-        filename_override: file.filename,
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const filepath = path.join(
+        "public/uploads/",
+        new Date().getTime().toString() + "_" + file.name,
+      );
+
+      await fs.writeFile(filepath, buffer, {
+        flag: "wx",
+      });
+
+      uploadedFile = await cloudinary.uploader.upload(filepath, {
+        filename_override: file.name,
         folder: "og-covers",
-        mimetype: file.mimetype.split("/").at(-1),
+        mimetype: file.type.split("/").at(-1),
       });
       query.metadata["ogCover"] = uploadedFile.secure_url;
-      await fs.unlink(file.path);
+      await fs.unlink(filepath);
     }
     await dbConnect();
     const url = await UrlModel.findOne({ _id: id, userId });
@@ -102,7 +113,8 @@ export const PATCH = async (request, { params }) => {
     const updatedUrl = await UrlModel.findByIdAndUpdate(id, query, {
       new: true,
     });
-    return Response.json(updatedUrl, { status: 200 });
+    console.log(updatedUrl);
+    return Response.json({ success: true }, { status: 200 });
   } catch (err) {
     console.log(err);
     return Response.json(err.message, { status: 500 });

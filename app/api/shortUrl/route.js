@@ -1,3 +1,4 @@
+import config from "@/config/config";
 import dbConnect from "@/db";
 import UrlModel from "@/db/models/Url";
 import { validateURL } from "@/utils";
@@ -22,7 +23,7 @@ export const POST = async (req) => {
     const newUrl = await UrlModel.findOneAndUpdate(
       { actualUrl: url },
       {
-        shortUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/s/${uniqueId}`,
+        shortUrl: `${config.domain}/s/${uniqueId}`,
         userId: userId ?? null,
       },
       { upsert: true, new: true },
