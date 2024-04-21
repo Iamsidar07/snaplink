@@ -28,7 +28,7 @@ const Page = () => {
     onError: () => {
       toast({
         title: "Something went wrong!",
-        description: "Please try again",
+        description: "Please try again later.",
         variant: "destructive",
       });
       router.push("/");

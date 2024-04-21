@@ -1,14 +1,16 @@
 "use client";
 import MyLoader from "@/components/Loader";
 import RenderQrCode from "@/components/RenderQrCode";
-import Statistics from "@/components/Statistics";
+import Chart from "@/components/Chart";
 import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
-import OgFormAndPreview from "@/components/OgForm";
+import OgForm from "@/components/OgForm";
+import { formatDate } from "@/utils";
+import { AreaChartIcon, Filter, WandSparkles } from "lucide-react";
 
 const Page = ({ params }) => {
   const id = params.id;
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [id],
     queryFn: async () => {
       const res = await fetch(`/api/url/${id}`);
@@ -18,38 +20,37 @@ const Page = ({ params }) => {
   if (!data && !isLoading) {
     return notFound();
   }
-  const formattedData = {
-    labels: data?.dailyClicks?.map((url) =>
-      new Date(url.date).toLocaleDateString("en-US"),
-    ),
-    datasets: [
-      {
-        label: "Clicks per day",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(75, 192, 192, 0.4)",
-        hoverBorderColor: "rgba(75, 192, 192, 1)",
-        data: data?.dailyClicks?.map((url) => url.count),
-      },
-    ],
-  };
+  const formattedData = data?.dailyClicks?.map((item) => {
+    const date = new Date(item.date);
+    return {
+      index: formatDate(date),
+      clicks: item.count,
+    };
+  });
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full max-w-[1440px] mx-auto pb-32">
       {data ? (
         <div>
-          <div className="flex flex-col md:flex-row md:items-stretch gap-6 max-w-[1440px] mx-auto">
-            <div className="w-full">
-              <Statistics data={formattedData} className={"h-full"} />
+          <div className="flex items-center gap-2 mb-4">
+            <h3 className="md:text-lg">Insights</h3>
+            <AreaChartIcon className="w-4 h-4 inline-block text-orange-500" />
+          </div>
+          <div className="flex flex-col md:flex-row md:items-stretch gap-6 ">
+            <div className="w-full border rounded-lg ">
+              <Chart data={formattedData} className={"h-full"} />
             </div>
-            <div className="w-full !h-[90%] max-w-sm ">
-              <RenderQrCode isCustom {...data} className="w-full " />
+            <div className="w-full max-w-sm border p-2 rounded-lg">
+              <RenderQrCode isCustom {...data} className="w-full h-full" />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row md:items-start my-12 gap-6">
-            <OgFormAndPreview {...data} />
+
+          <div className="flex items-center gap-2 my-3 md:my-6">
+            <h3 className="md:text-lg">Customization</h3>
+            <WandSparkles className="w-4 h-4 inline-block text-orange-400" />
           </div>
+
+          <OgForm {...data} />
         </div>
       ) : (
         isLoading && <MyLoader />

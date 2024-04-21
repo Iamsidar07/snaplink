@@ -28,15 +28,6 @@ export default async function Home() {
           />
         </ContainerScroll>
       </div>
-      {/* <div className="p-4 sm:p-6 border max-w-7xl mx-auto mt-12 sm:mt-24 rounded-3xl bg-gradient-to-br from-zinc-100 via-orange-50 to-slate-50 overflow-hidden shadow">
-        <Image
-          src={"/dashboard.png"}
-          alt="dashboard preview"
-          width={1920}
-          height={1080}
-          className="rounded-3xl"
-        />
-      </div> */}
       <WhyChooseUs />
       <UrlCount />
     </main>

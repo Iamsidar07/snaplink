@@ -45,7 +45,10 @@ const Card = ({ originalUrl, shortUrl, clicks, id }) => {
           alt="logo"
           src={`${origin}/favicon.ico`}
         />
-        <Link href={`/url/${id}`} className="truncate">
+        <Link
+          href={`/url/${id}`}
+          className="truncate hover:underline hover:underline-offset-2"
+        >
           {originalUrl}
         </Link>
       </div>

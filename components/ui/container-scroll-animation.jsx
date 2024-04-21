@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 export const ContainerScroll = ({ titleComponent, children }) => {
   const containerRef = useRef(null);
@@ -69,7 +69,7 @@ export const Card = ({ rotate, scale, children }) => {
         scale,
       }}
     >
-      <div className="p-4 sm:p-6 border max-w-7xl mx-auto mt-12 sm:mt-24 rounded-3xl bg-gradient-to-br from-zinc-100 via-orange-50 to-slate-50 overflow-hidden shadow">
+      <div className="p-4 sm:p-6 border max-w-7xl mx-auto mt-12 sm:mt-24 rounded-3xl bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 overflow-hidden">
         {children}
       </div>
     </motion.div>

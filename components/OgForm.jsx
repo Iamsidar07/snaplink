@@ -4,12 +4,15 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import OgPreview from "./OgPreview";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import { Loader } from "lucide-react";
 import axios from "axios";
+import OgCard from "./OgCard";
+import { cn } from "@/lib/utils";
+
+const socialSite = ["twitter", "linkedin", "facebook", "discord"];
 
 const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
   const queryClient = useQueryClient();
@@ -68,10 +71,10 @@ const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:items-start my-12 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-3 border rounded-xl h-fit p-2 md:p-4 w-full max-w-xl shadow-lg"
+        className="flex flex-col gap-3 border rounded-xl h-full p-2 md:p-4 w-full max-w-xl "
       >
         <div className="space-y-3">
           <Label htmlFor={"title"}>Title</Label>
@@ -109,12 +112,30 @@ const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
             id="image"
           />
         </div>
+        <p className="text-muted-foreground text-sm">
+          Recommended size: <span className="italic">1200x630</span>
+        </p>
         <Button disabled={isPending} type="submit">
           {isPending ? <Loader className="w-4 h-4 animate-spin mr-2" /> : null}
           Submit
         </Button>
       </form>
-      <OgPreview shortUrl={shortUrl} {...og} />
+      {socialSite.map((site, i) => (
+        <div
+          key={site}
+          className={cn("h-full", {
+            "col-span-2 ": i == 0,
+          })}
+        >
+          <OgCard
+            title={og.title}
+            description={og.description}
+            image={og.image}
+            shortUrl={shortUrl}
+            socialSite={site}
+          />
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,19 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown, BarChart2, Copy } from "lucide-react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { ArrowUpDown, Copy } from "lucide-react";
 import RenderQrCode from "@/components/RenderQrCode";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import Statistics from "@/components/Statistics";
 import Link from "next/link";
 
 export const columns = [
@@ -91,19 +80,10 @@ export const columns = [
       const history = row.original;
       return (
         <>
-          <Dialog>
-            <DialogTrigger>
-              <RenderQrCode {...history} _id={history.id} className="" />
-            </DialogTrigger>
-            <DialogContent className="py-12 flex items-center justify-center">
-              <RenderQrCode
-                {...history}
-                _id={history.id}
-                className="w-full h-full max-w-sm mx-auto"
-                isCustom
-              />
-            </DialogContent>
-          </Dialog>
+          <div className="w-12">
+            {" "}
+            <RenderQrCode {...history} _id={history.id} className="w-20" />
+          </div>
         </>
       );
     },
@@ -126,47 +106,6 @@ export const columns = [
       const date = new Date(history.date);
 
       return date.toLocaleDateString("en-US");
-    },
-  },
-  {
-    accessorKey: "visualize",
-    header: "Visualize",
-    cell: ({ row }) => {
-      const data = row.original.dailyClicks;
-      const formattedData = {
-        labels: data.map((url) =>
-          new Date(url.date).toLocaleDateString("en-US"),
-        ),
-        datasets: [
-          {
-            label: "Clicks per day",
-            backgroundColor: "rgba(75, 192, 192, 0.2)",
-            borderColor: "rgba(75, 192, 192, 1)",
-            borderWidth: 1,
-            hoverBackgroundColor: "rgba(75, 192, 192, 0.4)",
-            hoverBorderColor: "rgba(75, 192, 192, 1)",
-            data: data.map((url) => url.count),
-          },
-        ],
-      };
-
-      return (
-        <Drawer>
-          <DrawerTrigger>
-            <BarChart2 className="w-4 h-4 active:scale-95" />
-          </DrawerTrigger>
-          <DrawerContent className="max-h-[75vh] flex flex-col items-center gap-6">
-            <DrawerHeader>
-              <DrawerTitle>
-                Showing Statstics for {row.original.originalUrl}
-              </DrawerTitle>
-              <DrawerDescription>
-                <Statistics data={formattedData} className="h-64 md:h-96" />
-              </DrawerDescription>
-            </DrawerHeader>
-          </DrawerContent>
-        </Drawer>
-      );
     },
   },
 ];

@@ -8,11 +8,11 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
   const url = new URL(shortUrl);
   const domain = url.hostname;
   return (
-    <div target="_blank" className={"w-full md:w-[45%]"}>
+    <div target="_blank" className={"w-full"}>
       <h3 className="mb-2 capitalize">{socialSite}</h3>
       <Link
-        className={cn("block", {
-          "rounded-xl relative": socialSite.toLowerCase() == "twitter",
+        className={cn("block overflow-hidden", {
+          "rounded-xl relative h-96": socialSite.toLowerCase() == "twitter",
           "flex flex-col-reverse relative":
             socialSite.toLowerCase() == "discord",
         })}
@@ -23,15 +23,15 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
           width={1200}
           height={630}
           alt={`og-${socialSite}`}
-          className={cn("mt-2 aspect-[1200/630] object-cover", {
-            "rounded-xl ": socialSite.toLowerCase() == "twitter",
+          className={cn("mt-2 aspect-[1200/630] object-cover ", {
+            "rounded-xl": socialSite.toLowerCase() == "twitter",
             "mt-0 rounded-b": socialSite.toLowerCase() == "discord",
           })}
         />
         <div
           className={cn("p-2 border border-t-0 bg-gray-100", {
             "p-0 border-none bg-none": socialSite.toLowerCase() == "twitter",
-            "border-none bg-[#333333] rounded-t":
+            "border-none bg-[#333333] rounded-t mt-2":
               socialSite.toLowerCase() == "discord",
           })}
         >
@@ -50,7 +50,7 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
                 socialSite.toLowerCase() == "twitter",
               "uppercase text-xs": socialSite.toLowerCase() == "facebook",
 
-              "text-gray-50 ": socialSite.toLowerCase() == "discord",
+              "text-gray-50": socialSite.toLowerCase() == "discord",
             })}
           >
             {domain}
@@ -68,10 +68,8 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
           </h3>
           <h4
             className={cn("text-sm text-gray-600 truncate", {
-              "hidden ":
-                socialSite.toLowerCase() == "twitter" ||
-                socialSite.toLowerCase() == "linkedin",
-
+              "invisible ": socialSite.toLowerCase() == "linkedin",
+              "hidden ": socialSite.toLowerCase() == "twitter",
               "text-gray-100 ": socialSite.toLowerCase() == "discord",
             })}
           >
