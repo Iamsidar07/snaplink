@@ -49,7 +49,7 @@ const Dashboard = () => {
     });
   }
   const formattedData = data?.map((item) => {
-    const hostname = new URL(item.originalUrl).hostname.split(".")[1];
+    const hostname = new URL(item.originalUrl).hostname;
     return {
       index: hostname,
       clicks: item.clicks,
