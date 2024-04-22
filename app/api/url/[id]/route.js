@@ -2,8 +2,6 @@ import dbConnect from "@/db";
 import UrlModel from "@/db/models/Url";
 import cloudinary from "@/utils/cloudinary";
 import { auth } from "@clerk/nextjs";
-import fs from "fs/promises";
-import path from "path";
 
 export const DELETE = async (request, { params }) => {
   const { id } = params;
@@ -78,33 +76,30 @@ export const PATCH = async (request, { params }) => {
     return Response.json("Unauthorized", { status: 401 });
   }
   try {
-    let uploadedFile = null;
     if (file) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const filepath = path.join(
-        process.cwd(),
-        "public/uploads",
-        new Date().getTime().toString() + "_" + file.name,
-      );
-      console.log(filepath)
-
-      await fs.writeFile(filepath, buffer);
-
-      uploadedFile = await cloudinary.uploader.upload(filepath, {
-        filename_override: file.name,
-        folder: "og-covers",
-        mimetype: file.type.split("/").at(-1),
-      });
+      const uploadedFile = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream({
+          folder: "og-covers",
+          filename_override: file.filename,
+          format: file.type.split("/").at(-1)
+        }, (error, result) => {
+          if (error) {
+            reject(error)
+            return
+          }
+          resolve(result)
+        }).end(buffer)
+      })
       query.metadata["ogCover"] = uploadedFile.secure_url;
-      await fs.unlink(filepath);
     }
     await dbConnect();
     const url = await UrlModel.findOne({ _id: id, userId });
     if (!url) {
       return Response.json("Not found", { status: 400 });
     }
-    const updatedUrl = await UrlModel.findByIdAndUpdate(id, query, {
+    await UrlModel.findByIdAndUpdate(id, query, {
       new: true,
     });
     return Response.json({ success: true }, { status: 200 });
