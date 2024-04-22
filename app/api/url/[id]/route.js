@@ -87,9 +87,7 @@ export const PATCH = async (request, { params }) => {
         new Date().getTime().toString() + "_" + file.name,
       );
 
-      await fs.writeFile(filepath, buffer, {
-        flag: "wx",
-      });
+      await fs.writeFile(filepath, buffer);
 
       uploadedFile = await cloudinary.uploader.upload(filepath, {
         filename_override: file.name,
