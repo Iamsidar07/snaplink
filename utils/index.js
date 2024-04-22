@@ -7,8 +7,6 @@ export const validateURL = (url) => {
 };
 
 export function formatDate(date) {
-
-  console.log("env:", process.env.DOMAIN);
   const months = [
     "Jan",
     "Feb",
@@ -41,11 +39,16 @@ export function constructMetadata({
     openGraph: {
       title,
       description,
+      siteName: "Snaplink",
       images: [
         {
           url: image,
+          width: 1024,
+          height: 1024
         },
       ],
+      locale: "en-US",
+      type: "website"
     },
     twitter: {
       card: "summary_large_image",
@@ -54,27 +57,8 @@ export function constructMetadata({
       images: [image],
       creator: "@iamsidar07",
     },
-    facebook: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-    linkedin: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-    discord: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-
     icons,
-    metadataBase: new URL(process.env.DOMAIN),
+    metadataBase: new URL("https://snaplink-xegc.vercel.app"),
     ...(noIndex && {
       robots: {
         index: false,
