@@ -75,7 +75,6 @@ export function constructMetadata({
 
     icons,
     metadataBase: new URL(process.env.DOMAIN),
-    themeColor: "#FFF",
     ...(noIndex && {
       robots: {
         index: false,

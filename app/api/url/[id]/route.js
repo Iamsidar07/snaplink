@@ -83,6 +83,7 @@ export const PATCH = async (request, { params }) => {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
       const filepath = path.join(
+        process.cwd(),
         "public/uploads",
         new Date().getTime().toString() + "_" + file.name,
       );
