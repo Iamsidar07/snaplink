@@ -1,3 +1,4 @@
+import config from "@/config/config";
 import Image from "next/image";
 import React from "react";
 
@@ -17,7 +18,7 @@ const Footer = () => {
 
       <div className="w-full border-t mt-3 sm:mt-0 p-4 sm:p-8 bg-white">
         <p className="text-center text-xs sm:text-sm">
-          &copy;{new Date().getFullYear()} Copyright {process.env.DOMAIN}- Tool
+          &copy;{new Date().getFullYear()} Copyright {config.domain}- Tool
           to shorten a long link
         </p>
       </div>

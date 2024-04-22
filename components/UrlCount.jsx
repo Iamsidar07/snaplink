@@ -24,7 +24,7 @@ const UrlCount = () => {
         <span
           className={"inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative"}
         >
-          {totalUrlCreated?.toLocaleString() ?? 75197507}
+          {totalUrlCreated?.toLocaleString() ?? 0}
           <Image
             src={"/underline.png"}
             alt="url count"
