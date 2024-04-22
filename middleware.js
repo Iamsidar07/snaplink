@@ -7,6 +7,7 @@ export default authMiddleware({
     "/api/actualUrl",
     "/api/shortUrl",
     "/api/urlCount",
+    "/api/url/:id*",
   ],
 });
 

@@ -32,15 +32,9 @@ export const GET = async (request, { params }) => {
   if (!id) {
     return Response.json("Id's required.", { status: 400 });
   }
-  const { userId } = auth();
-  console.log({ userId });
-  if (!userId) {
-    return Response.json("Unauthorized", { status: 401 });
-  }
   try {
     await dbConnect();
-    const url = await UrlModel.findOne({ _id: id, userId });
-    console.log(url);
+    const url = await UrlModel.findOne({ _id: id });
     if (!url) {
       return Response.json("Not found", { status: 400 });
     }
@@ -113,7 +107,6 @@ export const PATCH = async (request, { params }) => {
     const updatedUrl = await UrlModel.findByIdAndUpdate(id, query, {
       new: true,
     });
-    console.log(updatedUrl);
     return Response.json({ success: true }, { status: 200 });
   } catch (err) {
     console.log(err);

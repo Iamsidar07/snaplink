@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 const socialSite = ["twitter", "linkedin", "facebook", "discord"];
 
-const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
+const OgForm = ({ shortUrl, _id: id, metadata }) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { mutate, isPending } = useMutation({
@@ -140,4 +140,4 @@ const OgFormAndPreview = ({ shortUrl, _id: id, metadata }) => {
   );
 };
 
-export default OgFormAndPreview;
+export default OgForm;

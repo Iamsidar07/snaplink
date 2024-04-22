@@ -13,8 +13,7 @@ export default function Chart({ data, className }) {
       categories={["clicks"]}
       colors={["green"]}
       valueFormatter={dataFormatter}
-      yAxisWidth={60}
-      onValueChange={(v) => console.log(v)}
+      yAxisWidth={30}
     />
   );
 }
