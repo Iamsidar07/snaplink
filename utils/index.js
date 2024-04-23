@@ -31,15 +31,17 @@ export function constructMetadata({
   description = "ShortURL is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
+  url = "/",
   noIndex = false,
 }) {
   return {
     title,
     description,
     openGraph: {
+      url: "https://snaplink-xegc.vercel.app/",
+      type: "website",
       title,
       description,
-      siteName: "Snaplink",
       images: [
         {
           url: image,
@@ -48,22 +50,17 @@ export function constructMetadata({
         },
       ],
       locale: "en-US",
-      type: "website",
+      siteName: "Snaplink",
     },
     twitter: {
       card: "summary_large_image",
+      domain: "snaplink-xegc.vercel.app",
+      url: "https://snaplink-xegc.vercel.app/",
       title,
       description,
       images: [image],
       creator: "@iamsidar07",
     },
-    discord: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-
     icons,
     metadataBase: new URL("https://snaplink-xegc.vercel.app"),
     ...(noIndex && {
