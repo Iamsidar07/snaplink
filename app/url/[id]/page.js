@@ -32,9 +32,9 @@ const Page = async ({ params }) => {
   });
 
   return (
-    <div className="w-full h-full max-w-[1440px] mx-auto pb-6">
-      <div className="flex items-center gap-2 mb-4">
-        <h3 className="md:text-lg">Insights</h3>
+    <div className="w-full h-full max-w-7xl mx-auto pb-6">
+      <div className="flex items-center gap-2 mb-4 underline underline-offset-4">
+        <h3 className="md:text-lg font-recursive">01. Insights</h3>
         <AreaChartIcon className="w-4 h-4 inline-block text-orange-500" />
       </div>
       <div className="flex flex-col md:flex-row md:items-stretch gap-6 ">
@@ -48,8 +48,8 @@ const Page = async ({ params }) => {
           <RenderQrCode isCustom {...data} className="w-full h-full" />
         </div>
       </div>
-      <div className="flex items-center gap-2 my-3 md:my-6">
-        <h3 className="md:text-lg">Customization</h3>
+      <div className="flex items-center gap-2 my-3 md:my-6 underline underline-offset-4">
+        <h3 className="md:text-lg font-recursive">02. Customization</h3>
         <WandSparkles className="w-4 h-4 inline-block text-orange-400" />
       </div>
 

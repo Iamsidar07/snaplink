@@ -19,7 +19,9 @@ const UrlCount = ({ count }) => {
       >
         Over{" "}
         <span
-          className={"inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative"}
+          className={
+            "inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-recursive"
+          }
         >
           {count?.toLocaleString() ?? 0}
           <Image
@@ -27,7 +29,7 @@ const UrlCount = ({ count }) => {
             alt="url count"
             width={797}
             height={78}
-            className="absolute bottom-0 inset-x-0 w-full"
+            className="absolute bottom-0 inset-x-0 w-full dark:invert"
           />
         </span>{" "}
         URL&apos;s Shortened <br /> and Counting!
@@ -39,10 +41,10 @@ const UrlCount = ({ count }) => {
 export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
   return (
-    <main className="py-12 md:py-24">
+    <main className="py-12 md:py-24 md:pb-[25%]">
       <div className="max-w-3xl w-full mx-auto">
         <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">
-          <div className="bg-white rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
+          <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
             Snaplink is public now
           </div>
         </div>
@@ -52,9 +54,19 @@ export default async function Home() {
         <ShortUrlForm />
       </div>
 
-      <div className="sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
+      <div className="dark:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
         <Image
-          src={`/dashboard.png`}
+          src={`/dashboard-light.png`}
+          alt="hero"
+          height={1080}
+          width={1920}
+          className="mx-auto rounded-2xl object-cover h-full object-left-top"
+          draggable={false}
+        />
+      </div>
+      <div className="light:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
+        <Image
+          src={`/dashboard-dark.png`}
           alt="hero"
           height={1080}
           width={1920}
@@ -63,10 +75,23 @@ export default async function Home() {
         />
       </div>
 
-      <div className="hidden sm:flex flex-col overflow-hidden ">
+      <div className="hidden sm:dark:flex flex-col ">
         <ContainerScroll>
           <Image
-            src={`/dashboard.png`}
+            src={`/dashboard-dark.png`}
+            alt="hero"
+            height={1080}
+            width={1920}
+            className="mx-auto rounded-2xl object-cover h-full object-left-top"
+            draggable={false}
+          />
+        </ContainerScroll>
+      </div>
+
+      <div className="hidden sm:dark:hidden sm:flex flex-col overflow-hidden ">
+        <ContainerScroll>
+          <Image
+            src={`/dashboard-light.png`}
             alt="hero"
             height={1080}
             width={1920}

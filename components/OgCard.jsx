@@ -29,7 +29,7 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
           })}
         />
         <div
-          className={cn("p-2 border border-t-0 bg-gray-100", {
+          className={cn("p-2 border border-border border-t-0 bg-background", {
             "p-0 border-none bg-none": socialSite.toLowerCase() == "twitter",
             "border-none bg-[#333333] rounded-t mt-2":
               socialSite.toLowerCase() == "discord",
@@ -46,7 +46,7 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
           ) : null}
           <small
             className={cn("text-gray-400 text-sm", {
-              "bg-black rounded-full px-4 py-1.5 absolute bottom-2 ml-2":
+              "bg-background rounded-full px-4 py-1.5 absolute bottom-2 ml-2":
                 socialSite.toLowerCase() == "twitter",
               "uppercase text-xs": socialSite.toLowerCase() == "facebook",
 

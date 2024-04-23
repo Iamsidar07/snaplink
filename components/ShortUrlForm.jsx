@@ -40,13 +40,13 @@ const ShortUrlForm = () => {
   };
 
   return (
-    <div className="mt-6 bg-white w-full p-6 border rounded text-center relative">
+    <div className="mt-6 bg-background w-full p-6 border rounded text-center relative">
       <Image
         src={"/try-it.png"}
         alt="try it"
         width={382}
         height={419}
-        className="w-20 obkect-contain absolute -right-2 -top-14 sm:-right-12 sm:-top-16 pointer-events-none"
+        className="w-20 obkect-contain absolute -right-2 -top-14 sm:-right-12 sm:-top-16 pointer-events-none dark:invert"
       />
       <form
         onSubmit={(e) => {

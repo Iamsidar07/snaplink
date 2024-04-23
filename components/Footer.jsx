@@ -4,8 +4,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="flex items-center justify-center gap-2">
+    <footer className="relative bg-background">
+      <div className="flex items-center justify-center gap-2 absolute bottom-2 -z-10 w-full">
         <Image
           src={"/logo.png"}
           width={1024}

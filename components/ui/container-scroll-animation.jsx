@@ -69,7 +69,7 @@ export const Card = ({ rotate, scale, children }) => {
         scale,
       }}
     >
-      <div className="p-4 sm:p-6 border max-w-7xl mx-auto mt-12 sm:mt-24 rounded-3xl bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 overflow-hidden">
+      <div className="p-2 sm:p-4 border border-border max-w-7xl mx-auto mt-12 sm:mt-24 rounded-3xl bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 dark:from-zinc-950 dark:via-teal-900 dark:to-slate-900 overflow-hidden">
         {children}
       </div>
     </motion.div>

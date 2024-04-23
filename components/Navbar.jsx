@@ -1,22 +1,24 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import ModeToggle from "./ModeToggle";
 
-const Navbar = async () => {
+const Navbar = () => {
   return (
-    <nav className="w-full backdrop-blur border-b fixed top-0 z-50 bg-white">
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
+    <nav className="w-full backdrop-blur border-b dark:border-b-border bg-background  fixed top-0 z-50 px-4 sm:px-12 py-1.5">
+      <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
         <Link className="flex items-center gap-2" href="/">
           <Image
             src={"/logo.png"}
-            width={40}
-            height={40}
+            width={30}
+            height={30}
             alt="Snaplink logo"
             className="object-cover border rounded-xl pointer-events-none"
           />
-          <span className="headline text-lg md:text-3xl">Snaplink</span>
+          <span className="headline md:text-xl">Snaplink</span>
         </Link>
         <div className="flex items-center gap-2">
           <SignedOut>
@@ -41,8 +43,27 @@ const Navbar = async () => {
               dashboard
             </Link>
 
-            <UserButton />
+            <UserButton
+              afterSignOutUrl="/sign-in"
+              appearance={{
+                elements: {
+                  userButtonPopoverCard:
+                    "border border-border bg-background text-secondary-foreground",
+                  userPreviewSecondaryIdentifier__userButton:
+                    "text-secondary-foreground",
+                  userPreviewMainIdentifier__userButton:
+                    "text-secondary-foreground",
+                  userButtonPopoverActionButtonIcon:
+                    "text-secondary-foreground",
+                  userButtonPopoverActionButtonText:
+                    "text-secondary-foreground",
+                  userButtonPopoverActionButtonIcon__signOut:
+                    "text-secondary-foreground",
+                },
+              }}
+            />
           </SignedIn>
+          <ModeToggle />
         </div>
       </div>
     </nav>

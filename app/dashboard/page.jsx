@@ -42,11 +42,11 @@ export default async function Page() {
   });
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto pt-32">
+    <div className="w-full max-w-7xl mx-auto py-32">
       <div className="max-w-4xl mx-auto mb-12">
         <ShortUrlForm />
       </div>
-      <div className="flex items-center gap-4 flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {data.map((card) => (
           <Card {...card} key={card._id} />
         ))}

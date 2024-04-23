@@ -30,11 +30,11 @@ const WhyChooseUs = () => {
       feature: "Actionable Insights",
       description:
         "Gain valuable insights into link performance and audience engagement with comprehensive analytics and reporting tools.",
-      icon: "📊",
+      icon: "🔥",
     },
   ];
   return (
-    <div className="pt-16 md:pt-32 max-w-5xl mx-auto ">
+    <div className="pt-16 md:pt-32 max-w-7xl mx-auto ">
       <h2 className="headline capitalize text-left relative inline-block text-3xl">
         Why choose snaplink?
         <span>
@@ -51,14 +51,14 @@ const WhyChooseUs = () => {
         {features.map(({ feature, description, icon }) => (
           <div
             key={icon}
-            className="rounded-3xl p-px bg-gradient-to-tl from-orange-100 to-blue-200 backdrop-blur bg-opacity-75"
+            className="rounded-3xl p-px hover:shadow hover:bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 dark:from-zinc-900 dark:via-teal-900 dark:to-orange-900 sm:max-w-sm h-full "
           >
-            <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full sm:max-w-sm h-full bg-gradient-to-br from-gray-50 to-zinc-50">
+            <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full h-full bg-background">
               <span className="text-2xl sm:text-3xl md:text-5xl">{icon}</span>
-              <h3 className="headline text-normal md:text-2xl tracking-widest mt-4">
+              <h3 className="headline text-normal md:text-xl tracking-widest mt-4 font-recursive">
                 {feature}
               </h3>
-              <p>{description}</p>
+              <p className="font-sans text-normal">{description}</p>
             </div>
           </div>
         ))}
@@ -68,7 +68,7 @@ const WhyChooseUs = () => {
         width={42}
         height={44}
         alt="See down"
-        className="h-24 sm:h-64 mx-auto"
+        className="h-24 sm:h-64 mx-auto dark:invert"
       />
     </div>
   );

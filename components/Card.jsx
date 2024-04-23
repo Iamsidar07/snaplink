@@ -36,7 +36,7 @@ const Card = ({ actualUrl, shortUrl, clicks, _id }) => {
   const newUrl = new URL(actualUrl);
   const origin = newUrl.origin;
   return (
-    <div className="border rounded-2xl w-full max-w-sm p-3 sm:p-6 group hover:border-black transition-transform hover:shadow-lg hover:scale-105 ">
+    <div className="border border-border rounded-2xl w-full max-w-sm p-3 sm:p-6 transition-transform hover:shadow-lg hover:scale-105 hover:border-primary ">
       <div className="flex items-center gap-2">
         <Image
           className="rounded"
