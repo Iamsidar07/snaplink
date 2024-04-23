@@ -44,11 +44,11 @@ export function constructMetadata({
         {
           url: image,
           width: 1024,
-          height: 1024
+          height: 1024,
         },
       ],
       locale: "en-US",
-      type: "website"
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
@@ -57,6 +57,13 @@ export function constructMetadata({
       images: [image],
       creator: "@iamsidar07",
     },
+    discord: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+
     icons,
     metadataBase: new URL("https://snaplink-xegc.vercel.app"),
     ...(noIndex && {
