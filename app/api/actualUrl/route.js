@@ -55,6 +55,7 @@ export const GET = async (req) => {
   try {
     await dbConnect();
     const result = await UrlModel.findOne({ shortUrl });
+    console.log({ result })
     return Response.json(result, { status: 200 });
   } catch (error) {
     console.error(error);

@@ -1,9 +1,10 @@
 import Redirection from "@/components/Redirection";
+import config from "@/config/config";
 import { constructMetadata } from "@/utils";
 
 export const generateMetadata = async ({ params }) => {
   const id = params.id;
-  const res = await fetch(`http://localhost:3000/api/actualUrl?id=${id}`);
+  const res = await fetch(`${config.domain}/api/actualUrl?id=${id}`);
   const data = await res.json();
   return constructMetadata({
     title: data?.metadata?.title,

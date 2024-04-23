@@ -1,7 +1,7 @@
 import Dashboard from "@/components/Dashboard";
 import { constructMetadata } from "@/utils";
 export const metadata = constructMetadata({
-  title: "Dashboard",
+  title: "Dashboard | Snaplink",
 });
 export default function Page() {
   return <Dashboard />;
