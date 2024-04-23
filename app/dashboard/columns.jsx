@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Copy } from "lucide-react";
 import RenderQrCode from "@/components/RenderQrCode";
 import Link from "next/link";
+import Image from "next/image";
 
 export const columns = [
   {
@@ -22,7 +23,7 @@ export const columns = [
           <Link
             href={url}
             target="_blank"
-            className="group-hover:underline group-hover:underline-offset-2 truncate"
+            className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
             {url}
           </Link>
@@ -40,7 +41,7 @@ export const columns = [
 
       return (
         <div className="flex items-center gap-2 group">
-          <img
+          <Image
             className="rounded"
             width={30}
             height={30}
@@ -51,7 +52,7 @@ export const columns = [
           <Link
             href={url}
             target="_blank"
-            className="group-hover:underline group-hover:underline-offset-2 truncate"
+            className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
             {url}
           </Link>

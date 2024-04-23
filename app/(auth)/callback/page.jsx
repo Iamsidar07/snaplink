@@ -30,7 +30,7 @@ const Callback = () => {
   return (
     <div className="flex flex-col items-center">
       {isPending ? <MyLoader /> : null}
-      <h3 className="gradient-text text-xl mt-3">
+      <h3 className="headline !text-sm !md:text-lg mt-3">
         You will be automatically redirected...
       </h3>
     </div>

@@ -2,7 +2,6 @@
 import { useState } from "react";
 
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,

@@ -1,8 +1,58 @@
-import Dashboard from "@/components/Dashboard";
+import Card from "@/components/Card";
+import ShortUrlForm from "@/components/ShortUrlForm";
+import config from "@/config/config";
 import { constructMetadata } from "@/utils";
+import { auth } from "@clerk/nextjs";
+import { notFound } from "next/navigation";
+import { DataTable } from "./data-table";
+import RenderQrCode from "@/components/RenderQrCode";
+import { columns } from "@/app/dashboard/columns";
+import RenderChart from "@/components/RenderChart";
+
 export const metadata = constructMetadata({
   title: "Dashboard | Snaplink",
 });
-export default function Page() {
-  return <Dashboard />;
+
+const fetData = async ({ userId }) => {
+  const res = await fetch(`${config.domain}/api/url?userId=${userId}`);
+  return await res.json();
+};
+export default async function Page() {
+  const { userId } = auth();
+  const data = await fetData({ userId });
+  if (!data) notFound();
+  const tableData = data?.map(
+    ({ _id, shortUrl, actualUrl, clicks, createdAt, dailyClicks }) => ({
+      id: _id,
+      shortUrl,
+      originalUrl: actualUrl,
+      clicks,
+      date: createdAt,
+      qrCode: <RenderQrCode value={shortUrl} />,
+      dailyClicks,
+    }),
+  );
+
+  const formattedData = data?.map((item) => {
+    const hostname = new URL(item.actualUrl).hostname;
+    return {
+      index: hostname,
+      clicks: item.clicks,
+    };
+  });
+
+  return (
+    <div className="w-full max-w-[1440px] mx-auto pt-32">
+      <div className="max-w-4xl mx-auto mb-12">
+        <ShortUrlForm />
+      </div>
+      <div className="flex items-center gap-4 flex-wrap">
+        {data.map((card) => (
+          <Card {...card} key={card._id} />
+        ))}
+      </div>
+      <DataTable columns={columns} data={tableData} />
+      <RenderChart data={formattedData} className="h-64 sm:h-[450px]" />
+    </div>
+  );
 }

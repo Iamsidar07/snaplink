@@ -1,10 +1,9 @@
-import Redirection from "@/components/Redirection";
 import config from "@/config/config";
 import { constructMetadata } from "@/utils";
+import { notFound, redirect } from "next/navigation";
 
 export const generateMetadata = async ({ params }) => {
-  const id = params.id;
-  const res = await fetch(`${config.domain}/api/actualUrl?id=${id}`);
+  const res = await fetch(`${config.domain}/api/actualUrl?id=${params.id}`);
   const data = await res.json();
   return constructMetadata({
     title: data?.metadata?.title,
@@ -13,10 +12,24 @@ export const generateMetadata = async ({ params }) => {
   });
 };
 
-const Page = ({ params }) => {
-  const id = params.id;
+const updateClicks = async ({ id }) => {
+  const res = await fetch(`${config.domain}/api/actualUrl`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+  return await res.json();
+};
 
-  return <Redirection id={id} />;
+const Page = async ({ params }) => {
+  const data = await updateClicks({ id: params.id });
+  const targetUrl = data?.actualUrl;
+  if (targetUrl) {
+    redirect(targetUrl);
+  }
+  notFound();
 };
 
 export default Page;

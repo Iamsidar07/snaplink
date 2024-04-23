@@ -1,10 +1,10 @@
 import dbConnect from "@/db";
 import UrlModel from "@/db/models/Url";
-import { auth } from "@clerk/nextjs";
 
 // get all url of a user
 export const GET = async (request) => {
-  const { userId } = auth();
+  const searchParams = request.nextUrl.searchParams;
+  const userId = searchParams.get("userId");
   if (!userId) {
     return Response.json("Unauthorized", { status: 401 });
   }

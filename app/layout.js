@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             </div>
             <div className="app">
               <Navbar />
-              <div className="min-h-screen flex flex-col items-center sm:px-16 px-4 pt-36">
+              <div className="min-h-screen flex flex-col items-center sm:px-16 px-4 pt-24 sm:pt-24">
                 {children}
               </div>
               <Footer />

@@ -16,10 +16,10 @@ const Footer = () => {
         <span className="headline text-6xl  md:text-[10rem]">Snaplink</span>
       </div>
 
-      <div className="w-full border-t mt-3 sm:mt-0 p-4 sm:p-8 bg-white">
+      <div className="w-full border-t mt-3 sm:mt-0 p-4 sm:p-8">
         <p className="text-center text-xs sm:text-sm">
-          &copy;{new Date().getFullYear()} Copyright {config.domain}- Tool
-          to shorten a long link
+          &copy;{new Date().getFullYear()} Copyright {config.domain}- Tool to
+          shorten a long link
         </p>
       </div>
     </footer>

@@ -1,14 +1,15 @@
 "use client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, Loader, Trash } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import axios from "axios";
+import revalidate from "@/app/actions";
+import Image from "next/image";
 
-const Card = ({ originalUrl, shortUrl, clicks, id }) => {
-  const queryClient = useQueryClient();
+const Card = ({ actualUrl, shortUrl, clicks, _id }) => {
   const { toast } = useToast();
   const { mutate, isPending } = useMutation({
     mutationFn: async (id) => {
@@ -16,11 +17,10 @@ const Card = ({ originalUrl, shortUrl, clicks, id }) => {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["history"]);
+      revalidate({ tag: "urls" });
     },
     onError: (err) => {
       console.error(err);
-      //TODO: spell check later
       toast({
         title: "Something went wrong!",
         description: "Please try again later.",
@@ -33,12 +33,12 @@ const Card = ({ originalUrl, shortUrl, clicks, id }) => {
       });
     },
   });
-  const newUrl = new URL(originalUrl);
+  const newUrl = new URL(actualUrl);
   const origin = newUrl.origin;
   return (
     <div className="border rounded-2xl w-full max-w-sm p-3 sm:p-6 group hover:border-black transition-transform hover:shadow-lg hover:scale-105 ">
       <div className="flex items-center gap-2">
-        <img
+        <Image
           className="rounded"
           width={30}
           height={30}
@@ -46,10 +46,10 @@ const Card = ({ originalUrl, shortUrl, clicks, id }) => {
           src={`${origin}/favicon.ico`}
         />
         <Link
-          href={`/url/${id}`}
+          href={`/url/${_id}`}
           className="truncate hover:underline hover:underline-offset-2"
         >
-          {originalUrl}
+          {actualUrl}
         </Link>
       </div>
 
@@ -66,7 +66,7 @@ const Card = ({ originalUrl, shortUrl, clicks, id }) => {
           <Loader className="w-4 h-4 animate-spin" />
         ) : (
           <Trash
-            onClick={() => mutate(id)}
+            onClick={() => mutate(_id)}
             className="w-4 h-4 cursor-pointer active:scale-90"
           />
         )}

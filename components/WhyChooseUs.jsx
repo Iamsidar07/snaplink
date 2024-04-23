@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import DownArrow from "./DownArrow";
 
 const WhyChooseUs = () => {
   const features = [
@@ -15,16 +14,27 @@ const WhyChooseUs = () => {
         "Tailor your shortened URLs to reflect your brand, adding professionalism to every share.",
       icon: "🎨",
     },
-
     {
       feature: "Reliable Security",
       description:
         "Rest easy knowing your links are secure and protected with advanced encryption.",
       icon: "🔒",
     },
+    {
+      feature: "Customizable Links",
+      description:
+        "Personalize your shortened URLs with custom aliases, making them memorable and relevant to your audience.",
+      icon: "🔗",
+    },
+    {
+      feature: "Actionable Insights",
+      description:
+        "Gain valuable insights into link performance and audience engagement with comprehensive analytics and reporting tools.",
+      icon: "📊",
+    },
   ];
   return (
-    <div className="pt-16 md:pt-32 max-w-5xl mx-auto md:mb-32">
+    <div className="pt-16 md:pt-32 max-w-5xl mx-auto ">
       <h2 className="headline capitalize text-left relative inline-block text-3xl">
         Why choose snaplink?
         <span>
@@ -41,18 +51,25 @@ const WhyChooseUs = () => {
         {features.map(({ feature, description, icon }) => (
           <div
             key={icon}
-            className="border rounded-xl md:rounded-3xl p-4 sm:p-8 flex flex-col gap-2 bg-white bg-opacity-70 backdrop-blur w-full sm:max-w-sm"
+            className="rounded-3xl p-px bg-gradient-to-tl from-orange-100 to-blue-200 backdrop-blur bg-opacity-75"
           >
-            <span className="text-2xl sm:text-3xl md:text-5xl">{icon}</span>
-            <h3 className="headline text-normal md:text-2xl tracking-widest">
-              {feature}
-            </h3>
-            <p>{description}</p>
+            <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full sm:max-w-sm h-full bg-gradient-to-br from-gray-50 to-zinc-50">
+              <span className="text-2xl sm:text-3xl md:text-5xl">{icon}</span>
+              <h3 className="headline text-normal md:text-2xl tracking-widest mt-4">
+                {feature}
+              </h3>
+              <p>{description}</p>
+            </div>
           </div>
         ))}
       </div>
-
-      <DownArrow />
+      <Image
+        src={"/down-arrow.svg"}
+        width={42}
+        height={44}
+        alt="See down"
+        className="h-24 sm:h-64 mx-auto"
+      />
     </div>
   );
 };

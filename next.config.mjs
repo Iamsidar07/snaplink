@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/*/image/upload/**",
       },
+      {
+        protocol: "https",
+        hostname: "*",
+        port: "",
+        pathname: "/favicon.ico",
+      },
     ],
   },
 };

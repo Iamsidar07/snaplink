@@ -80,10 +80,6 @@
   @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-400 bg-clip-text font-bold tracking-tight text-transparent drop-shadow-sm dark:from-gray-100 dark:to-gray-800 md:text-6xl leading-[3.5rem] md:leading-tight;
 }
 
-.gradient-text {
-  @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-400 bg-clip-text tracking-tight text-transparent drop-shadow-sm dark:from-gray-100 dark:to-gray-800 md:text-xl leading-[3.5rem] md:leading-tight;
-}
-
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -138,7 +134,7 @@
   height: 100%;
   filter: blur(100px) saturate(150%);
   top: 80px;
-  opacity: 0.025;
+  opacity: 0.15;
 }
 
 .app {
@@ -155,12 +151,4 @@
 
 .cl-internal-b3fm6y {
   @apply bg-primary text-primary-foreground active:bg-primary active:ring-black;
-}
-
-.grainy-light {
-  background-image: url("/grainy-light.png");
-}
-
-.grainy-dark {
-  background-image: url("/grainy-dark.png");
 }

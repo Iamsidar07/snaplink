@@ -7,9 +7,9 @@ import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
 import Image from "next/image";
+import revalidate from "@/app/actions";
 
 const ShortUrlForm = () => {
-  const queryClient = useQueryClient();
   const { toast } = useToast();
   const [actualUrl, setActualURL] = useState("");
   const [shortenUrl, setShortenUrl] = useState(null);
@@ -22,7 +22,7 @@ const ShortUrlForm = () => {
     },
     onSuccess: async ({ shortUrl }) => {
       setShortenUrl(shortUrl);
-      await queryClient.invalidateQueries(["history", "urlCount"]);
+      revalidate({ tag: "urls" });
     },
     onError: (error) => {
       return toast({
@@ -76,7 +76,7 @@ const ShortUrlForm = () => {
           </span>
         </div>
       )}
-      <p className="mt-6 text-muted-foreground">
+      <p className="mt-6 text-xs sm:text-sm text-muted-foreground">
         ShortURL is a free tool to shorten URLs and generate short links URL
         shortener allows to create a shortened link making it easy to share
       </p>

@@ -12,7 +12,7 @@ const OgCard = ({ title, image, description, socialSite, shortUrl }) => {
       <h3 className="mb-2 capitalize">{socialSite}</h3>
       <Link
         className={cn("block overflow-hidden", {
-          "rounded-xl relative h-96": socialSite.toLowerCase() == "twitter",
+          "rounded-xl relative sm:h-96": socialSite.toLowerCase() == "twitter",
           "flex flex-col-reverse relative":
             socialSite.toLowerCase() == "discord",
         })}
