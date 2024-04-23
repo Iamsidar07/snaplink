@@ -25,6 +25,12 @@ export const POST = async (req) => {
       {
         shortUrl: `${config.domain}/s/${uniqueId}`,
         userId: userId ?? null,
+        metadata: {
+          title: "Shorten via snaplink",
+          description: "This link is shorten by sanplink.",
+          ogCover:
+            "https://res.cloudinary.com/dc6yzmwrq/image/upload/v1713851114/og-covers/onupnqfjgytymgws66ma.png",
+        },
       },
       { upsert: true, new: true },
     );

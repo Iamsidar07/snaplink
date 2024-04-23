@@ -31,14 +31,13 @@ export function constructMetadata({
   description = "ShortURL is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
-  url = "/",
   noIndex = false,
 }) {
   return {
     title,
     description,
     openGraph: {
-      url: "https://snaplink-xegc.vercel.app/",
+      url: "https://snaplink-xegc.vercel.app",
       type: "website",
       title,
       description,
