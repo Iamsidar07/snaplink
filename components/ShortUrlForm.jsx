@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
@@ -77,7 +77,7 @@ const ShortUrlForm = () => {
         </div>
       )}
       <p className="mt-6 text-xs sm:text-sm text-muted-foreground">
-        ShortURL is a free tool to shorten URLs and generate short links URL
+        Snaplink is a free tool to shorten URLs and generate short links URL
         shortener allows to create a shortened link making it easy to share
       </p>
     </div>

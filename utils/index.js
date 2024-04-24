@@ -28,7 +28,7 @@ export function formatDate(date) {
 }
 export function constructMetadata({
   title = "Simple and Fast URL 🔗 Shortner",
-  description = "ShortURL is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share",
+  description = "Snaplink is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false,
