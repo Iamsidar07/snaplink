@@ -44,7 +44,7 @@ const Navbar = () => {
             </Link>
 
             <UserButton
-              afterSignOutUrl="/sign-in"
+              afterSignOutUrl="/"
               appearance={{
                 elements: {
                   userButtonPopoverCard:

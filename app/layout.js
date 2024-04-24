@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
         <Provider>
           <body
             className={cn(
-              "!font-sans antialiased",
+              "antialiased",
               fontSans.variable,
               fontRecursive.variable,
             )}

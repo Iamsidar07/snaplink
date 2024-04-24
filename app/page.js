@@ -48,7 +48,7 @@ export default async function Home() {
             Snaplink is public now
           </div>
         </div>
-        <h1 className="max-w-3xl mx-auto headline text-center text-4xl">
+        <h1 className="headline text-center mt-2">
           Simple and Fast URL <br /> 🔗Shortner
         </h1>
         <ShortUrlForm />
