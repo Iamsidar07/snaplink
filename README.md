@@ -1,3 +1,9 @@
+# Snaplink
+
+ShortURL is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share.
+
+![snaplink](/public/preview.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
