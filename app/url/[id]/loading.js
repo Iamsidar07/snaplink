@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading() {
   return (
-    <div className="w-full h-full max-w-[1440px] mx-auto pb-6">
+    <div className="w-full h-full max-w-7xl mx-auto pb-6">
       <div className="flex items-center gap-2 mb-4">
         <h3 className="md:text-lg">Insights</h3>
       </div>
