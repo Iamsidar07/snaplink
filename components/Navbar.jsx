@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <SignedOut>
             <Link
-              className={buttonVariants({ variant: "outline" })}
+              className={buttonVariants({ variant: "link" })}
               href="/sign-in"
             >
               signin
