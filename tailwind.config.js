@@ -26,7 +26,6 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-        recursive: ["var(--font-recursive)", ...fontFamily.sans],
       },
       colors: {
         // light mode

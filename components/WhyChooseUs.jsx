@@ -51,11 +51,12 @@ const WhyChooseUs = () => {
         {features.map(({ feature, description, icon }) => (
           <div
             key={icon}
-            className="rounded-3xl p-px hover:shadow hover:bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 dark:from-zinc-900 dark:via-teal-900 dark:to-orange-900 sm:max-w-sm h-full "
+            className="rounded-3xl p-px  hover:bg-gradient-to-br from-zinc-100 via-teal-100 to-slate-50 dark:from-zinc-900 dark:via-teal-900 dark:to-orange-900 sm:max-w-sm h-full relative overflow-hidden group "
           >
+            <div className="opacity-0 group-hover:opacity-100 absolute -top-0 left-0 w-64 h-64 rounded-full bg-primary dark:bg-teal-700 filter blur-[22rem] transition-opacity" />
             <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full h-full bg-background">
               <span className="text-2xl sm:text-3xl md:text-5xl">{icon}</span>
-              <h3 className="headline text-normal md:text-xl tracking-widest mt-4 font-recursive">
+              <h3 className="headline text-normal md:text-xl tracking-widest mt-4">
                 {feature}
               </h3>
               <p className="font-sans text-normal">{description}</p>

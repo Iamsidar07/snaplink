@@ -41,55 +41,21 @@ const UrlCount = ({ count }) => {
 export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
   return (
-    <main className="py-12 md:py-24 md:pb-[25%]">
-      <div className="max-w-3xl w-full mx-auto">
-        <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">
-          <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
-            Snaplink is public now
+    <>
+      <main className="py-12 md:py-24 md:pb-[25%]">
+        <div className="max-w-3xl w-full mx-auto">
+          <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">
+            <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
+              Snaplink is public now
+            </div>
           </div>
+          <h1 className="headline text-center mt-2">
+            Simple and Fast URL <br /> 🔗Shortner
+          </h1>
+          <ShortUrlForm />
         </div>
-        <h1 className="headline text-center mt-2">
-          Simple and Fast URL <br /> 🔗Shortner
-        </h1>
-        <ShortUrlForm />
-      </div>
 
-      <div className="dark:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
-        <Image
-          src={`/dashboard-light.png`}
-          alt="hero"
-          height={1080}
-          width={1920}
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
-          draggable={false}
-        />
-      </div>
-      <div className="light:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
-        <Image
-          src={`/dashboard-dark.png`}
-          alt="hero"
-          height={1080}
-          width={1920}
-          className="mx-auto rounded-2xl object-cover h-full object-left-top"
-          draggable={false}
-        />
-      </div>
-
-      <div className="hidden sm:dark:flex flex-col ">
-        <ContainerScroll>
-          <Image
-            src={`/dashboard-dark.png`}
-            alt="hero"
-            height={1080}
-            width={1920}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top"
-            draggable={false}
-          />
-        </ContainerScroll>
-      </div>
-
-      <div className="hidden sm:dark:hidden sm:flex flex-col overflow-hidden ">
-        <ContainerScroll>
+        <div className="dark:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
           <Image
             src={`/dashboard-light.png`}
             alt="hero"
@@ -98,10 +64,46 @@ export default async function Home() {
             className="mx-auto rounded-2xl object-cover h-full object-left-top"
             draggable={false}
           />
-        </ContainerScroll>
-      </div>
-      <WhyChooseUs />
-      <UrlCount count={shortenUrlCount ?? 0} />
-    </main>
+        </div>
+        <div className="light:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
+          <Image
+            src={`/dashboard-dark.png`}
+            alt="hero"
+            height={1080}
+            width={1920}
+            className="mx-auto rounded-2xl object-cover h-full object-left-top"
+            draggable={false}
+          />
+        </div>
+
+        <div className="hidden sm:dark:flex flex-col ">
+          <ContainerScroll>
+            <Image
+              src={`/dashboard-dark.png`}
+              alt="hero"
+              height={1080}
+              width={1920}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top"
+              draggable={false}
+            />
+          </ContainerScroll>
+        </div>
+
+        <div className="hidden sm:dark:hidden sm:flex flex-col overflow-hidden ">
+          <ContainerScroll>
+            <Image
+              src={`/dashboard-light.png`}
+              alt="hero"
+              height={1080}
+              width={1920}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top"
+              draggable={false}
+            />
+          </ContainerScroll>
+        </div>
+        <WhyChooseUs />
+        <UrlCount count={shortenUrlCount ?? 0} />
+      </main>
+    </>
   );
 }
