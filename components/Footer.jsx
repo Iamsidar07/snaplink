@@ -5,7 +5,7 @@ import React from "react";
 import { LucideTwitter } from "lucide-react";
 
 const Footer = () => {
-  const url = new URL(process.env.DOMAIN);
+  const url = new URL(config.domain);
   const domain = url.host;
   return (
     <footer className="relative bg-background">

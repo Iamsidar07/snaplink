@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import config from "@/config/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
+import ProductHunt from "@/components/ProductHunt";
 
 const getShortenUrlCount = async () => {
   const res = await fetch(`${config.domain}/api/urlCount`);
@@ -42,6 +43,7 @@ export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
   return (
     <>
+      <ProductHunt />
       <main className="py-12 md:py-24 md:pb-[25%]">
         <div className="max-w-3xl w-full mx-auto">
           <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">

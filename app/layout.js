@@ -1,4 +1,7 @@
-import { Plus_Jakarta_Sans as PlusJakartaSans } from "next/font/google";
+import {
+  Plus_Jakarta_Sans as PlusJakartaSans,
+  Recursive,
+} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Provider from "@/components/Provider";
@@ -16,6 +19,12 @@ const fontSans = PlusJakartaSans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const fontRecursive = Recursive({
+  subsets: ["latin"],
+  variable: "--font-recursive",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata = constructMetadata({});
 
 export default function RootLayout({ children }) {
@@ -23,7 +32,13 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <Provider>
-          <body className={cn("antialiased", fontSans.variable)}>
+          <body
+            className={cn(
+              "antialiased",
+              fontSans.variable,
+              fontRecursive.variable,
+            )}
+          >
             <ThemeProvider
               attribute="class"
               defaultTheme="system"

@@ -14,6 +14,9 @@ const nextConfig = {
         port: "",
         pathname: "/favicon.ico",
       },
+      {
+        hostname: "api.producthunt.com",
+      },
     ],
   },
 };
