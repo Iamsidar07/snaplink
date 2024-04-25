@@ -5,6 +5,8 @@ import React from "react";
 import { LucideTwitter } from "lucide-react";
 
 const Footer = () => {
+  const url = new URL(process.env.DOMAIN);
+  const domain = url.host;
   return (
     <footer className="relative bg-background">
       <div className="flex items-center justify-center gap-2 absolute bottom-6 -z-10 w-full">
@@ -20,8 +22,8 @@ const Footer = () => {
 
       <div className="w-full border-t mt-3 sm:mt-0 p-4 sm:p-8 flex flex-col items-center">
         <p className="text-center text-xs sm:text-sm">
-          &copy;{new Date().getFullYear()} Copyright {config.domain}- Tool to
-          shorten a long link
+          &copy;{new Date().getFullYear()} Copyright {domain}- Tool to shorten a
+          long link
         </p>
         <p className="mt-1.5 flex items-center gap-2 ">
           <span>follow me at</span>
