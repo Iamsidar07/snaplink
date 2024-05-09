@@ -4,6 +4,7 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import config from "@/config/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import ProductHunt from "@/components/ProductHunt";
+import Testimonials from "@/components/Testimonials";
 
 const getShortenUrlCount = async () => {
   const res = await fetch(`${config.domain}/api/urlCount`);
@@ -15,14 +16,12 @@ const UrlCount = ({ count }) => {
     <div className={"relative"}>
       <h4
         className={
-          "headline text-center !leading-normal  md:text-6xl md:leading-tight"
+          "headline text-center !leading-normal  md:text-6xl md:leading-tight capitalize"
         }
       >
         Over{" "}
         <span
-          className={
-            "inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-recursive"
-          }
+          className={"inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative"}
         >
           {count?.toLocaleString() ?? 0}
           <Image
@@ -44,7 +43,7 @@ export default async function Home() {
   return (
     <>
       <ProductHunt />
-      <main className="py-12 md:py-24 md:pb-[25%]">
+      <main className="py-12 md:py-24 md:pb-[15%] overflow-x-hidden">
         <div className="max-w-3xl w-full mx-auto">
           <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">
             <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
@@ -105,6 +104,7 @@ export default async function Home() {
         </div>
         <WhyChooseUs />
         <UrlCount count={shortenUrlCount ?? 0} />
+        <Testimonials />
       </main>
     </>
   );

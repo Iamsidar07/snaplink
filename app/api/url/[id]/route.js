@@ -80,18 +80,23 @@ export const PATCH = async (request, { params }) => {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
       const uploadedFile = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream({
-          folder: "og-covers",
-          filename_override: file.filename,
-          format: file.type.split("/").at(-1)
-        }, (error, result) => {
-          if (error) {
-            reject(error)
-            return
-          }
-          resolve(result)
-        }).end(buffer)
-      })
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: "og-covers",
+              filename_override: file.filename,
+              format: file.type.split("/").at(-1),
+            },
+            (error, result) => {
+              if (error) {
+                reject(error);
+                return;
+              }
+              resolve(result);
+            },
+          )
+          .end(buffer);
+      });
       query.metadata["ogCover"] = uploadedFile.secure_url;
     }
     await dbConnect();
