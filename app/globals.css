@@ -51,7 +51,7 @@
 
 @layer base {
   * {
-    @apply border-border font-sans;
+    @apply border-border font-sans m-0 p-0 box-border;
   }
 
   body {

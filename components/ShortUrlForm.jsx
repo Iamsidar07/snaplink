@@ -6,10 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
-import Image from "next/image";
 import revalidate from "@/app/actions";
+import { cn } from "@/lib/utils";
 
-const ShortUrlForm = () => {
+const ShortUrlForm = ({ className }) => {
   const { toast } = useToast();
   const [actualUrl, setActualURL] = useState("");
   const [shortenUrl, setShortenUrl] = useState(null);
@@ -40,14 +40,7 @@ const ShortUrlForm = () => {
   };
 
   return (
-    <div className="mt-6 bg-background w-full p-6 border rounded text-center relative">
-      <Image
-        src={"/try-it.png"}
-        alt="try it"
-        width={382}
-        height={419}
-        className="w-20 obkect-contain absolute -right-2 -top-14 sm:-right-12 sm:-top-16 pointer-events-none dark:invert"
-      />
+    <div className={cn("w-full text-center relative", className)}>
       <form
         onSubmit={(e) => {
           e.preventDefault();

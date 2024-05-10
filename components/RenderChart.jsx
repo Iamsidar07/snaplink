@@ -3,9 +3,13 @@ import React from "react";
 import Chart from "./Chart";
 import { cn } from "@/lib/utils";
 
-const RenderChart = ({ data, className }) => {
+const RenderChart = ({ data, className, type = "bar" }) => {
   return (
-    <Chart data={data} className={cn("min-h-fit sm:min-h-72", className)} />
+    <Chart
+      data={data}
+      type={type}
+      className={cn("min-h-fit sm:min-h-72", className)}
+    />
   );
 };
 

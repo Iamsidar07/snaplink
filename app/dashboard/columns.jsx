@@ -5,6 +5,7 @@ import { ArrowUpDown, Copy } from "lucide-react";
 import RenderQrCode from "@/components/RenderQrCode";
 import Link from "next/link";
 import Image from "next/image";
+import { convertToTimeAgo } from "@/lib/utils";
 
 export const columns = [
   {
@@ -106,7 +107,7 @@ export const columns = [
       const history = row.original;
       const date = new Date(history.date);
 
-      return date.toLocaleDateString("en-US");
+      return convertToTimeAgo(date);
     },
   },
 ];

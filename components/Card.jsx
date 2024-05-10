@@ -46,7 +46,7 @@ const Card = ({ actualUrl, shortUrl, clicks, _id }) => {
           src={`${origin}/favicon.ico`}
         />
         <Link
-          href={`/url/${_id}`}
+          href={`/dashboard/url/${_id}`}
           className="truncate hover:underline hover:underline-offset-2"
         >
           {actualUrl}
