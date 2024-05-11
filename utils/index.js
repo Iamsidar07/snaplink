@@ -70,3 +70,6 @@ export function constructMetadata({
     }),
   };
 }
+
+export const dataFormatter = (number) =>
+  Intl.NumberFormat("us").format(number).toString();

@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { convertToTimeAgo } from "@/lib/utils";
+import TopPerformingLinks from "@/components/TopPerformingLinks";
 
 export const metadata = constructMetadata({
   title: "Dashboard | Snaplink",
@@ -126,16 +127,7 @@ export default async function Page() {
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-6 lg:grid-cols-2 mt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Performing Links</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <RenderChart data={formattedData} />
-          </CardContent>
-        </Card>
-      </div>
+      <TopPerformingLinks />
     </div>
   );
 }

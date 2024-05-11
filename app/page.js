@@ -50,8 +50,18 @@ export default async function Home() {
               Snaplink is public now
             </div>
           </div>
-          <h1 className="headline text-center mt-2">
-            Simple and Fast URL <br /> 🔗Shortner
+          <h1 className="text-center mt-2 text-xl lg:text-6xl font-bold leading-7">
+            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-orange-500 to-indigo-600">
+              Link.
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-pink-500 to-pink-900">
+              {" "}
+              Snap.
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-teal-500 to-green-600">
+              {" "}
+              Success.
+            </span>
           </h1>
           <ShortUrlForm />
         </div>

@@ -7,8 +7,8 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
-    <nav className="w-full backdrop-blur border-b dark:border-b-border  sticky top-0 z-50 px-4 sm:px-12 py-1.5">
-      <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
+    <nav className="w-full backdrop-blur border-b dark:border-b-border  sticky top-0 z-50 px-4 py-1.5">
+      <div className="flex items-center justify-between w-full">
         <Link className="flex items-center gap-2" href="/">
           <Image
             src={"/logo.png"}

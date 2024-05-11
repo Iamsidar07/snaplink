@@ -12,7 +12,7 @@ export const columns = [
     accessorKey: "shortUrl",
     header: "Short Link",
     cell: ({ row }) => {
-      const url = row.original.shortUrl;
+      const { shortUrl: url, id } = row.original;
       return (
         <div className="flex items-center gap-2 group">
           <Copy
@@ -22,8 +22,7 @@ export const columns = [
             }}
           />
           <Link
-            href={url}
-            target="_blank"
+            href={`/dashboard/links/${id}`}
             className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
             {url}
@@ -50,13 +49,7 @@ export const columns = [
             src={`${origin}/favicon.ico`}
           />
 
-          <Link
-            href={url}
-            target="_blank"
-            className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
-          >
-            {url}
-          </Link>
+          {url}
         </div>
       );
     },
