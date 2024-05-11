@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { convertToTimeAgo } from "@/lib/utils";
 import TopPerformingLinks from "@/components/TopPerformingLinks";
+import CreateLink from "@/components/CreateLink";
 
 export const metadata = constructMetadata({
   title: "Dashboard | Snaplink",
@@ -58,7 +59,11 @@ export default async function Page() {
 
   return (
     <div className="p-5">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="flex items-center justify-between mb-4">
+        <p className="font-bold">Home</p>
+        <CreateLink />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="dark:bg-gray-800 dark:text-gray-50">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
             <LinkIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
@@ -118,16 +123,8 @@ export default async function Page() {
             </Table>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="capitalize">Create new link</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ShortUrlForm />
-          </CardContent>
-        </Card>
+        <TopPerformingLinks />
       </div>
-      <TopPerformingLinks />
     </div>
   );
 }

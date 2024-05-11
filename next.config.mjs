@@ -17,6 +17,12 @@ const nextConfig = {
       {
         hostname: "api.producthunt.com",
       },
+      {
+        hostname: "opengraph.githubassets.com",
+      },
+      {
+        hostname: "www.google.com",
+      },
     ],
   },
 };

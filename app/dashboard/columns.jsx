@@ -22,7 +22,8 @@ export const columns = [
             }}
           />
           <Link
-            href={`/dashboard/links/${id}`}
+            href={url}
+            target="_blank"
             className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
             {url}
@@ -36,8 +37,6 @@ export const columns = [
     header: "Original Link",
     cell: ({ row }) => {
       const url = row.original.originalUrl;
-      const newUrl = new URL(row.original.originalUrl);
-      const origin = newUrl.origin;
 
       return (
         <div className="flex items-center gap-2 group">
@@ -46,10 +45,15 @@ export const columns = [
             width={30}
             height={30}
             alt="logo"
-            src={`${origin}/favicon.ico`}
+            src={`https://www.google.com/s2/favicons?sz=64&domain_url=${url}`}
           />
-
-          {url}
+          <Link
+            href={url}
+            target="_blank"
+            className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
+          >
+            {url}
+          </Link>
         </div>
       );
     },

@@ -18,7 +18,7 @@ const TopPerformingLinks = () => {
     };
   });
   return (
-    <div className="grid gap-6 lg:grid-cols-2 mt-8">
+    <div className="">
       <Card>
         <CardHeader>
           <CardTitle>Top Performing Links</CardTitle>

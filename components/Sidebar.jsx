@@ -39,7 +39,7 @@ const Sidebar = () => {
           )}
         >
           {item.icon}
-          <span>{item.name}</span>
+          <span className="hidden md:flex">{item.name}</span>
         </Link>
       ))}
     </div>

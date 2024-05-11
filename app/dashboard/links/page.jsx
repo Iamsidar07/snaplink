@@ -4,6 +4,7 @@ import { DataTable } from "../data-table";
 import RenderQrCode from "@/components/RenderQrCode";
 import { auth } from "@clerk/nextjs";
 import { fetData } from "../page";
+import CreateLink from "@/components/CreateLink";
 
 const page = async () => {
   const { userId } = auth();
@@ -23,7 +24,11 @@ const page = async () => {
 
   return (
     <div className="p-5">
-      <h2 className="font-bold text-lg lg:text-3xl">Recent Links</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-bold text-lg lg:text-3xl">Recent Links</h2>
+        <CreateLink />
+      </div>
+
       <DataTable columns={columns} data={tableData} />
     </div>
   );
