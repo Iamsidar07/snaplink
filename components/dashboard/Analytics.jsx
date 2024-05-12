@@ -1,7 +1,7 @@
 "use client";
 import useUserLinks from "@/hooks/useUserLinks";
-import React, { Suspense, useState } from "react";
-import { Card, CardContent, CardHeader } from "./ui/card";
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { AreaChart } from "@tremor/react";
 import { dataFormatter } from "@/utils";
 import { format } from "date-fns";

@@ -52,7 +52,8 @@ const CreateLink = () => {
       });
       return res.data;
     },
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      console.log("success:", data);
       router.push("/dashboard/links");
     },
     onError: (error) => {

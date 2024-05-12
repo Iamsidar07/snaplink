@@ -4,7 +4,7 @@ import { Home, LineChartIcon, Link2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import MaxWidthWrapper from "./MaxWidthWrapper";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 
 const Tabs = () => {
   const pathname = usePathname();

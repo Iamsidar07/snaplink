@@ -1,14 +1,8 @@
-import ShortUrlForm from "@/components/ShortUrlForm";
 import config from "@/config/config";
 import { constructMetadata } from "@/utils";
 import { auth } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
-import { DataTable } from "./data-table";
-import RenderQrCode from "@/components/RenderQrCode";
-import { columns } from "@/app/dashboard/columns";
-import RenderChart from "@/components/RenderChart";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
-import { formatDistance } from "date-fns";
 import {
   Table,
   TableHeader,
@@ -19,12 +13,9 @@ import {
 } from "@/components/ui/table";
 import { ActivityIcon, LinkIcon } from "lucide-react";
 import Link from "next/link";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { convertToTimeAgo } from "@/lib/utils";
-import TopPerformingLinks from "@/components/TopPerformingLinks";
 import CreateLink from "@/components/CreateLink";
+import TopPerformingLinks from "@/components/dashboard/TopPerformingLinks";
 
 export const metadata = constructMetadata({
   title: "Dashboard | Snaplink",
@@ -34,6 +25,9 @@ export const fetData = async ({ userId }) => {
   const res = await fetch(`${config.domain}/api/url?userId=${userId}`);
   return await res.json();
 };
+
+export const formatter = Intl.NumberFormat("en-US", {});
+
 export default async function Page() {
   const { userId } = auth();
   const data = await fetData({ userId });
@@ -46,16 +40,6 @@ export default async function Page() {
   const recentLinks = data
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 3);
-  const formatter = Intl.NumberFormat("en-US", {});
-
-  const clicksHighToLow = data?.sort((a, b) => b.clicks - a.clicks).slice(0, 5);
-  const formattedData = clicksHighToLow?.map((item) => {
-    const domain = new URL(item.actualUrl).host;
-    return {
-      domain,
-      clicks: item.clicks,
-    };
-  });
 
   return (
     <div className="p-3">

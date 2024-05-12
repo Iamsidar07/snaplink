@@ -1,5 +1,5 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Tabs from "@/components/Sidebar";
+import Tabs from "@/components/dashboard/Tabs";
 
 function DashboardLayout({ children }) {
   return (

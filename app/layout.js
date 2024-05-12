@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
         <Provider>
           <body className={cn("antialiased", fontSans.variable)}>
             <div className="main"></div>
-
             <div className="relative z-50">
               <Navbar />
               {children}

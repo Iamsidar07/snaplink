@@ -6,6 +6,7 @@ import RenderQrCode from "@/components/RenderQrCode";
 import Link from "next/link";
 import Image from "next/image";
 import { convertToTimeAgo } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export const columns = [
   {
@@ -74,16 +75,18 @@ export const columns = [
   },
   {
     accessorKey: "qrCode",
-    header: "QR Code",
+    header: <p className="text-nowrap">Qr Code</p>,
     cell: ({ row }) => {
-      const history = row.original;
+      const url = row.original.shortUrl;
       return (
-        <>
-          <div className="w-12">
-            {" "}
-            <RenderQrCode {...history} _id={history.id} className="w-20" />
-          </div>
-        </>
+        <Dialog>
+          <DialogTrigger className="w-12">
+            <RenderQrCode url={url} />
+          </DialogTrigger>
+          <DialogContent className="pt-12 max-w-sm md:max-w-lg">
+            <RenderQrCode url={url} />
+          </DialogContent>
+        </Dialog>
       );
     },
   },

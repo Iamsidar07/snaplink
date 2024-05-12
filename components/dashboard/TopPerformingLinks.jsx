@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { BarChart } from "@tremor/react";
 import { dataFormatter } from "@/utils";
 import useUserLinks from "@/hooks/useUserLinks";
@@ -28,7 +28,7 @@ const TopPerformingLinks = () => {
             data={chartdata}
             index="domain"
             categories={["Total Clicks"]}
-            colors={["blue"]}
+            colors={["black"]}
             valueFormatter={dataFormatter}
             yAxisWidth={48}
             onValueChange={(v) => console.log(v)}

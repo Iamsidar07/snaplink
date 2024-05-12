@@ -1,6 +1,6 @@
 import dbConnect from "@/db";
 import UrlModel from "@/db/models/Url";
-import cloudinary from "@/utils/cloudinary";
+import cloudinary from "@/config/cloudinary";
 import { auth } from "@clerk/nextjs";
 
 export const DELETE = async (request, { params }) => {

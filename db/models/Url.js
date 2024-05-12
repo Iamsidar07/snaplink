@@ -1,4 +1,13 @@
 import mongoose from "mongoose";
+const locationSchema = new mongoose.Schema({
+  city: { type: String },
+  country: { type: String },
+});
+const deviceSchema = new mongoose.Schema({
+  osName: { type: String },
+  browserName: { type: String },
+  deviceType: { type: String },
+});
 
 const urlSchema = new mongoose.Schema(
   {
@@ -28,27 +37,21 @@ const urlSchema = new mongoose.Schema(
           type: Number,
           default: 0,
         },
+        location: [
+          {
+            city: { type: String },
+            country: { type: String },
+          },
+        ],
+        devices: [
+          {
+            osName: { type: String },
+            browserName: { type: String },
+            deviceType: { type: String },
+          },
+        ],
       },
     ],
-    metadata: {
-      title: {
-        type: String,
-      },
-      description: {
-        type: String,
-      },
-      ogCover: {
-        type: String,
-      },
-    },
-    qrCodeFgColor: {
-      type: String,
-      default: "black",
-    },
-    qrCodeBgColor: {
-      type: String,
-      default: "white",
-    },
   },
   { timestamps: true },
 );

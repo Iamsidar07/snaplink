@@ -1,6 +1,5 @@
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Image from "next/image";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import config from "@/config/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import ProductHunt from "@/components/ProductHunt";
