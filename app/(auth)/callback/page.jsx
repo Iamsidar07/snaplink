@@ -28,7 +28,7 @@ const Callback = () => {
     mutate();
   }, [mutate]);
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pt-12 md:pt-24 min-h-[100vh-60px]">
       {isPending ? <MyLoader /> : null}
       <h3 className="headline !text-sm !md:text-lg mt-3">
         You will be automatically redirected...

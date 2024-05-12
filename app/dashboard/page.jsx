@@ -58,12 +58,12 @@ export default async function Page() {
   });
 
   return (
-    <div className="p-5">
-      <div className="flex items-center justify-between mb-4">
-        <p className="font-bold">Home</p>
+    <div className="p-3">
+      <div className="flex items-center justify-end mb-4">
         <CreateLink />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="dark:bg-gray-800 dark:text-gray-50">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
             <LinkIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
@@ -83,8 +83,8 @@ export default async function Page() {
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-6 lg:grid-cols-2 mt-8">
-        <Card className="dark:bg-gray-800 dark:text-gray-50">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 mt-8">
+        <Card className="">
           <CardHeader>
             <CardTitle>Recent Links</CardTitle>
           </CardHeader>
@@ -114,7 +114,7 @@ export default async function Page() {
                     <TableCell className="text-gray-900 dark:text-gray-50">
                       {link.clicks}
                     </TableCell>
-                    <TableCell className="text-gray-500 dark:text-gray-400">
+                    <TableCell className="text-gray-500 dark:text-gray-400 text-nowrap">
                       {convertToTimeAgo(new Date(link.createdAt))}
                     </TableCell>
                   </TableRow>

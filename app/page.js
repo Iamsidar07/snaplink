@@ -5,6 +5,8 @@ import config from "@/config/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import ProductHunt from "@/components/ProductHunt";
 import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 const getShortenUrlCount = async () => {
   const res = await fetch(`${config.domain}/api/urlCount`);
@@ -16,7 +18,7 @@ const UrlCount = ({ count }) => {
     <div className={"relative"}>
       <h4
         className={
-          "headline text-center !leading-normal  md:text-6xl md:leading-tight capitalize"
+          "headline text-center text-3xl !leading-normal  md:text-6xl md:leading-tight capitalize"
         }
       >
         Over{" "}
@@ -41,16 +43,16 @@ const UrlCount = ({ count }) => {
 export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
   return (
-    <>
+    <MaxWidthWrapper>
       <ProductHunt />
-      <main className="py-12 md:py-24 md:pb-[15%] overflow-x-hidden">
-        <div className="max-w-3xl w-full mx-auto">
-          <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-br from-orange-500 via-indigo-100 to-blue-500">
+      <main className="py-12 md:py-24 md:pb-[15%] overflow-x-hidden px-4">
+        <div className="md:max-w-3xl w-full mx-auto space-y-4">
+          <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-r from-orange-700  to-blue-900">
             <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
               Snaplink is public now
             </div>
           </div>
-          <h1 className="text-center mt-2 text-xl lg:text-6xl font-bold leading-7">
+          <h1 className="text-center mt-2 text-4xl lg:text-6xl font-bold">
             <span className="bg-clip-text text-transparent bg-gradient-to-tr from-orange-500 to-indigo-600">
               Link.
             </span>
@@ -66,7 +68,7 @@ export default async function Home() {
           <ShortUrlForm />
         </div>
 
-        <div className="dark:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
+        <div className="bg-gradient-to-b from-gray-50  to-gray-100 p-2 mt-12 border rounded-2xl">
           <Image
             src={`/dashboard-light.png`}
             alt="hero"
@@ -76,46 +78,11 @@ export default async function Home() {
             draggable={false}
           />
         </div>
-        <div className="light:hidden sm:hidden bg-gradient-to-tr from-teal-100 via-indigo-200 to-orange-100 p-2 mt-12 border rounded-2xl">
-          <Image
-            src={`/dashboard-dark.png`}
-            alt="hero"
-            height={1080}
-            width={1920}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top"
-            draggable={false}
-          />
-        </div>
-
-        <div className="hidden sm:dark:flex flex-col ">
-          <ContainerScroll>
-            <Image
-              src={`/dashboard-dark.png`}
-              alt="hero"
-              height={1080}
-              width={1920}
-              className="mx-auto rounded-2xl object-cover h-full object-left-top"
-              draggable={false}
-            />
-          </ContainerScroll>
-        </div>
-
-        <div className="hidden sm:dark:hidden sm:flex flex-col overflow-hidden ">
-          <ContainerScroll>
-            <Image
-              src={`/dashboard-light.png`}
-              alt="hero"
-              height={1080}
-              width={1920}
-              className="mx-auto rounded-2xl object-cover h-full object-left-top"
-              draggable={false}
-            />
-          </ContainerScroll>
-        </div>
         <WhyChooseUs />
         <UrlCount count={shortenUrlCount ?? 0} />
         <Testimonials />
       </main>
-    </>
+      <Footer />
+    </MaxWidthWrapper>
   );
 }

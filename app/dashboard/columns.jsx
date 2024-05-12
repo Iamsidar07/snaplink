@@ -104,7 +104,7 @@ export const columns = [
       const history = row.original;
       const date = new Date(history.date);
 
-      return convertToTimeAgo(date);
+      return <p className="text-nowrap"> {convertToTimeAgo(date)}</p>;
     },
   },
 ];

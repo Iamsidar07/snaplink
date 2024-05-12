@@ -62,7 +62,8 @@ const Analytics = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <h2>Analytics</h2>
+        <h2 className="font-bold text-lg lg:text-3xl">Analytics</h2>
+
         <div className="w-[200px] text-gray-500 relative">
           <div
             onClick={() =>

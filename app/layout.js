@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import Provider from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { constructMetadata } from "@/utils";
 
@@ -22,10 +21,11 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning className="light">
         <Provider>
           <body className={cn("antialiased", fontSans.variable)}>
-            <div className="">
+            <div className="main"></div>
+
+            <div className="relative z-50">
               <Navbar />
               {children}
-              <Footer />
             </div>
             <Toaster />
           </body>

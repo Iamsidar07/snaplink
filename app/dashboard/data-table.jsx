@@ -51,7 +51,7 @@ export function DataTable({ columns, data }) {
           onChange={(event) =>
             table.getColumn("originalUrl")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="md:max-w-sm"
         />
       </div>
       <div className="rounded-md border">

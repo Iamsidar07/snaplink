@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const ProductHunt = () => {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 font-recursive px-3 py-1.5 max-w-fit mx-auto mt-6 relative overflow-hidden rounded-lg border border-background group">
-      <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-primary dark:bg-teal-700 filter blur-[16rem] group-hover:brightness-200 transition-all" />
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 font-recursive px-3 py-1.5 max-w-fit mx-auto mt-6 relative overflow-hidden rounded-lg group">
+      <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-teal-500 filter blur-[10rem] group-hover:brightness-105 transition-all" />
 
       <p>
         👏 Checkout features on
