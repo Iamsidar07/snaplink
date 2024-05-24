@@ -18,7 +18,7 @@ function addVariablesForColors({ addBase, theme }) {
 }
 
 module.exports = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
@@ -40,7 +40,6 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-        recursive: ["var(--font-recursive)", ...fontFamily.sans],
       },
       colors: {
         // light mode

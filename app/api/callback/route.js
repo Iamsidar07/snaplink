@@ -1,5 +1,5 @@
 import dbConnect from "@/db";
-import UserModel from "@/db/models/User";
+import UserModel from "@/models/User";
 import { currentUser } from "@clerk/nextjs";
 
 export const POST = async (request) => {

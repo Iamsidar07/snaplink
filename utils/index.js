@@ -1,3 +1,4 @@
+import { formatDistance } from "date-fns";
 export const validateURL = (url) => {
   const urlPattern = new RegExp(
     /^(?:http|https?):\/\/(?:\w+\.)+\w{2,}(?:\/\S*)?$/i,
@@ -6,26 +7,6 @@ export const validateURL = (url) => {
   return urlPattern.test(url);
 };
 
-export function formatDate(date) {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const month = months[monthIndex];
-  return `${day} ${month}`;
-}
 export function constructMetadata({
   title = "Simple and Fast URL 🔗 Shortner",
   description = "Snaplink is a free tool to shorten URLs and generate short links URL shortener allows to create a shortened link making it easy to share",
@@ -70,3 +51,12 @@ export function constructMetadata({
     }),
   };
 }
+
+export const dataFormatter = (number) =>
+  Intl.NumberFormat("us").format(number).toString();
+
+export const convertToTimeAgo = (date) => {
+  return formatDistance(date, new Date(), {
+    addSuffix: true,
+  });
+};

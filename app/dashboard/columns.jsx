@@ -2,16 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Copy } from "lucide-react";
-import RenderQrCode from "@/components/RenderQrCode";
 import Link from "next/link";
 import Image from "next/image";
+import { convertToTimeAgo } from "@/utils";
+import config from "@/config";
 
 export const columns = [
   {
     accessorKey: "shortUrl",
     header: "Short Link",
     cell: ({ row }) => {
-      const url = row.original.shortUrl;
+      const { shortUrl } = row.original;
+      const url = `${config.domain}/s/${shortUrl}`;
       return (
         <div className="flex items-center gap-2 group">
           <Copy
@@ -35,10 +37,9 @@ export const columns = [
     accessorKey: "originalUrl",
     header: "Original Link",
     cell: ({ row }) => {
-      const url = row.original.originalUrl;
-      const newUrl = new URL(row.original.originalUrl);
-      const origin = newUrl.origin;
-
+      const { originalUrl } = row.original;
+      const origin = new URL(originalUrl).origin;
+      console.log({ origin });
       return (
         <div className="flex items-center gap-2 group">
           <Image
@@ -46,15 +47,14 @@ export const columns = [
             width={30}
             height={30}
             alt="logo"
-            src={`${origin}/favicon.ico`}
+            src={`https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`}
           />
-
           <Link
-            href={url}
+            href={originalUrl}
             target="_blank"
             className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
-            {url}
+            {originalUrl}
           </Link>
         </div>
       );
@@ -75,21 +75,6 @@ export const columns = [
     },
   },
   {
-    accessorKey: "qrCode",
-    header: "QR Code",
-    cell: ({ row }) => {
-      const history = row.original;
-      return (
-        <>
-          <div className="w-12">
-            {" "}
-            <RenderQrCode {...history} _id={history.id} className="w-20" />
-          </div>
-        </>
-      );
-    },
-  },
-  {
     accessorKey: "date",
     header: ({ column }) => {
       return (
@@ -106,7 +91,7 @@ export const columns = [
       const history = row.original;
       const date = new Date(history.date);
 
-      return date.toLocaleDateString("en-US");
+      return <p className="text-nowrap"> {convertToTimeAgo(date)}</p>;
     },
   },
 ];

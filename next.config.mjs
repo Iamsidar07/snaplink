@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  //reactStrictMode: false,
   images: {
     remotePatterns: [
       {
@@ -16,6 +17,12 @@ const nextConfig = {
       },
       {
         hostname: "api.producthunt.com",
+      },
+      {
+        hostname: "opengraph.githubassets.com",
+      },
+      {
+        hostname: "www.google.com",
       },
     ],
   },
