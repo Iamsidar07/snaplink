@@ -276,3 +276,18 @@ export const ANALYTICS_EMOJIS = {
     iOS: "📱",
   },
 };
+
+export const TIME_PERIOD_DATA = [
+  {
+    label: "Last 24 hours",
+    value: new Date(Date.now() - 86400000),
+  },
+  {
+    label: "Last 7 days",
+    value: new Date(Date.now() - 604800000),
+  },
+  {
+    label: "Last 30 days",
+    value: new Date(Date.now() - 2592000000),
+  },
+];

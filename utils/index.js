@@ -1,3 +1,4 @@
+import config from "@/config";
 import { formatDistance } from "date-fns";
 export const validateURL = (url) => {
   const urlPattern = new RegExp(
@@ -52,11 +53,36 @@ export function constructMetadata({
   };
 }
 
-export const dataFormatter = (number) =>
-  Intl.NumberFormat("us").format(number).toString();
+export const numberFormatter = Intl.NumberFormat("en-US", {});
+
+export const dataFormatter = (number) => Intl.NumberFormat("us").format(number).toString()
 
 export const convertToTimeAgo = (date) => {
   return formatDistance(date, new Date(), {
     addSuffix: true,
   });
+};
+
+export const handleDeviceDetection = (userAgent) => {
+  let device = "Unknown";
+  const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(
+    userAgent,
+  );
+  const isTablet = /(ipad|tablet|playbook|silk)|(android(?!.*mobile))/g.test(
+    userAgent,
+  );
+
+  if (isMobile) {
+    device = "Mobile";
+  } else if (isTablet) {
+    device = "Tablet";
+  } else {
+    device = "Desktop";
+  }
+  return device;
+};
+export const getLocation = async () => {
+  const res = await fetch(config.locationEndpoint);
+  const data = await res.json();
+  return data;
 };
