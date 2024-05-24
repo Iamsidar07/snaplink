@@ -2,11 +2,11 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { BarChart } from "@tremor/react";
-import { dataFormatter } from "@/utils";
+import { dataFormatter } from "@/lib/utils";
 import useUserLinks from "@/hooks/useUserLinks";
 
 const TopPerformingLinks = () => {
-  const { data, isLoading } = useUserLinks();
+  const { data } = useUserLinks();
   const topLinks = data?.sort((a, b) => b.clicks - a.clicks).slice(0, 5);
   const chartdata = topLinks?.map((item) => {
     const url = new URL(item.originalUrl);

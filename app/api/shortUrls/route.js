@@ -1,8 +1,8 @@
 import dbConnect from "@/db";
 import ShortUrl from "@/models/ShortUrl";
-import { validateURL } from "@/utils";
 import { auth } from "@clerk/nextjs";
 import generateUniqueId from "generate-unique-id";
+import { validateURL } from "@/lib/utils";
 
 dbConnect();
 
@@ -39,7 +39,7 @@ export const GET = async (req) => {
   const searchParams = req.nextUrl.searchParams;
   const userId = searchParams.get("userId");
   try {
-    const urls = await ShortUrl.find({ userId });
+    const urls = await ShortUrl.find({ userId }).sort({ createdAt: -1 });
     console.log("GET api/shortUrls-> Done");
     return Response.json(urls, { status: 200 });
   } catch (error) {

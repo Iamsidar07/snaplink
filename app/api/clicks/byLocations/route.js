@@ -4,7 +4,6 @@ import { auth } from "@clerk/nextjs";
 dbConnect();
 
 export const GET = async (req) => {
-  console.log("getting req: ", req.pathname);
   try {
     const { userId } = auth();
     const links = await ClickLog.find({ userId });
