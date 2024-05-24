@@ -1,10 +1,10 @@
 import { Rethink_Sans } from "next/font/google";
 import "./globals.css";
-import { cn, constructMetadata } from "@/lib/utils";
 import Provider from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { cn, constructMetadata } from "@/lib/utils";
 
 const fontSans = Rethink_Sans({
   subsets: ["latin"],

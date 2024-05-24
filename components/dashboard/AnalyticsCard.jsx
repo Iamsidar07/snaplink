@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { AreaChart } from "@tremor/react";
 import { BarChart } from 'lucide-react';
-import { dataFormatter, numberFormatter } from '@/utils';
+import { dataFormatter, numberFormatter } from '@/lib/utils';
 
 const AnalyticsCard = ({ totalClicks }) => {
     return (

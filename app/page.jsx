@@ -16,8 +16,7 @@ const getShortenUrlCount = async () => {
       return 0;
     }
 
-    const data = await res.json();
-    return data;
+    return await res.json();
   } catch (error) {
     console.log(error?.message);
     return 0;
