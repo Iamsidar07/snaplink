@@ -1,5 +1,5 @@
 "use client"
-import { getTotalClicks } from "@/app/actions";
+import { getTotalClicks } from "@/actions";
 import { useQuery } from "@tanstack/react-query";
 
 const useTotalClicks = () => {

@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ActivityIcon, LinkIcon } from "lucide-react";
 import CreateLink from "@/components/CreateLink";
 import TopPerformingLinks from "@/components/dashboard/TopPerformingLinks";
-import { getTotalClicks } from "../actions";
+import { getTotalClicks } from "@/actions";
 import RecentLinks from "@/components/dashboard/RecentLinks";
 
 export const metadata = constructMetadata({
