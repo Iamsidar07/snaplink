@@ -1,5 +1,5 @@
-import { constructMetadata } from "@/utils";
 import Image from "next/image";
+import { constructMetadata } from "@/lib/utils";
 export const metadata = constructMetadata({
   title: "Not found",
 });

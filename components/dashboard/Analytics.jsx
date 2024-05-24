@@ -1,50 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { AreaChart } from "@tremor/react";
-import { dataFormatter } from "@/utils";
 import { format } from "date-fns";
-import { BarChart, Calendar, ChevronDown } from "lucide-react";
+import { Calendar, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useQueries } from "@tanstack/react-query";
-import axios from "axios";
+import useTotalClicks from "@/hooks/useTotalClicks";
+import { TIME_PERIOD_DATA } from "@/constants";
+import AnalyticsCard from "./AnalyticsCard";
 
-const TIME_PERIOD_DATA = [
-  {
-    label: "Last 24 hours",
-    value: new Date(Date.now() - 86400000),
-  },
-  {
-    label: "Last 7 days",
-    value: new Date(Date.now() - 604800000),
-  },
-  {
-    label: "Last 30 days",
-    value: new Date(Date.now() - 2592000000),
-  },
-];
 const Analytics = () => {
-  const getTotalClicks = async () => {
-    const res = await axios.get("/api/clicks/totalClicks");
-    return res.data;
-  };
-  const getClicksOverTime = async () => {
-    const res = await axios.get("/api/clicks/overTime");
-    return res.data;
-  };
-
-  const [{ data: totalClicks = 0 }, { data: clicksOverTime = [] }] = useQueries(
-    {
-      queries: [
-        { queryKey: ["totalClicks"], queryFn: getTotalClicks },
-        { queryKey: ["clicksOverTime"], queryFn: getClicksOverTime },
-      ],
-    },
-  );
-  let data = clicksOverTime;
+  const { data: totalClicks } = useTotalClicks()
+  const { data: clicksOverTime } = useTotalClicks()
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
-  const filteredClicksOverTime = data?.filter((clickLog) => {
+
+  const filteredClicksOverTime = [...clicksOverTime]?.filter((clickLog) => {
     return new Date(clickLog.time) > timePeriod.value;
   });
 
@@ -63,7 +32,6 @@ const Analytics = () => {
     <div className="md:col-span-2">
       <div className="flex items-center justify-between mb-2">
         <h2 className="font-bold text-lg lg:text-3xl">Analytics</h2>
-
         <div className="w-[200px] text-gray-500 relative">
           <div
             onClick={() =>
@@ -104,31 +72,7 @@ const Analytics = () => {
           )}
         </div>
       </div>
-
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-1">
-            <h2 className="text-lg lg:text-3xl font-bold">
-              {dataFormatter(totalClicks)}
-            </h2>
-            <BarChart className="w-5 h-5 text-gray-600" />
-          </div>
-
-          <p className="uppercase text-gray-500">total clicks</p>
-        </CardHeader>
-        <CardContent>
-          <AreaChart
-            className="h-80"
-            data={chartdata}
-            index="date"
-            categories={["clicks"]}
-            colors={["indigo"]}
-            valueFormatter={dataFormatter}
-            yAxisWidth={60}
-            onValueChange={(v) => console.log(v)}
-          />
-        </CardContent>
-      </Card>
+      <AnalyticsCard totalClicks={totalClicks} />
     </div>
   );
 };

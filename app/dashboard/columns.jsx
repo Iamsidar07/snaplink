@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Copy } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { convertToTimeAgo } from "@/utils";
 import config from "@/config";
+import { convertToTimeAgo } from "@/lib/utils";
 
 export const columns = [
   {

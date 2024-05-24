@@ -1,5 +1,4 @@
 import Analytics from "@/components/dashboard/Analytics";
-import BrowserAnalytics from "@/components/dashboard/BrowserAnalytics";
 import DeviceAnalytics from "@/components/dashboard/DeviceAnalytics";
 import LocationAnalytics from "@/components/dashboard/LocationAnalytics";
 
