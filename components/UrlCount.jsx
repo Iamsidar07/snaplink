@@ -4,7 +4,7 @@ const UrlCount = () => {
   const { data: totalUrlCreated } = useQuery({
     queryKey: ["urlCount"],
     queryFn: async () => {
-      const res = await axios.get("/api/urlCount");
+      const res = await axios.get("/api/shortUrls/count");
       return res.data;
     },
     retry: true,

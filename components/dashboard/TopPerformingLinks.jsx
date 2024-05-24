@@ -7,10 +7,9 @@ import useUserLinks from "@/hooks/useUserLinks";
 
 const TopPerformingLinks = () => {
   const { data, isLoading } = useUserLinks();
-  console.log({ data });
   const topLinks = data?.sort((a, b) => b.clicks - a.clicks).slice(0, 5);
   const chartdata = topLinks?.map((item) => {
-    const url = new URL(item.actualUrl);
+    const url = new URL(item.originalUrl);
     const domain = url.host;
     return {
       domain,

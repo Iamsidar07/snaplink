@@ -7,9 +7,9 @@ import axios from "axios";
 const useUserLinks = () => {
   const { userId } = useAuth();
   const result = useQuery({
-    queryKey: ["links", userId],
+    queryKey: ["allShortUrls", userId],
     queryFn: async () => {
-      const res = await axios.get(`/api/url?userId=${userId}`);
+      const res = await axios.get(`/api/shortUrls?userId=${userId}`);
       return res.data;
     },
   });

@@ -8,8 +8,20 @@ import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 const getShortenUrlCount = async () => {
-  const res = await fetch(`${config.domain}/api/urlCount`);
-  return await res.json();
+  try {
+    const res = await fetch(`${config.domain}/api/shortUrls/count`, {
+      cache: "no-cache",
+    });
+    if (res.status === 500) {
+      return 0;
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error?.message);
+    return 0;
+  }
 };
 
 const UrlCount = ({ count }) => {
@@ -65,6 +77,10 @@ export default async function Home() {
             </span>
           </h1>
           <ShortUrlForm />
+          <p className="mt-6 text-muted-foreground">
+            Snaplink is a free tool to shorten URLs and generate short links URL
+            shortener allows to create a shortened link making it easy to share
+          </p>
         </div>
 
         <div className="bg-gradient-to-b from-gray-50  to-gray-100 p-2 mt-12 border rounded-2xl">

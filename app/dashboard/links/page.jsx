@@ -3,22 +3,21 @@ import { columns } from "../columns";
 import { DataTable } from "../data-table";
 import RenderQrCode from "@/components/RenderQrCode";
 import { auth } from "@clerk/nextjs";
-import { fetData } from "../page";
+import { getShortLinks } from "../page";
 import CreateLink from "@/components/CreateLink";
 
 const page = async () => {
   const { userId } = auth();
-  const data = await fetData({ userId });
+  const data = await getShortLinks({ userId });
   if (!data) notFound();
   const tableData = data?.map(
-    ({ _id, shortUrl, actualUrl, clicks, createdAt, dailyClicks }) => ({
+    ({ _id, shortUrl, originalUrl, clicks, createdAt }) => ({
       id: _id,
       shortUrl,
-      originalUrl: actualUrl,
+      originalUrl,
       clicks,
       date: createdAt,
       qrCode: <RenderQrCode value={shortUrl} />,
-      dailyClicks,
     }),
   );
 

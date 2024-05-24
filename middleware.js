@@ -4,10 +4,9 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/s/:path*",
-    "/api/actualUrl",
-    "/api/shortUrl",
-    "/api/urlCount",
-    "/api/url/:id*",
+    "/api/clicks",
+    "/api/shortUrls",
+    "/api/shortUrls/count",
   ],
 });
 

@@ -1,13 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "./ui/dialog";
-import {
-  Images,
   Link,
   Twitter,
   Image as ImageIcon,
@@ -25,12 +18,20 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import config from "@/config/config";
 
 const CreateLink = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [designationURL, setDesignationURL] = useState("");
   const [host, setHost] = useState("");
+  // metatagEndpoint
+  const metatagEndpoint = new URL(config.dubMetatagEndpointUrl);
+  const params = new URLSearchParams({
+    url: designationURL,
+  });
+  metatagEndpoint.search = params;
+
   const {
     data: metadata,
     isLoading: isMetadataLoading,
@@ -38,17 +39,15 @@ const CreateLink = () => {
   } = useQuery({
     queryKey: ["metadata", designationURL],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://app.dub.co/api/metatags?url=${designationURL}`,
-      );
+      const res = await axios.get(metatagEndpoint.href);
       return res.data;
     },
   });
   const { mutate, isPending } = useMutation({
     mutationKey: ["createLink", designationURL],
     mutationFn: async (url) => {
-      const res = await axios.post("/api/shortUrl", {
-        url,
+      const res = await axios.post("/api/shortUrls", {
+        originalUrl: url,
       });
       return res.data;
     },

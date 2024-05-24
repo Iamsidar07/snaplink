@@ -21,16 +21,19 @@ export const metadata = constructMetadata({
   title: "Dashboard | Snaplink",
 });
 
-export const fetData = async ({ userId }) => {
-  const res = await fetch(`${config.domain}/api/url?userId=${userId}`);
-  return await res.json();
+// All shorturls for dashboard
+export const getShortLinks = async ({ userId }) => {
+  const res = await fetch(`${config.domain}/api/shortUrls?userId=${userId}`);
+  const data = await res.json();
+  return data;
 };
 
 export const formatter = Intl.NumberFormat("en-US", {});
 
 export default async function Page() {
   const { userId } = auth();
-  const data = await fetData({ userId });
+  const data = await getShortLinks({ userId });
+  console.log("got: ", data);
   if (!data) notFound();
 
   const totalLinks = data.length;
@@ -46,7 +49,6 @@ export default async function Page() {
       <div className="flex items-center justify-end mb-4">
         <CreateLink />
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="dark:bg-gray-800 dark:text-gray-50">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
@@ -89,9 +91,9 @@ export default async function Page() {
                         <LinkIcon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                         <Link
                           className="truncate font-medium text-gray-900 dark:text-gray-50"
-                          href={link.actualUrl}
+                          href={link.originalUrl}
                         >
-                          {link.actualUrl}
+                          {link.originalUrl}
                         </Link>
                       </div>
                     </TableCell>

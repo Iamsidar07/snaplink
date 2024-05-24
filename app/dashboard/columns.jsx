@@ -37,8 +37,9 @@ export const columns = [
     accessorKey: "originalUrl",
     header: "Original Link",
     cell: ({ row }) => {
-      const url = row.original.originalUrl;
-
+      const { originalUrl } = row.original;
+      const origin = new URL(originalUrl).origin;
+      console.log({ origin });
       return (
         <div className="flex items-center gap-2 group">
           <Image
@@ -46,14 +47,14 @@ export const columns = [
             width={30}
             height={30}
             alt="logo"
-            src={`https://www.google.com/s2/favicons?sz=64&domain_url=${url}`}
+            src={`https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`}
           />
           <Link
-            href={url}
+            href={originalUrl}
             target="_blank"
             className="group-hover:underline group-hover:underline-offset-2 truncate max-w-xs"
           >
-            {url}
+            {originalUrl}
           </Link>
         </div>
       );

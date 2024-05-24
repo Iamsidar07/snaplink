@@ -1,5 +1,4 @@
 "use client";
-import useUserLinks from "@/hooks/useUserLinks";
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { AreaChart } from "@tremor/react";
@@ -7,12 +6,10 @@ import { dataFormatter } from "@/utils";
 import { format } from "date-fns";
 import { BarChart, Calendar, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useQueries } from "@tanstack/react-query";
+import axios from "axios";
 
 const TIME_PERIOD_DATA = [
-  {
-    label: "Last hour",
-    value: new Date(Date.now() - 3600000),
-  },
   {
     label: "Last 24 hours",
     value: new Date(Date.now() - 86400000),
@@ -27,40 +24,43 @@ const TIME_PERIOD_DATA = [
   },
 ];
 const Analytics = () => {
-  const { data, isLoading } = useUserLinks();
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
-  const countsByDate = {};
-  data?.forEach((item) => {
-    item.dailyClicks.forEach((click) => {
-      const date = click.date.split("T")[0];
-      countsByDate[date] = (countsByDate[date] || 0) + click.count;
-    });
-  });
+  const getTotalClicks = async () => {
+    const res = await axios.get("/api/clicks/totalClicks");
+    return res.data;
+  };
+  const getClicksOverTime = async () => {
+    const res = await axios.get("/api/clicks/overTime");
+    return res.data;
+  };
 
-  const filteredCountsByDate = Object.fromEntries(
-    Object.entries(countsByDate).filter(([date, count]) => {
-      console.log([date, count], timePeriod.value);
-      return new Date(date) > timePeriod.value;
-    }),
-  );
-
-  const chartdata = Object.entries(filteredCountsByDate).map(
-    ([date, count]) => {
-      const formattedDate = format(new Date(date), "EEE, MMM d");
-      return {
-        date: formattedDate,
-        clicks: count,
-      };
+  const [{ data: totalClicks = 0 }, { data: clicksOverTime = [] }] = useQueries(
+    {
+      queries: [
+        { queryKey: ["totalClicks"], queryFn: getTotalClicks },
+        { queryKey: ["clicksOverTime"], queryFn: getClicksOverTime },
+      ],
     },
   );
-  const totalClicks = Object.entries(filteredCountsByDate).reduce(
-    (prev, [_, count]) => prev + count,
-    0,
-  );
+  let data = clicksOverTime;
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
+  const filteredClicksOverTime = data?.filter((clickLog) => {
+    return new Date(clickLog.time) > timePeriod.value;
+  });
+
+  const chartdata = filteredClicksOverTime?.map(({ clicks, time }) => {
+    const formattedDate =
+      timePeriod.label !== TIME_PERIOD_DATA[0].label
+        ? format(new Date(time), "EEE, MMM d")
+        : format(new Date(time), "h:mm a");
+    return {
+      date: formattedDate,
+      clicks,
+    };
+  });
 
   return (
-    <div>
+    <div className="md:col-span-2">
       <div className="flex items-center justify-between mb-2">
         <h2 className="font-bold text-lg lg:text-3xl">Analytics</h2>
 

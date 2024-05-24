@@ -17,8 +17,7 @@ const WhyChooseUs = () => {
     },
     {
       feature: "Reliable Security",
-      description:
-        "Rest easy knowing your links are secure and protected with advanced encryption.",
+      description: "Rest easy knowing your links are secure and protected.",
       icon: <ShieldEllipsis />,
     },
     {
@@ -52,7 +51,7 @@ const WhyChooseUs = () => {
         {features.map(({ feature, description, icon }) => (
           <div
             key={icon}
-            className="rounded-3xl p-px bg-gradient-to-b from-white to-gray-50 sm:max-w-sm h-full relative overflow-hidden group "
+            className="rounded-3xl p-px bg-gradient-to-r from-white to-transparent sm:max-w-sm h-full relative overflow-hidden group "
           >
             <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full h-full shadow">
               <div className="w-14 h-14 grid place-content-center rounded-full text-orange-500 bg-gray-100">

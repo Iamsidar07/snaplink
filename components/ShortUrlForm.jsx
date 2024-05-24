@@ -11,29 +11,31 @@ import { cn } from "@/lib/utils";
 
 const ShortUrlForm = ({ className }) => {
   const { toast } = useToast();
-  const [actualUrl, setActualURL] = useState("");
-  const [shortenUrl, setShortenUrl] = useState(null);
+  const [originalUrl, setOriginalUrl] = useState("");
+  const [shortUrl, setShortUrl] = useState(null);
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
-      const res = await axios.post("/api/shortUrl", {
-        url: actualUrl,
+      const res = await axios.post("/api/shortUrls", {
+        originalUrl,
       });
       return res.data;
     },
-    onSuccess: async ({ shortUrl }) => {
-      setShortenUrl(shortUrl);
+    onSuccess: async (shortUrl) => {
+      setShortUrl(shortUrl);
+      setOriginalUrl("");
       revalidate({ tag: "urls" });
     },
     onError: (error) => {
+      console.log(error);
       return toast({
-        title: error.response.data || "Something went wrong!",
+        title: error.response.data ?? "Something went wrong!",
         description: "Please try again after some time.",
         variant: "destructive",
       });
     },
   });
   const copyShortUrl = async () => {
-    await navigator.clipboard.writeText(shortenUrl);
+    await navigator.clipboard.writeText(shortUrl);
     toast({
       description: "🔗 Url copied to your clipboard.",
     });
@@ -50,29 +52,25 @@ const ShortUrlForm = ({ className }) => {
       >
         <Input
           disabled={isPending}
-          value={actualUrl}
-          onChange={(e) => setActualURL(e.target.value)}
+          value={originalUrl}
+          onChange={(e) => setOriginalUrl(e.target.value)}
           placeholder="Enter the link here"
         />
         <Button disabled={isPending} type="submit">
           Shorten URL
         </Button>
       </form>
-      {shortenUrl && (
+      {shortUrl && (
         <div
           className="mt-4 cursor-pointer text-sm underline-offset-2 flex items-center justify-center underline gap-2 "
           onClick={copyShortUrl}
         >
           <CopyIcon className="w-4 h-4 text-blue-500" />
           <span className="headline text-xs md:text-sm font-bold">
-            {shortenUrl}
+            {shortUrl}
           </span>
         </div>
       )}
-      <p className="mt-6 text-xs sm:text-sm text-muted-foreground">
-        Snaplink is a free tool to shorten URLs and generate short links URL
-        shortener allows to create a shortened link making it easy to share
-      </p>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import config from "@/config/config";
 
 const ProductHunt = () => {
   return (
@@ -22,7 +23,7 @@ const ProductHunt = () => {
         target="_blank"
       >
         <img
-          src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=453724&theme=light`}
+          src={config.productHuntBadge}
           alt="Snaplink - Simple&#0032;and&#0032;Fast&#0032;URL&#0032;🔗Shortner | Product Hunt"
           width="250"
           height="54"
