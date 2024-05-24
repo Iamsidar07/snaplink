@@ -1,4 +1,3 @@
-import config from "@/config/config";
 import dbConnect from "@/db";
 import ClickLog from "@/models/ClickLog";
 import ShortUrl from "@/models/ShortUrl";
@@ -11,15 +10,14 @@ export const POST = async (req) => {
     return Response.json("Missing fields...", { status: 400 });
   }
   const location = city + ", " + country;
-  const url = `${config.domain}/s/${urlId}`;
   try {
     const shortUrl = await ShortUrl.findOne({
-      shortUrl: url,
+      shortUrl: urlId,
     });
     if (!shortUrl)
       return Response.json("Short URL not found.", { status: 404 });
     await ShortUrl.findOneAndUpdate(
-      { shortUrl: url },
+      { shortUrl: urlId },
       {
         $inc: { clicks: 1 },
       },

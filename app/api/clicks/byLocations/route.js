@@ -8,7 +8,6 @@ export const GET = async (req) => {
   try {
     const { userId } = auth();
     const links = await ClickLog.find({ userId });
-    // Separate counts for cities and countries
     const cityCount = {};
     const countryCount = {};
     links.map((link) => {

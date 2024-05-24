@@ -1,5 +1,5 @@
 import RedirectToDesignationURL from "@/components/RedirectToDesignationURL";
-import config from "@/config/config";
+import config from "@/config";
 import { notFound, redirect } from "next/navigation";
 
 // export const generateMetadata = async ({ params }) => {

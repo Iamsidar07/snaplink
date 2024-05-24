@@ -1,7 +1,6 @@
 import React from "react";
 import { columns } from "../columns";
 import { DataTable } from "../data-table";
-import RenderQrCode from "@/components/RenderQrCode";
 import { auth } from "@clerk/nextjs";
 import { getShortLinks } from "../page";
 import CreateLink from "@/components/CreateLink";
@@ -17,7 +16,6 @@ const page = async () => {
       originalUrl,
       clicks,
       date: createdAt,
-      qrCode: <RenderQrCode value={shortUrl} />,
     }),
   );
 

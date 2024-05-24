@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import config from "@/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
@@ -35,7 +36,7 @@ const ShortUrlForm = ({ className }) => {
     },
   });
   const copyShortUrl = async () => {
-    await navigator.clipboard.writeText(shortUrl);
+    await navigator.clipboard.writeText(config.domain + "/s/" + shortUrl);
     toast({
       description: "🔗 Url copied to your clipboard.",
     });
@@ -67,7 +68,7 @@ const ShortUrlForm = ({ className }) => {
         >
           <CopyIcon className="w-4 h-4 text-blue-500" />
           <span className="headline text-xs md:text-sm font-bold">
-            {shortUrl}
+            {`${config.domain}/s/${shortUrl}`}
           </span>
         </div>
       )}

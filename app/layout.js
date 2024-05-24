@@ -18,7 +18,7 @@ export const metadata = constructMetadata({});
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className="light">
+      <html lang="en" suppressHydrationWarning>
         <Provider>
           <body className={cn("antialiased", fontSans.variable)}>
             <div className="main"></div>

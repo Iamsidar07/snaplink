@@ -1,4 +1,4 @@
-import config from "@/config/config";
+import config from "@/config";
 import Link from "next/link";
 import React from "react";
 import { LucideTwitter } from "lucide-react";

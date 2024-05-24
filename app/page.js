@@ -1,6 +1,6 @@
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Image from "next/image";
-import config from "@/config/config";
+import config from "@/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import ProductHunt from "@/components/ProductHunt";
 import Testimonials from "@/components/Testimonials";
@@ -63,21 +63,11 @@ export default async function Home() {
               Snaplink is public now
             </div>
           </div>
-          <h1 className="text-center mt-2 text-4xl lg:text-6xl font-bold">
-            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-orange-500 to-indigo-600">
-              Link.
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-pink-500 to-pink-900">
-              {" "}
-              Snap.
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-teal-500 to-green-600">
-              {" "}
-              Success.
-            </span>
+          <h1 className="text-center mt-2 text-4xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-gray-900 via-gray-800 to-gray-400">
+            Shorten. Share. Simplify.
           </h1>
           <ShortUrlForm />
-          <p className="mt-6 text-muted-foreground">
+          <p className="mt-6 text-muted-foreground text-center">
             Snaplink is a free tool to shorten URLs and generate short links URL
             shortener allows to create a shortened link making it easy to share
           </p>

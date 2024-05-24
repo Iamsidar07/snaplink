@@ -2,13 +2,12 @@
 import { deviceDetect } from "react-device-detect";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { Loader } from "lucide-react";
-import { useEffect, useState, useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import config from "@/config/config";
+import { useEffect, useState, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import config from "@/config";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-//FIX:  Request is getting two times.
 const handleDeviceDetection = (userAgent) => {
   let device = "Unknown";
   const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(
@@ -34,6 +33,7 @@ const getLocation = async () => {
 };
 
 const RedirectToDesignationURL = ({ id }) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [originalUrl, setOriginalUrl] = useState(null);
   const { osName, browserName, userAgent } = deviceDetect();
@@ -44,8 +44,9 @@ const RedirectToDesignationURL = ({ id }) => {
       return res.data;
     },
   });
-  const handleUpdateClickLog = useMemo(async () => {
+  useMemo(async () => {
     const { country, city } = await getLocation();
+    const referrer = searchParams.get("ref");
     const clickLogInfo = {
       urlId: id,
       country,
@@ -53,6 +54,7 @@ const RedirectToDesignationURL = ({ id }) => {
       os: osName,
       browser: browserName,
       device,
+      referrer,
     };
     console.log("userinfo:", clickLogInfo);
     try {
@@ -61,7 +63,7 @@ const RedirectToDesignationURL = ({ id }) => {
     } catch (error) {
       console.error("Error updating click:", error);
     }
-  }, [browserName, osName, id, device, updateClickLog]);
+  }, [browserName, osName, id, device, updateClickLog, searchParams]);
 
   useEffect(() => {
     if (originalUrl) {

@@ -1,5 +1,5 @@
 const config = {
-  domain: process.env.DOMAIN,
+  domain: process.env.NEXT_PUBLIC_DOMAIN,
   mongodbUri: process.env.MONGODB_URI,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinarySecretKey: process.env.CLOUDINARY_SECRET_KEY,

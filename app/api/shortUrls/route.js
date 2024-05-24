@@ -1,4 +1,3 @@
-import config from "@/config/config";
 import dbConnect from "@/db";
 import ShortUrl from "@/models/ShortUrl";
 import { validateURL } from "@/utils";
@@ -24,7 +23,7 @@ export const POST = async (req) => {
     });
     const newUrl = await ShortUrl.create({
       originalUrl,
-      shortUrl: `${config.domain}/s/${uniqueId}`,
+      shortUrl: uniqueId,
       userId: userId ?? null,
     });
     console.log("POST api/shortUrls-> Done");

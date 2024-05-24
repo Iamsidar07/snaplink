@@ -2,18 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Copy } from "lucide-react";
-import RenderQrCode from "@/components/RenderQrCode";
 import Link from "next/link";
 import Image from "next/image";
-import { convertToTimeAgo } from "@/lib/utils";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { convertToTimeAgo } from "@/utils";
+import config from "@/config";
 
 export const columns = [
   {
     accessorKey: "shortUrl",
     header: "Short Link",
     cell: ({ row }) => {
-      const { shortUrl: url, id } = row.original;
+      const { shortUrl } = row.original;
+      const url = `${config.domain}/s/${shortUrl}`;
       return (
         <div className="flex items-center gap-2 group">
           <Copy
@@ -71,23 +71,6 @@ export const columns = [
           Clicks
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "qrCode",
-    header: <p className="text-nowrap">Qr Code</p>,
-    cell: ({ row }) => {
-      const url = row.original.shortUrl;
-      return (
-        <Dialog>
-          <DialogTrigger className="w-12">
-            <RenderQrCode url={url} />
-          </DialogTrigger>
-          <DialogContent className="pt-12 max-w-sm md:max-w-lg">
-            <RenderQrCode url={url} />
-          </DialogContent>
-        </Dialog>
       );
     },
   },

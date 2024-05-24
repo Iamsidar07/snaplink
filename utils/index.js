@@ -1,3 +1,4 @@
+import { formatDistance } from "date-fns";
 export const validateURL = (url) => {
   const urlPattern = new RegExp(
     /^(?:http|https?):\/\/(?:\w+\.)+\w{2,}(?:\/\S*)?$/i,
@@ -53,3 +54,9 @@ export function constructMetadata({
 
 export const dataFormatter = (number) =>
   Intl.NumberFormat("us").format(number).toString();
+
+export const convertToTimeAgo = (date) => {
+  return formatDistance(date, new Date(), {
+    addSuffix: true,
+  });
+};

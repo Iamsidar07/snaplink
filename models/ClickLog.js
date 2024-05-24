@@ -18,6 +18,7 @@ const clickLogSchema = new mongoose.Schema(
     device: { type: String },
     referrer: {
       type: String,
+      default: null,
     },
   },
   { timestamps: true },

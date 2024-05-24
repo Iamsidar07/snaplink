@@ -18,7 +18,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
-import config from "@/config/config";
+import config from "@/config";
 
 const CreateLink = () => {
   const router = useRouter();

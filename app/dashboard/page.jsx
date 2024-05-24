@@ -1,5 +1,5 @@
-import config from "@/config/config";
-import { constructMetadata } from "@/utils";
+import config from "@/config";
+import { constructMetadata, convertToTimeAgo } from "@/utils";
 import { auth } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
 import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/table";
 import { ActivityIcon, LinkIcon } from "lucide-react";
 import Link from "next/link";
-import { convertToTimeAgo } from "@/lib/utils";
 import CreateLink from "@/components/CreateLink";
 import TopPerformingLinks from "@/components/dashboard/TopPerformingLinks";
 
