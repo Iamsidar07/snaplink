@@ -1,5 +1,5 @@
 import config from "@/config";
-import { constructMetadata, numberFormatter } from "@/utils";
+import { constructMetadata, numberFormatter } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";

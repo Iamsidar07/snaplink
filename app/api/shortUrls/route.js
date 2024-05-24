@@ -1,8 +1,8 @@
 import dbConnect from "@/db";
 import ShortUrl from "@/models/ShortUrl";
-import { validateURL } from "@/utils";
 import { auth } from "@clerk/nextjs";
 import generateUniqueId from "generate-unique-id";
+import { validateURL } from "@/lib/utils";
 
 dbConnect();
 
