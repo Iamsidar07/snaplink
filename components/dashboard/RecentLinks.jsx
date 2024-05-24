@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card'
 import { Table, TableCell, TableHeader, TableRow, TableBody, TableHead } from '../ui/table'
-import { convertToTimeAgo } from '@/utils'
+import { convertToTimeAgo } from '@/lib/utils'
 import { LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 
