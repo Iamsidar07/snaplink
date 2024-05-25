@@ -291,3 +291,4 @@ export const TIME_PERIOD_DATA = [
     value: new Date(Date.now() - 2592000000),
   },
 ];
+

@@ -1,13 +1,14 @@
-"use client"
+"use client";
 import { getTotalClicks } from "@/actions";
 import { useQuery } from "@tanstack/react-query";
 
 const useTotalClicks = () => {
-    const result = useQuery({
-        queryKey: ["totalClicks"],
-        queryFn: getTotalClicks
-    })
-    return result
-}
+  const result = useQuery({
+    queryKey: ["totalClicks"],
+    queryFn: getTotalClicks,
+  });
+  return result;
+};
 
-export default useTotalClicks
+export default useTotalClicks;
+

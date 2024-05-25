@@ -23,7 +23,7 @@ export const getShortLinks = async ({ userId }) => {
 export default async function Page() {
   const { userId } = auth();
   const data = await getShortLinks({ userId });
-  const totalClicks = await getTotalClicks()
+  const totalClicks = await getTotalClicks();
   if (!data) notFound();
   const totalLinks = data.length;
   const recentLinks = data.slice(0, 5);
@@ -60,3 +60,4 @@ export default async function Page() {
     </div>
   );
 }
+

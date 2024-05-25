@@ -8,8 +8,8 @@ import { TIME_PERIOD_DATA } from "@/constants";
 import AnalyticsCard from "./AnalyticsCard";
 
 const Analytics = () => {
-  const { data: totalClicks } = useTotalClicks()
-  const { data: clicksOverTime } = useTotalClicks()
+  const { data: totalClicks } = useTotalClicks();
+  const { data: clicksOverTime } = useTotalClicks();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
 
@@ -78,3 +78,4 @@ const Analytics = () => {
 };
 
 export default Analytics;
+

@@ -6,7 +6,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { getLocation, handleDeviceDetection } from "@/lib/utils"
+import { getLocation, handleDeviceDetection } from "@/lib/utils";
 
 const RedirectToDesignationURL = ({ id }) => {
   const searchParams = useSearchParams();
