@@ -8,12 +8,13 @@ import { TIME_PERIOD_DATA } from "@/constants";
 import AnalyticsCard from "./AnalyticsCard";
 
 const Analytics = () => {
-  const { data: totalClicks } = useTotalClicks();
-  const { data: clicksOverTime } = useTotalClicks();
+  const { data: totalClicks = 0 } = useTotalClicks();
+  const { data: clicksOverTime = [] } = useTotalClicks();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
-
-  const filteredClicksOverTime = [...clicksOverTime]?.filter((clickLog) => {
+  const data = clicksOverTime;
+  console.log({ data, clicksOverTime, totalClicks })
+  const filteredClicksOverTime = data.filter((clickLog) => {
     return new Date(clickLog.time) > timePeriod.value;
   });
 
@@ -32,15 +33,15 @@ const Analytics = () => {
     <div className="md:col-span-2">
       <div className="flex items-center justify-between mb-2">
         <h2 className="font-bold text-lg lg:text-3xl">Analytics</h2>
-        <div className="w-[200px] text-gray-500 relative">
+        <div className="w-[200px]  relative">
           <div
             onClick={() =>
               setIsOptionsOpen((prevIsOptionsOpen) => !prevIsOptionsOpen)
             }
             className={cn(
-              "flex items-center justify-between border rounded px-3 py-1.5 text-gray-800 cursor-pointer group",
+              "flex items-center justify-between border rounded px-3 py-1.5  cursor-pointer group",
               {
-                "shadow ring-2 ring-offset-2 ring-gray-200": isOptionsOpen,
+                shadow: isOptionsOpen,
               },
             )}
           >
@@ -55,14 +56,14 @@ const Analytics = () => {
             />
           </div>
           {isOptionsOpen && (
-            <div className="z-10 absolute bg-background inset-x-0 top-14 border ring-2 ring-offset-2 ring-gray-200 rounded space-y-2 px-3 py-1.5 text-sm">
+            <div className="z-10 absolute bg-background inset-x-0 top-14 border rounded space-y-2 px-3 py-1.5 text-sm">
               {TIME_PERIOD_DATA.map((period, i) => (
                 <p
                   onClick={() => {
                     setTimePeriod(period);
                     setIsOptionsOpen(false);
                   }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-900 transition-colors"
+                  className="cursor-pointer  transition-colors"
                   key={i}
                 >
                   {period.label}
@@ -72,10 +73,9 @@ const Analytics = () => {
           )}
         </div>
       </div>
-      <AnalyticsCard totalClicks={totalClicks} />
+      <AnalyticsCard totalClicks={totalClicks} data={chartdata} />
     </div>
   );
 };
 
 export default Analytics;
-

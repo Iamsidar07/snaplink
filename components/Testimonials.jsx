@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
+import MaxWidthWrapper from "./MaxWidthWrapper";
 
 const testimonials = [
   {
@@ -22,7 +23,7 @@ const testimonials = [
 ];
 const Testimonials = () => {
   return (
-    <div className="pt-16 md:pt-32 max-w-7xl mx-auto">
+    <MaxWidthWrapper className="py-16 md:py-32">
       <h2 className="headline capitalize text-left relative inline-block md:text-3xl">
         What other peoples are saying?
       </h2>
@@ -33,7 +34,7 @@ const Testimonials = () => {
           speed="fast"
         />
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

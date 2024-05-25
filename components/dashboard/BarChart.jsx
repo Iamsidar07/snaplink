@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
+import { Button } from "../ui/button";
 import { BarList } from "@tremor/react";
 import { cn } from "@/lib/utils";
 import { ANALYTICS_EMOJIS, COUNTRY_FLAGS } from "@/constants";
@@ -17,7 +18,6 @@ const BarChart = ({ name = "", data }) => {
   const BARLIST_DATA = Object.entries(data[currentActiveTab] || {}).map(
     ([item, itemCount]) => {
       if (currentActiveTab === "country" || currentActiveTab === "city") {
-        console.log({ name, item });
         const [city, country] = item.split(", ");
         return {
           name: currentActiveTab === "country" ? country : city,
@@ -44,26 +44,26 @@ const BarChart = ({ name = "", data }) => {
           <h3>{name}</h3>
           <div className="flex items-center gap-3 ">
             {options.map((option, i) => {
+              const isActive = currentActiveTab === option;
               return (
-                <button
+                <Button
                   onClick={() => setCurrentActiveTab(option)}
                   key={option}
-                  className={cn(
-                    "px-3 py-1 hover:bg-gray-100 text-xs capitalize",
-                    {
-                      "bg-gray-100 font-semibold": currentActiveTab === option,
-                    },
-                  )}
+                  size={"sm"}
+                  variant={isActive ? "default" : "ghost"}
+                  className={cn("px-3 py-1 text-xs capitalize", {
+                    "font-semibold": currentActiveTab === option,
+                  })}
                 >
                   {option}
-                </button>
+                </Button>
               );
             })}
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <BarList data={BARLIST_DATA} className="" />
+        <BarList color={"zinc"} data={BARLIST_DATA} />
       </CardContent>
     </Card>
   );

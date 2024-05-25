@@ -14,6 +14,7 @@ export default async function revalidate({ tag, path }) {
 export const getTotalClicks = async () => {
     const res = await fetch(config.domain + "/api/clicks/totalClicks");
     const data = await res.json()
+    console.log({data})
     return data
 };
 

@@ -4,7 +4,7 @@ import { AreaChart } from "@tremor/react";
 import { BarChart } from "lucide-react";
 import { dataFormatter, numberFormatter } from "@/lib/utils";
 
-const AnalyticsCard = ({ totalClicks }) => {
+const AnalyticsCard = ({ totalClicks, data }) => {
   return (
     <Card>
       <CardHeader>
@@ -19,7 +19,7 @@ const AnalyticsCard = ({ totalClicks }) => {
       <CardContent>
         <AreaChart
           className="h-80"
-          data={chartdata}
+          data={data}
           index="date"
           categories={["clicks"]}
           colors={["indigo"]}
@@ -33,4 +33,3 @@ const AnalyticsCard = ({ totalClicks }) => {
 };
 
 export default AnalyticsCard;
-

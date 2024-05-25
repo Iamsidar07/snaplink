@@ -1,3 +1,4 @@
+import { BarChart, Link, Palette, Rocket, ShieldEllipsis } from "lucide-react";
 export const COUNTRY_FLAGS = new Map([
   ["AD", "🇦🇩"],
   ["AE", "🇦🇪"],
@@ -292,3 +293,33 @@ export const TIME_PERIOD_DATA = [
   },
 ];
 
+export const FEATURES = [
+  {
+    feature: "Streamlined Simplicity",
+    description: "Long URLs become elegant and concise with just a click.",
+    icon: <Rocket />,
+  },
+  {
+    feature: "Branded Links",
+    description:
+      "Tailor your shortened URLs to reflect your brand, adding professionalism to every share.",
+    icon: <Palette />,
+  },
+  {
+    feature: "Reliable Security",
+    description: "Rest easy knowing your links are secure and protected.",
+    icon: <ShieldEllipsis />,
+  },
+  {
+    feature: "Customizable Links",
+    description:
+      "Personalize your shortened URLs with custom aliases, making them memorable and relevant to your audience.",
+    icon: <Link />,
+  },
+  {
+    feature: "Actionable Insights",
+    description:
+      "Gain valuable insights into link performance and audience engagement with comprehensive analytics and reporting tools.",
+    icon: <BarChart />,
+  },
+];

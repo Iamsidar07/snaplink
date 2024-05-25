@@ -1,13 +1,15 @@
 import dbConnect from "@/db";
 import ClickLog from "@/models/ClickLog";
-import { auth } from "@clerk/nextjs";
+import { getAuth } from "@clerk/nextjs/server"
 dbConnect();
-// /api/clicks/overTime
+
 export const GET = async (req) => {
-  const { userId } = auth();
+  const { userId } = getAuth(req);
+  console.log({ userId })
   try {
     const totalClicks = await ClickLog.find({ userId }).countDocuments();
     console.log("/api/clicks/totalClicks");
+    console.log({ totalClicks })
     return Response.json(totalClicks, { status: 200 });
   } catch (error) {
     console.log("Error: /api/clicks/totalClicks", error);

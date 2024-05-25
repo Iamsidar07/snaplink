@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import config from "@/config";
+import { Skeleton } from "./ui/skeleton";
 
 const CreateLink = () => {
   const router = useRouter();
@@ -88,10 +89,10 @@ const CreateLink = () => {
             Create link <Link className="hidden lg:block w-4 h-4 ml-1.5" />
           </button>
         </DrawerTrigger>
-        <DrawerContent className="w-full md:max-h-[95vh] h-full max-w-screen-lg mx-auto p-0 sm:rounded-t-2xl shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-x divide-gray-100 md:max-h-[95vh] overflow-y-scroll md:overflow-hidden rounded-2xl">
+        <DrawerContent className="w-full md:max-h-[95vh] h-full max-w-screen-lg mx-auto p-0 sm:rounded-t-2xl shadow-2xl bg-background">
+          <div className="grid grid-cols-1 md:grid-cols-2 divide-x md:max-h-[95vh] overflow-y-scroll md:overflow-hidden rounded-2xl">
             <div className="space-y-4 relative">
-              <div className="bg-white flex items-center justify-center h-14 sm:h-24 gap-3 rounded-tl-2xl border-b border-gray-200 md:sticky md:top-0 z-10">
+              <div className=" flex items-center justify-center h-14 sm:h-24 gap-3 rounded-tl-2xl border-b md:sticky md:top-0 z-10">
                 {metadata?.image ? (
                   <Image
                     src={`https://www.google.com/s2/favicons?sz=64&domain_url=${designationURL}`}
@@ -101,8 +102,8 @@ const CreateLink = () => {
                     className="rounded-full overflow-hidden"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-gray-100 grid place-content-center">
-                    <Globe className="text-gray-800 w-5 h-5" />
+                  <div className="w-8 h-8 rounded-full bg-zinc-900 grid place-content-center">
+                    <Globe className="text-orange-400 w-5 h-5" />
                   </div>
                 )}
                 <h2 className="text-lg">Create a new link</h2>
@@ -120,7 +121,7 @@ const CreateLink = () => {
                     placeholder="https://ui.shadcn.com/docs/components/alert-dialog"
                   />
                 </div>
-                <div className="flex flex-col items-center justify-center h-14 sm:h-24 bg-white md:rounded-bl-2xl md:rounded-br-2xl z-10 mt-12 md:mt-0 md:absolute md:bottom-0 w-full border-t border-gray-200 shadow">
+                <div className="flex flex-col items-center justify-center h-14 sm:h-24  md:rounded-bl-2xl md:rounded-br-2xl z-10 mt-12 md:mt-0 md:absolute md:bottom-0 w-full border-t shadow">
                   <Button
                     disabled={isPending}
                     type="submit"
@@ -134,8 +135,8 @@ const CreateLink = () => {
                 </div>
               </form>
             </div>
-            <div className="md:overflow-auto no-scrollbar">
-              <div className="flex items-center justify-center h-14 sm:h-24 gap-3 rounded-tr-2xl border-b sticky bg-white top-0 z-10">
+            <div className="md:overflow-auto no-scrollbar bg-background">
+              <div className="flex items-center justify-center h-14 sm:h-24 gap-3 rounded-tr-2xl border-b sticky  top-0 z-10 bg-background">
                 <h2 className="text-lg">Social Previews</h2>
               </div>
               {metadata?.title || metadata?.description || metadata?.image ? (
@@ -149,7 +150,7 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="rounded-2xl overflow-hidden border border-gray-300 relative">
+                    <div className="rounded-2xl overflow-hidden border relative">
                       <img
                         src={metadata.image}
                         alt=""
@@ -172,14 +173,14 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="overflow-hidden border border-gray-300 bg-gray-100">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col bg-gray-100 space-y-4 text-gray-400 text-sm">
+                    <div className="overflow-hidden border">
+                      <div className="h-[250px] w-full flex items-center justify-center flex-col space-y-4 text-sm">
                         <img src={metadata.image} alt="" />
                       </div>
-                      <div className="space-y-1 w-full border-t border-gray-300 p-2">
-                        <p className="text-sm text-gray-500">{host}</p>
+                      <div className="space-y-1 w-full border-t p-2">
+                        <p className="text-sm ">{host}</p>
                         <h3 className="truncate">{metadata.title}</h3>
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-sm">
                           {metadata.description}
                         </p>
                       </div>
@@ -194,13 +195,13 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="overflow-hidden border border-gray-300 bg-gray-100">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col bg-gray-100 space-y-4 text-gray-400 text-sm">
+                    <div className="overflow-hidden border">
+                      <div className="h-[250px] w-full flex items-center justify-center flex-col space-y-4 text-sm">
                         <img src={metadata.image} alt="" />
                       </div>
-                      <div className="space-y-1 w-full border-t border-gray-300 p-2">
+                      <div className="space-y-1 w-full border-t p-2">
                         <h3 className="truncate">{metadata.title}</h3>
-                        <p className="text-sm text-gray-500">{host}</p>
+                        <p className="text-sm">{host}</p>
                       </div>
                     </div>
                   </div>
@@ -216,8 +217,8 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="rounded-2xl overflow-hidden border border-gray-300">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col bg-gray-100 space-y-4 text-gray-400 text-sm">
+                    <div className="rounded-2xl overflow-hidden border">
+                      <div className="h-[250px] w-full flex items-center justify-center flex-col  space-y-4  text-sm">
                         {isMetadataLoading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (
@@ -238,8 +239,8 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="overflow-hidden border border-gray-300 bg-gray-100">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col bg-gray-100 space-y-4 text-gray-400 text-sm">
+                    <div className="overflow-hidden border">
+                      <div className="h-[250px] w-full flex items-center justify-center flex-col  space-y-4  text-sm">
                         {isMetadataLoading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (
@@ -249,11 +250,11 @@ const CreateLink = () => {
                           </>
                         )}
                       </div>
-                      <div className="space-y-2 w-full border-t border-gray-300 p-2">
-                        <div className="bg-gray-200 w-1/4 py-2 rounded-lg" />
-                        <div className="bg-gray-200 w-full py-2 rounded-lg" />
-                        <div className="bg-gray-200 w-full py-2 rounded-lg" />
-                        <div className="bg-gray-200 w-3/4 py-2 rounded-lg" />
+                      <div className="space-y-2 w-full border-t p-2">
+                        <Skeleton className="w-1/4 py-2 rounded-lg" />
+                        <Skeleton className="w-full py-2 rounded-lg" />
+                        <Skeleton className="w-full py-2 rounded-lg" />
+                        <Skeleton className="w-3/4 py-2 rounded-lg" />
                       </div>
                     </div>
                   </div>
@@ -266,8 +267,8 @@ const CreateLink = () => {
                       </div>
                       <div className="border-b h-1 w-full" />
                     </div>
-                    <div className="overflow-hidden border border-gray-300 bg-gray-100">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col bg-gray-100 space-y-4 text-gray-400 text-sm">
+                    <div className="overflow-hidden border">
+                      <div className="h-[250px] w-full flex items-center justify-center flex-col space-y-4 text-sm">
                         {isMetadataLoading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (
@@ -277,9 +278,9 @@ const CreateLink = () => {
                           </>
                         )}
                       </div>
-                      <div className="space-y-2 w-full border-t border-gray-300 p-2">
-                        <div className="bg-gray-200 w-full py-2 rounded-lg" />
-                        <div className="bg-gray-200 w-3/4 py-2 rounded-lg" />
+                      <div className="space-y-2 w-full border-t p-2">
+                        <Skeleton className="w-full py-2 rounded-lg" />
+                        <Skeleton className="w-3/4 py-2 rounded-lg" />
                       </div>
                     </div>
                   </div>

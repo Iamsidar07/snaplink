@@ -24,6 +24,7 @@ export default async function Page() {
   const { userId } = auth();
   const data = await getShortLinks({ userId });
   const totalClicks = await getTotalClicks();
+  console.log({totalClicks})
   if (!data) notFound();
   const totalLinks = data.length;
   const recentLinks = data.slice(0, 5);
@@ -34,22 +35,22 @@ export default async function Page() {
         <CreateLink />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="dark:bg-gray-800 dark:text-gray-50">
+        <Card className="">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
-            <LinkIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
+            <LinkIcon className="h-8 w-8 text-gray-300" />
             <h3 className="text-2xl font-semibold">
               {numberFormatter.format(totalLinks)}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400">Total Links</p>
+            <p className="">Total Links</p>
           </CardContent>
         </Card>
-        <Card className="dark:bg-gray-800 dark:text-gray-50">
+        <Card className="">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
-            <ActivityIcon className="h-8 w-8 text-gray-500 dark:text-gray-400" />
+            <ActivityIcon className="h-8 w-8 text-gray-300" />
             <h3 className="text-2xl font-semibold">
               {numberFormatter.format(totalClicks)}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400">Clicks</p>
+            <p className="">Clicks</p>
           </CardContent>
         </Card>
       </div>
@@ -60,4 +61,3 @@ export default async function Page() {
     </div>
   );
 }
-

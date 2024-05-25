@@ -13,9 +13,8 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "w-full backdrop-blur border-b dark:border-b-border  sticky top-0 z-50 px-4 py-1.5 bg-background",
+        "w-full backdrop-blur sticky top-0 z-50 px-4 py-1.5 bg-background/90",
         {
-          "border-0": pathname.includes("/dashboard"),
           hidden: pathname === "/sign-in" || pathname === "/sign-up",
         },
       )}
@@ -29,7 +28,7 @@ const Navbar = () => {
             alt="Snaplink logo"
             className="object-cover border rounded-xl pointer-events-none"
           />
-          <span className="headline md:text-xl">Snaplink</span>
+          <span className="md:text-xl">Snaplink</span>
         </Link>
         <div className="flex items-center gap-2">
           <SignedOut>
@@ -54,25 +53,7 @@ const Navbar = () => {
               dashboard
             </Link>
 
-            <UserButton
-              afterSignOutUrl="/"
-              appearance={{
-                elements: {
-                  userButtonPopoverCard:
-                    "border border-border bg-background text-secondary-foreground",
-                  userPreviewSecondaryIdentifier__userButton:
-                    "text-secondary-foreground",
-                  userPreviewMainIdentifier__userButton:
-                    "text-secondary-foreground",
-                  userButtonPopoverActionButtonIcon:
-                    "text-secondary-foreground",
-                  userButtonPopoverActionButtonText:
-                    "text-secondary-foreground",
-                  userButtonPopoverActionButtonIcon__signOut:
-                    "text-secondary-foreground",
-                },
-              }}
-            />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
         </div>
       </MaxWidthWrapper>

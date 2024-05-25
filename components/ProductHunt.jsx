@@ -4,20 +4,7 @@ import config from "@/config";
 
 const ProductHunt = () => {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 font-recursive px-3 py-1.5 max-w-fit mx-auto mt-6 relative overflow-hidden rounded-lg group">
-      <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-teal-500 filter blur-[10rem] group-hover:brightness-105 transition-all" />
-
-      <p>
-        👏 Checkout features on
-        <Link
-          href="https://www.producthunt.com/posts/snaplink-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-snaplink&#0045;2"
-          target="_blank"
-          className="underline underline-offset-4 text-primary mx-1.5"
-        >
-          Product Hunt
-        </Link>
-        🎉
-      </p>
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6  px-3 py-1.5 max-w-fit mx-auto mt-6 absolute overflow-hidden rounded-lg group top-[40px] left-1/2 -translate-x-1/2">
       <Link
         href="https://www.producthunt.com/posts/snaplink-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-snaplink&#0045;2"
         target="_blank"

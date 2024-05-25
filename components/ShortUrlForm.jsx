@@ -7,9 +7,9 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { CopyIcon } from "lucide-react";
-import { revalidate } from "@/actions";
 
 import { cn } from "@/lib/utils";
+import revalidate from "@/actions";
 
 const ShortUrlForm = ({ className }) => {
   const { toast } = useToast();

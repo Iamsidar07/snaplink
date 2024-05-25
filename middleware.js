@@ -7,6 +7,7 @@ export default authMiddleware({
     "/api/clicks",
     "/api/shortUrls",
     "/api/shortUrls/count",
+    "/api/clicks/totalClicks"
   ],
 });
 

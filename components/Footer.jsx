@@ -17,7 +17,7 @@ const Footer = () => {
           <span>follow me at</span>
           <Link
             href=""
-            className="text-secondary-foreground flex items-center gap-1"
+            className="text-secondary-foreground flex items-center gap-px"
           >
             <LucideTwitter className="w-3 h-3 text-secondary-foreground" />
             @iamsidar07
