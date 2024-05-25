@@ -42,7 +42,7 @@ const UrlCount = ({ count }) => {
     </div>
   );
 };
-console.log("realoding...")
+
 
 export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
