@@ -1,10 +1,11 @@
+import { auth } from "@/auth";
 import dbConnect from "@/db";
 import ClickLog from "@/models/ClickLog";
-import { auth } from "@clerk/nextjs";
 dbConnect();
 // /api/clicks/overTime
-export const GET = async (req) => {
-  const { userId } = auth();
+export const GET = auth(async (req) => {
+  const session = req.auth;
+  const userId = session.user?.id;
   try {
     const clickLog = await ClickLog.aggregate([
       {
@@ -41,4 +42,4 @@ export const GET = async (req) => {
     );
     return Response.json(error.message, { status: 500 });
   }
-};
+});

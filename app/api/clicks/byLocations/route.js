@@ -1,11 +1,12 @@
+import { auth } from "@/auth";
 import dbConnect from "@/db";
 import ClickLog from "@/models/ClickLog";
-import { auth } from "@clerk/nextjs";
 dbConnect();
 
-export const GET = async (req) => {
+export const GET = auth(async (req) => {
   try {
-    const { userId } = auth();
+    const session = req.auth;
+    const userId = session.user?.id;
     const links = await ClickLog.find({ userId });
     const cityCount = {};
     const countryCount = {};
@@ -39,4 +40,4 @@ export const GET = async (req) => {
     console.log("failed", error);
     return Response.json(error.message, { status: 500 });
   }
-};
+});

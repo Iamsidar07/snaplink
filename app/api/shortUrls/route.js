@@ -1,16 +1,18 @@
 import dbConnect from "@/db";
 import ShortUrl from "@/models/ShortUrl";
-import { auth } from "@clerk/nextjs";
 import generateUniqueId from "generate-unique-id";
 import { validateURL } from "@/lib/utils";
+import { auth } from "@/auth";
+import mongoose from "mongoose";
 
 dbConnect();
 
 // create shortUrl
-export const POST = async (req) => {
+export const POST = auth(async (req) => {
   const reqBody = await req.json();
   const { originalUrl } = reqBody;
-  const { userId } = auth();
+  const session = req.auth;
+  const userId = session?.user?.id;
   const isValidUrl = validateURL(originalUrl);
   if (!isValidUrl) {
     return Response.json("Invalid URL", { status: 400 });
@@ -24,7 +26,7 @@ export const POST = async (req) => {
     const newUrl = await ShortUrl.create({
       originalUrl,
       shortUrl: uniqueId,
-      userId: userId ?? null,
+      userId: new mongoose.Types.ObjectId(userId) ?? null,
     });
     console.log("POST api/shortUrls-> Done");
     return Response.json(newUrl.shortUrl, { status: 201 });
@@ -32,12 +34,11 @@ export const POST = async (req) => {
     console.log("POST api/shortUrls-> Error: ", error);
     return Response.json(error.message, { status: 500 });
   }
-};
-
+});
 // get all short url
-export const GET = async (req) => {
-  const searchParams = req.nextUrl.searchParams;
-  const userId = searchParams.get("userId");
+export const GET = auth(async (req) => {
+  const session = req.auth;
+  const userId = session?.user?.id;
   try {
     const urls = await ShortUrl.find({ userId }).sort({ createdAt: -1 });
     console.log("GET api/shortUrls-> Done");
@@ -46,4 +47,4 @@ export const GET = async (req) => {
     console.log("GET api/shortUrls-> Error: ", error);
     return Response.json(error.message, { status: 500 });
   }
-};
+});

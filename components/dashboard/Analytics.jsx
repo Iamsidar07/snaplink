@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 import useTotalClicks from "@/hooks/useTotalClicks";
 import { TIME_PERIOD_DATA } from "@/constants";
 import AnalyticsCard from "./AnalyticsCard";
+import useClicksOverTime from "@/hooks/useClicksOverTime";
 
 const Analytics = () => {
   const { data: totalClicks = 0 } = useTotalClicks();
-  const { data: clicksOverTime = [] } = useTotalClicks();
+  const { data: clicksOverTime = [] } = useClicksOverTime();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
   const data = clicksOverTime;
-  console.log({ data, clicksOverTime, totalClicks })
   const filteredClicksOverTime = data.filter((clickLog) => {
     return new Date(clickLog.time) > timePeriod.value;
   });

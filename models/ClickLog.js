@@ -7,7 +7,8 @@ const clickLogSchema = new mongoose.Schema(
       ref: "ShortUrl",
     },
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: false,
     },
 

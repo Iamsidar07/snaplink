@@ -3,10 +3,16 @@ import { cn } from "@/lib/utils";
 
 const WhyChooseUsCard = ({ feature: featureItem, index }) => {
   return (
-    <div className={cn("h-full relative overflow-hidden group border border-dashed", {
-      "md:border-x-0": index === 1,
-      "md:border-t-0": index === 3 || index === 4,
-    })}>
+    <div
+      className={cn(
+        "h-full relative overflow-hidden group border border-dashed",
+        {
+          "md:border-x-0": index === 1,
+          "md:border-t-0": index === 3,
+          "md:border-l-0": index === 4,
+        },
+      )}
+    >
       <div className="rounded-[calc(1.5rem)] p-4 sm:p-8 flex flex-col gap-2 w-full h-full shadow">
         <div className="w-14 h-14 grid place-content-center rounded-full text-orange-500 bg-zinc-900">
           {featureItem.icon}

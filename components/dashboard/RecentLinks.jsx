@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import {
@@ -11,12 +12,16 @@ import {
 import { convertToTimeAgo } from "@/lib/utils";
 import { LinkIcon } from "lucide-react";
 import Link from "next/link";
+import useUserLinks from "@/hooks/useUserLinks";
 
-const RecentLinks = ({ recentLinks }) => {
+const RecentLinks = () => {
+  const { data: links = [], isLoading } = useUserLinks();
+
+  console.log({ links, isLoading, hello: links.slice(0, 5) });
   return (
     <Card className="">
       <CardHeader>
-        <CardTitle>Recent Links</CardTitle>
+        <CardTitle>Recent Links {links.length}</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -28,13 +33,13 @@ const RecentLinks = ({ recentLinks }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {recentLinks?.map((link) => (
+            {links.slice(0, 5).map((link) => (
               <TableRow key={link.createdAt}>
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <LinkIcon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                     <Link
-                      className="truncate font-medium text-gray-900 dark:text-gray-50"
+                      className="truncate font-medium text-gray-900 dark:text-gray-50 max-w-xs"
                       href={link.originalUrl}
                     >
                       {link.originalUrl}

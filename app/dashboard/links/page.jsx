@@ -1,14 +1,12 @@
+"use client";
 import React from "react";
 import { columns } from "../columns";
 import { DataTable } from "../data-table";
-import { auth } from "@clerk/nextjs";
-import { getShortLinks } from "../page";
 import CreateLink from "@/components/CreateLink";
+import useUserLinks from "@/hooks/useUserLinks";
 
-const page = async () => {
-  const { userId } = auth();
-  const data = await getShortLinks({ userId });
-  if (!data) notFound();
+const Page = () => {
+  const { data = [], isLoading } = useUserLinks();
   const tableData = data?.map(
     ({ _id, shortUrl, originalUrl, clicks, createdAt }) => ({
       id: _id,
@@ -31,4 +29,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;

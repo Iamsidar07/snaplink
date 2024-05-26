@@ -6,10 +6,11 @@ import ProductHunt from "@/components/ProductHunt";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { auth } from "@/auth";
 
 const getShortenUrlCount = async () => {
   try {
-    const res = await fetch(`${config.domain}/api/shortUrls/count`, {
+    const res = await fetch(`${config.domain}/api/countLinks`, {
       cache: "no-cache",
     });
     if (res.status === 500) {
@@ -33,7 +34,9 @@ const UrlCount = ({ count }) => {
       >
         Over{" "}
         <span
-          className={"inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-bold border-b border-dashed"}
+          className={
+            "inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-bold border-b border-dashed"
+          }
         >
           {count?.toLocaleString() ?? 0}
         </span>{" "}
@@ -42,9 +45,10 @@ const UrlCount = ({ count }) => {
     </div>
   );
 };
-console.log("realoding...")
 
 export default async function Home() {
+  const session = await auth();
+  console.log({ session });
   const shortenUrlCount = await getShortenUrlCount();
   return (
     <div>
