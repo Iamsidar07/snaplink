@@ -26,8 +26,8 @@ export const providers = [
       password: { type: "passwrod", label: "Password", required: true },
     },
     authorize: async ({ email, password, name }) => {
-      await dbConnect();
       try {
+        await dbConnect();
         let user = null;
         if (!email || !password) {
           throw new Error("Email and password are required.");

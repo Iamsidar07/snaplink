@@ -11,6 +11,7 @@ export default middleware((req) => {
   if (!req.auth && url.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
+  return NextResponse.next()
 });
 
 // Optionally, don't invoke Middleware on some paths
