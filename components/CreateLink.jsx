@@ -53,7 +53,6 @@ const CreateLink = () => {
       return res.data;
     },
     onSuccess: async (data) => {
-      console.log("success:", data);
       router.push("/dashboard/links");
     },
     onError: (error) => {
@@ -73,7 +72,6 @@ const CreateLink = () => {
     if (!designationURL) return;
     const url = new URL(designationURL);
     setHost(url.host);
-    console.log("Host:", url.host);
 
     refetchMetadata();
   }, [designationURL, refetchMetadata]);
@@ -180,9 +178,7 @@ const CreateLink = () => {
                       <div className="space-y-1 w-full border-t p-2">
                         <p className="text-sm ">{host}</p>
                         <h3 className="truncate">{metadata.title}</h3>
-                        <p className="text-sm">
-                          {metadata.description}
-                        </p>
+                        <p className="text-sm">{metadata.description}</p>
                       </div>
                     </div>
                   </div>

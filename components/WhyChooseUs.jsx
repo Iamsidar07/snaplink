@@ -17,10 +17,12 @@ const WhyChooseUsCard = ({ feature: featureItem, index }) => {
         <div className="w-14 h-14 grid place-content-center rounded-full text-orange-500 bg-zinc-900">
           {featureItem.icon}
         </div>
-        <h3 className="headline text-normal md:text-xl tracking-widest mt-4">
+        <h3 className="headline text-normal md:text-xl font-semibold mt-4">
           {featureItem.feature}
         </h3>
-        <p className="font-sans text-normal">{featureItem.description}</p>
+        <p className="font-sans text-normal text-secondary-foreground opacity-75">
+          {featureItem.description}
+        </p>
       </div>
     </div>
   );

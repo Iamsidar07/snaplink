@@ -19,6 +19,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-query": "^5.29.2",
     "@tanstack/react-table": "^8.16.0",
+    "@tremor/react": "^3.17.2",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",

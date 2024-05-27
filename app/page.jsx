@@ -6,7 +6,6 @@ import ProductHunt from "@/components/ProductHunt";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { auth } from "@/auth";
 
 const getShortenUrlCount = async () => {
   try {
@@ -26,7 +25,8 @@ const getShortenUrlCount = async () => {
 
 const UrlCount = ({ count }) => {
   return (
-    <div className={"relative py-12 md:py-24"}>
+    <div className={"relative pt-12 md:pt-24"}>
+      <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-950 to-transparent" />
       <h4
         className={
           "headline text-center text-3xl !leading-normal  md:text-6xl md:leading-tight capitalize"
@@ -49,13 +49,17 @@ const UrlCount = ({ count }) => {
 export default async function Home() {
   const shortenUrlCount = await getShortenUrlCount();
   return (
-    <div>
+    <div className="relative">
+      <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-900 to-transparent" />
+      <div className="w-52 h-52 absolute left-1/4 top-[12rem] filter blur-[12rem] bg-gradient-to-r from-yellow-900 to-transparent" />
+
       <main className="overflow-x-hidden pb-12 md:pb-24">
+        <ProductHunt />
         <MaxWidthWrapper className="w-full mx-auto flex flex-col items-center py-12 md:py-24">
           <div className="w-full border-x border-dashed">
             <div className="border-x border-dashed p-8 w-fit mx-auto">
               <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-r from-orange-700  to-blue-900 ">
-                <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm tracking-wide">
+                <div className="bg-background rounded-[calc(2.5rem-1px)] px-3 py-1.5 text-sm">
                   Snaplink is public now
                 </div>
               </div>
@@ -77,9 +81,9 @@ export default async function Home() {
           </div>
           <div className="h-24 w-full max-w-xl border-x border-dashed"></div>
         </MaxWidthWrapper>
-        <MaxWidthWrapper className="bg-gradient-to-b from-zinc-800  to-zinc-900 p-2 mt-12 border rounded-2xl">
+        <MaxWidthWrapper className="bg-gradient-to-b from-zinc-900  to-zinc-950 p-2 mt-12 border rounded-2xl">
           <Image
-            src={`/dashboard-light.png`}
+            src={`/dashboard.png`}
             alt="hero"
             height={1080}
             width={1920}

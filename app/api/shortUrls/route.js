@@ -39,8 +39,11 @@ export const POST = auth(async (req) => {
 export const GET = auth(async (req) => {
   const session = req.auth;
   const userId = session?.user?.id;
+  if (!userId) return Response.json("Unauthorized", { status: 403 });
   try {
-    const urls = await ShortUrl.find({ userId }).sort({ createdAt: -1 });
+    const urls = await ShortUrl.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    }).sort({ createdAt: -1 });
     console.log("GET api/shortUrls-> Done");
     return Response.json(urls, { status: 200 });
   } catch (error) {

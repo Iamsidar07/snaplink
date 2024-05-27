@@ -34,7 +34,7 @@ const RedirectToDesignationURL = ({ id }) => {
       device,
       referrer,
     };
-    console.log("userinfo:", clickLogInfo);
+
     try {
       const data = await updateClickLog(clickLogInfo);
       setOriginalUrl(data?.originalUrl);
@@ -54,7 +54,7 @@ const RedirectToDesignationURL = ({ id }) => {
       className={"pt-12 space-y-4 grid place-content-center place-items-center"}
     >
       <Loader className="w-5 h-5 animate-spin" />
-      <h1>You are redirecting to your designation</h1>
+      <p>You are redirecting to your designation</p>
     </MaxWidthWrapper>
   );
 };

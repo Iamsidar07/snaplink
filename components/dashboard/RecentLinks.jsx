@@ -17,7 +17,6 @@ import useUserLinks from "@/hooks/useUserLinks";
 const RecentLinks = () => {
   const { data: links = [], isLoading } = useUserLinks();
 
-  console.log({ links, isLoading, hello: links.slice(0, 5) });
   return (
     <Card className="">
       <CardHeader>

@@ -1,13 +1,17 @@
 import { auth } from "@/auth";
 import dbConnect from "@/db";
 import ClickLog from "@/models/ClickLog";
+import mongoose from "mongoose";
 dbConnect();
 
 export const GET = auth(async (req) => {
   try {
     const session = req.auth;
     const userId = session.user?.id;
-    const links = await ClickLog.find({ userId });
+    if (!userId) return Response.json("Unauthorized", { status: 403 });
+    const links = await ClickLog.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    });
     const cityCount = {};
     const countryCount = {};
     links.map((link) => {

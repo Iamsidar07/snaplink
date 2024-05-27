@@ -9,7 +9,6 @@ export const GET = auth(async (req) => {
   try {
     const totalClicks = await ClickLog.find({ userId }).countDocuments();
     console.log("/api/clicks/totalClicks");
-    console.log({ totalClicks });
     return Response.json(totalClicks, { status: 200 });
   } catch (error) {
     console.log("Error: /api/clicks/totalClicks", error);

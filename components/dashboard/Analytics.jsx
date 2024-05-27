@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 import { Calendar, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, dataFormatter } from "@/lib/utils";
 import useTotalClicks from "@/hooks/useTotalClicks";
 import { TIME_PERIOD_DATA } from "@/constants";
 import AnalyticsCard from "./AnalyticsCard";
@@ -10,7 +10,8 @@ import useClicksOverTime from "@/hooks/useClicksOverTime";
 
 const Analytics = () => {
   const { data: totalClicks = 0 } = useTotalClicks();
-  const { data: clicksOverTime = [] } = useClicksOverTime();
+  const { data: clicksOverTime = [], isClicksOverTimeLoading } =
+    useClicksOverTime();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
   const data = clicksOverTime;
@@ -25,9 +26,10 @@ const Analytics = () => {
         : format(new Date(time), "h:mm a");
     return {
       date: formattedDate,
-      clicks,
+      clicks: dataFormatter(clicks),
     };
   });
+
 
   return (
     <div className="md:col-span-2">
@@ -73,7 +75,11 @@ const Analytics = () => {
           )}
         </div>
       </div>
-      <AnalyticsCard totalClicks={totalClicks} data={chartdata} />
+      <AnalyticsCard
+        totalClicks={totalClicks}
+        data={chartdata}
+        isLoading={isClicksOverTimeLoading}
+      />
     </div>
   );
 };

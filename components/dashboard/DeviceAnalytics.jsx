@@ -4,8 +4,8 @@ import BarChart from "./BarChart";
 import React from "react";
 
 const DeviceAnalytics = () => {
-  const { data = {} } = useDeviceAnalytics();
-  return <BarChart name="Devices" data={data} />;
+  const { data = {}, isLoading } = useDeviceAnalytics();
+  return <BarChart name="Devices" data={data} isLoading={isLoading} />;
 };
 
 export default DeviceAnalytics;

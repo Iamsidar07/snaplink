@@ -4,6 +4,7 @@ import { columns } from "../columns";
 import { DataTable } from "../data-table";
 import CreateLink from "@/components/CreateLink";
 import useUserLinks from "@/hooks/useUserLinks";
+import MyLoader from "@/components/Loader";
 
 const Page = () => {
   const { data = [], isLoading } = useUserLinks();
@@ -23,8 +24,11 @@ const Page = () => {
         <h2 className="font-bold text-lg lg:text-3xl">Recent Links</h2>
         <CreateLink />
       </div>
-
-      <DataTable columns={columns} data={tableData} />
+      {isLoading ? (
+        <MyLoader className="mt-12" />
+      ) : (
+        <DataTable columns={columns} data={tableData} />
+      )}
     </div>
   );
 };
