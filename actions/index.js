@@ -26,18 +26,7 @@ export const getClicksOverTime = async () => {
   return data;
 };
 
-export const signInWithNextAuth = async (formData) => {
-  try {
-    await signIn("credentials", formData);
-  } catch (error) {
-    if (isRedirectError(error)) {
-      console.log("Error", error);
-      throw Error(error);
-    }
-  } finally {
-    redirect("/dashboard");
-  }
-};
+
 
 export const signInWithGoogle = async () => {
   try {
@@ -60,8 +49,6 @@ export const createAccount = async (formData) => {
     redirect("/sign-in");
   } catch (error) {
     console.log("Error", error);
-
-    throw new Error("Something went wrong");
   }
 };
 

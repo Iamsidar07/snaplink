@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { signIn, signOut } from "@/auth/helpers";
+import { signIn, signOut } from "@/lib/helpers";
 import { useSession } from "next-auth/react";
 
 export default function UserButton() {

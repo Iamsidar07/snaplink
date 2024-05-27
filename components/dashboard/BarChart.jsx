@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
-import { BarList } from "@tremor/react";
 import { cn } from "@/lib/utils";
 import { ANALYTICS_EMOJIS, COUNTRY_FLAGS } from "@/constants";
+import { BarChart, Bar, ResponsiveContainer } from "recharts";
 
-const BarChart = ({ name = "", data }) => {
+const DisplayBarChart = ({ name = "", data }) => {
   const [currentActiveTab, setCurrentActiveTab] = useState(null);
   useEffect(() => {
     if (Object.keys(data).length > 0) {
@@ -63,10 +63,19 @@ const BarChart = ({ name = "", data }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <BarList color={"zinc"} data={BARLIST_DATA} />
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            layout="horizontal"
+            width={150}
+            height={40}
+            data={BARLIST_DATA}
+          >
+            <Bar layout="horizontal" dataKey="value" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
       </CardContent>
     </Card>
   );
 };
 
-export default BarChart;
+export default DisplayBarChart;

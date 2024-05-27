@@ -1,30 +1,26 @@
+import { auth as middleware } from "@/auth";
 import { NextResponse } from "next/server";
-
-import { getToken } from "next-auth/jwt";
-
-// This function can be marked `async` if using `await` inside
-export async function middleware(request) {
-  const token = await getToken({
-    req: request,
-    secret: process.env.JWT_SECRET,
-  });
-  const url = request.nextUrl;
+export default middleware((req) => {
+  const url = req.nextUrl;
   if (
-    (token && url.pathname.startsWith("/sign-in")) ||
-    url.pathname.startsWith("/sign-up")
+    req.auth &&
+    (url.pathname.startsWith("/sign-in") || url.pathname.startsWith("/sign-in"))
   ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
-}
+  if (!req.auth && url.pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
+  }
+});
 
-// See "Matching Paths" below to learn more
+// Optionally, don't invoke Middleware on some paths
 export const config = {
   matcher: [
-    "/sign-in",
-    "/sign-up",
-    "/dashboard",
-    "/api/clicks/:path*",
-    "/api/shortUrls/:path*",
     "/",
+    "/dashboard",
+    "/sign-up",
+    "/sign-in",
+    "/api/shortUrls/:path*",
+    "/api/clicks/:path*",
   ],
 };

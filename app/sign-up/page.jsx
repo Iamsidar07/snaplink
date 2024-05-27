@@ -1,5 +1,3 @@
-"use client";
-import BackButton from "@/components/BackButton";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,12 +11,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAccount } from "@/actions";
-import { signIn } from "next-auth/react";
+import LoginWithGoogle from "@/components/auth/LoginWithGoogle";
 
 export default function SignUpPage() {
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
-      <BackButton />
       <Card className="mx-auto max-w-md w-full">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
@@ -50,13 +47,7 @@ export default function SignUpPage() {
               Create an account
             </Button>
           </form>
-          <Button
-            onClick={async () => signIn("google")}
-            variant="outline"
-            className="w-full mt-2"
-          >
-            Sign up with Google
-          </Button>
+          <LoginWithGoogle />
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
             <Link href="/sign-in" className="underline">

@@ -4,7 +4,7 @@ import UserModel from "@/models/User";
 import bcryptjs from "bcryptjs";
 
 export const POST = async (req) => {
-  const formdata = req.formData();
+  const formdata = await req.formData();
   const name = formdata.get("name");
   const email = formdata.get("email");
   const password = formdata.get("password");

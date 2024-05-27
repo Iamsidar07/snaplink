@@ -2,9 +2,8 @@ import { constructMetadata } from "@/lib/utils";
 import CreateLink from "@/components/CreateLink";
 import TopPerformingLinks from "@/components/dashboard/TopPerformingLinks";
 import RecentLinks from "@/components/dashboard/RecentLinks";
-import { auth } from "@/auth";
+import { auth, signIn } from "@/auth";
 import TotalLinks from "@/components/dashboard/TotalLinks";
-import { signIn } from "@/auth/helpers";
 import TotalClicks from "@/components/dashboard/TotalClicks";
 
 export const metadata = constructMetadata({

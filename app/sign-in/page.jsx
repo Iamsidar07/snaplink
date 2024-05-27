@@ -1,8 +1,6 @@
-"use client";
-import BackButton from "@/components/BackButton";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,13 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signInWithNextAuth } from "@/actions";
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
 
-export default function SignInPage() {
+export default async function SignInPage() {
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
-      <BackButton />
       <Card className="mx-auto max-w-md w-full">
         <CardHeader>
           <CardTitle className="text-xl">Login</CardTitle>
@@ -27,7 +23,13 @@ export default function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={signInWithNextAuth} className="grid gap-4">
+          <form
+            action={async (formData) => {
+              "use server";
+              await signIn("credentials", formData);
+            }}
+            className="grid gap-4"
+          >
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -42,17 +44,15 @@ export default function SignInPage() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" name="password" />
             </div>
-            <Button type="submit" className="w-full">
+            <button
+              type="submit"
+              className={buttonVariants({
+                className: "w-full",
+              })}
+            >
               Login
-            </Button>
+            </button>
           </form>
-          <Button
-            onClick={async () => signIn("google")}
-            variant="outline"
-            className="w-full mt-2"
-          >
-            Login up with Google
-          </Button>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/sign-up" className="underline">
