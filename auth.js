@@ -3,7 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcryptjs from "bcryptjs";
 import config from "@/config";
-import { getUserFromDb, registerUser } from "./actions";
+import UserModel from "./models/User";
+import { getSuperHero } from "./lib/utils";
 
 export const providers = [
   GoogleProvider({
@@ -25,15 +26,26 @@ export const providers = [
     },
     authorize: async ({ email, password, name }) => {
       try {
-
         let user = null;
         if (!email || !password) {
           throw new Error("Email and password are required.");
         }
-        user = await getUserFromDb(email);
+        user = await UserModel.findOne({ email });
         if (!user) {
-          user = await registerUser(name, email, password)
-          return user;
+          // get random superhero name
+          const superheroName = getSuperHero();
+          // create new user
+          // hash password
+          const salt = await bcryptjs.genSalt(8);
+          const hashPassword = await bcryptjs.hash(password, salt);
+          const getName = name ? name : superheroName;
+          user = await UserModel.create({
+            email,
+            password: hashPassword,
+            name: getName,
+            image: `https://api.multiavatar.com/${getName}.svg`,
+          });
+          return user
         }
 
         const isPasswordCorrect = await bcryptjs.compare(

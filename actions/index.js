@@ -68,35 +68,3 @@ export const logOut = async () => {
     redirect("/");
   }
 };
-
-export const getUserFromDb = async (email) => {
-  try {
-    await dbConnect()
-    const user = await UserModel.findOne({ email })
-    return user
-  } catch (error) {
-    console.log("Something went wrong.", error)
-  }
-}
-
-export const registerUser = async (name, email, password) => {
-  try {
-    // get random superhero name
-    const superheroName = getSuperHero();
-    // create new user
-    // hash password
-    const salt = await bcryptjs.genSalt(8);
-    const hashPassword = await bcryptjs.hash(password, salt);
-    const getName = name ? name : superheroName;
-    const newUser = await UserModel.create({
-      email,
-      password: hashPassword,
-      name: getName,
-      image: `https://api.multiavatar.com/${getName}.svg`,
-    });
-    return newUser
-
-  } catch (error) {
-    console.log('Failed to register user.')
-  }
-}
