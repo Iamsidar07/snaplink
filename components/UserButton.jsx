@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -8,11 +9,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { signIn, signOut } from "@/lib/helpers";
-import { useSession } from "next-auth/react";
+import { logout } from "@/lib/helpers";
 
-export default function UserButton() {
-  const { data: session } = useSession();
+export default function UserButton({ session }) {
+  const router = useRouter();
+  if (!session?.user) return;
 
   return (
     <div className="flex gap-2 items-center">
@@ -49,8 +50,8 @@ export default function UserButton() {
               className="w-full"
               size="sm"
               onClick={async () => {
-                await signOut();
-                await signIn();
+                await logout();
+                router.push("/sign-in");
               }}
             >
               Sign Out

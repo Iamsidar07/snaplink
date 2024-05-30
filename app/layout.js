@@ -27,7 +27,6 @@ export default async function RootLayout({ children }) {
         <div className="pointer-events-none fixed bottom-0 left-1 right-1 top-1 z-[101] rounded-t-xl shadow-[0_1px_1px_rgba(0,0,0,0.5),0_4px_6px_rgba(32,42,54,0.04),0_24px_68px_rgba(47,48,56,0.15),0_2px_3px_rgba(0,0,0,0.09)] ring-1 ring-inset ring-white/10 overflow-x-hidden"></div>
 
         <Provider>
-          <Navbar />
           {children}
           <Toaster />
         </Provider>

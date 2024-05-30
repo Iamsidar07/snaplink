@@ -1,9 +1,8 @@
 "use server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import config from "@/config";
-import { signIn, signOut } from "@/auth";
+import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
-import { isRedirectError } from "next/dist/client/components/redirect";
 import axios from "axios";
 
 export default async function revalidate({ tag, path }) {
@@ -50,20 +49,11 @@ export const createAccount = async (formData) => {
   }
 };
 
-export const logOut = async () => {
-  try {
-    await signOut({ redirect: false });
-  } catch (error) {
-    if (isRedirectError(error)) {
-      console.error(error);
-      throw Error(error);
-    }
-  } finally {
-    redirect("/");
-  }
+export const login = async ({ email, password, name }) => {
+  await signIn("credentials", {
+    email,
+    password,
+    name,
+    redirectTo: "/dashboard",
+  });
 };
-
-export const signInServerAction = async (formData) => {
-  await signIn("credentials", formData);
-};
-

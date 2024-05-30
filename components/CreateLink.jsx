@@ -47,6 +47,7 @@ const CreateLink = () => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["createLink", designationURL],
     mutationFn: async (url) => {
+      if (designationURL === "") return null;
       const res = await axios.post("/api/shortUrls", {
         originalUrl: url,
       });
@@ -69,7 +70,7 @@ const CreateLink = () => {
   };
 
   useEffect(() => {
-    if (!designationURL) return;
+    if (designationURL === "") return;
     const url = new URL(designationURL);
     setHost(url.host);
 

@@ -11,16 +11,37 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader } from "lucide-react";
-import { signInServerAction } from "@/actions";
+import { login } from "@/actions";
 import { useState } from "react";
+import LoginWithGoogle from "@/components/auth/LoginWithGoogle";
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
   const { toast } = useToast();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (isLoading) return;
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    try {
+      setIsLoading(true);
+      await login({ name, email, password });
+    } catch (error) {
+      toast({
+        title: error.message || "Something went wrong!",
+        description: "Something went wrong! Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
       <Card className="mx-auto max-w-md w-full">
@@ -31,24 +52,7 @@ export default function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form
-            action={async (formData) => {
-              try {
-                setIsLoading(true);
-                await signInServerAction(formData);
-                router.push("/dashboard");
-              } catch (error) {
-                toast({
-                  title: error.message || "Something went wrong!",
-                  description: "Something went wrong! Please try again later.",
-                  variant: "destructive",
-                });
-              } finally {
-                setIsLoading(false);
-              }
-            }}
-            className="grid gap-4"
-          >
+          <form onSubmit={handleSubmit} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -74,6 +78,7 @@ export default function SignInPage() {
               Login
             </button>
           </form>
+          <LoginWithGoogle />
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/sign-up" className="underline">

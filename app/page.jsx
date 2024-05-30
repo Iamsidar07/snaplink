@@ -6,10 +6,12 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import UrlCount from "@/components/UrlCount";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div className="relative">
+      <Navbar />
       <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-900 to-transparent" />
       <div className="w-52 h-52 absolute left-1/4 top-[12rem] filter blur-[12rem] bg-gradient-to-r from-yellow-900 to-transparent" />
 

@@ -16,7 +16,7 @@ export const GET = auth(async (req) => {
     const countryCount = {};
     links.map((link) => {
       const [city, country] = link.location.split(",");
-      console.log({ city, country });
+      
       if (!Object.keys(cityCount).join(",").split(",").includes(city)) {
         cityCount[link.location] = 1;
       } else {

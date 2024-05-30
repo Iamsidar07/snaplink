@@ -5,7 +5,7 @@ import useLinkAnalytics from "@/hooks/useLinkAnalytics";
 
 const LocationAnalytics = () => {
   const { data: locationsInfo = {}, isLoading } = useLinkAnalytics();
-  console.log(locationsInfo);
+
   return (
     <BarChart name="Location" data={locationsInfo} isLoading={isLoading} />
   );

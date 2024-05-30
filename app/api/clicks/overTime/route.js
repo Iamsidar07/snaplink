@@ -37,11 +37,7 @@ export const GET = auth(async (req) => {
     console.log("api/clicks/overTime", clickLog);
     return Response.json(clickLog, { status: 200 });
   } catch (error) {
-    console.log(
-      `ERROR: api/shortUrls/id/clicks
-`,
-      error,
-    );
+    console.log(`ERROR: api/shortUrls/id/clicks`,error);
     return Response.json(error.message, { status: 500 });
   }
 });

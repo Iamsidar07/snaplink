@@ -1,26 +1,35 @@
 import { auth } from "@/auth";
-import { NextResponse } from "next/server";
+import {
+  DEFAULT_LOGIN_REDIRECT,
+  apiAuthPrefix,
+  authRoutes,
+  publicRoutes,
+} from "./routes";
 export default auth((req) => {
-  const url = req.nextUrl;
-  if (
-    req.auth &&
-    (url.pathname.startsWith("/sign-in") || url.pathname.startsWith("/sign-in"))
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
+
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    nextUrl.pathname.startsWith("/s");
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+
+  // Don't block api/auth routes
+  if (isApiAuthRoute) return null;
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+    }
+    return null;
   }
-  if (!req.auth && url.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/sign-in", req.url));
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL("/sign-in", nextUrl));
   }
+  return null;
 });
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: [
-    "/",
-    "/dashboard",
-    "/sign-up",
-    "/sign-in",
-    "/api/shortUrls/:path*",
-    "/api/clicks/:path*",
-  ],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
