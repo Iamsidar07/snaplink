@@ -14,7 +14,6 @@ export default function Home() {
       <Navbar />
       <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-900 to-transparent" />
       <div className="w-52 h-52 absolute left-1/4 top-[12rem] filter blur-[12rem] bg-gradient-to-r from-yellow-900 to-transparent" />
-
       <main className="overflow-x-hidden pb-12 md:pb-24">
         <ProductHunt />
         <MaxWidthWrapper className="w-full mx-auto flex flex-col items-center py-12 md:py-24">
