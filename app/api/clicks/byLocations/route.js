@@ -15,7 +15,8 @@ export const GET = auth(async (req) => {
     const cityCount = {};
     const countryCount = {};
     links.map((link) => {
-      const [city, country] = link.location.split(",").map((r) => r.trim());
+      const [city, country] = link.location.split(",");
+      console.log({ city, country });
       if (!Object.keys(cityCount).join(",").split(",").includes(city)) {
         cityCount[link.location] = 1;
       } else {
@@ -25,10 +26,11 @@ export const GET = auth(async (req) => {
           }
         });
       }
+
       if (!Object.keys(countryCount).join(",").split(",").includes(country)) {
         countryCount[link.location] = 1;
       } else {
-        Object.entries(cityCount).map(([loc, _count]) => {
+        Object.entries(countryCount).map(([loc, _count]) => {
           if (loc.split(",").includes(country)) {
             countryCount[loc] += 1;
           }

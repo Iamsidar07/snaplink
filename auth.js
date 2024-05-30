@@ -3,8 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcryptjs from "bcryptjs";
 import config from "@/config";
-import UserModel from "./models/User";
 import { getSuperHero } from "./lib/utils";
+import { prisma } from "./db/prisma";
 
 export const providers = [
   GoogleProvider({
@@ -30,22 +30,22 @@ export const providers = [
         if (!email || !password) {
           throw new Error("Email and password are required.");
         }
-        user = await UserModel.findOne({ email });
+        user = await prisma.users.findFirst({ where: { email } });
         if (!user) {
           // get random superhero name
           const superheroName = getSuperHero();
-          // create new user
-          // hash password
           const salt = await bcryptjs.genSalt(8);
           const hashPassword = await bcryptjs.hash(password, salt);
           const getName = name ? name : superheroName;
-          user = await UserModel.create({
-            email,
-            password: hashPassword,
-            name: getName,
-            image: `https://api.multiavatar.com/${getName}.svg`,
+          user = await prisma.users.create({
+            data: {
+              email,
+              password: hashPassword,
+              name: getName,
+              image: `https://api.multiavatar.com/${getName}.svg`,
+            },
           });
-          return user
+          return user;
         }
 
         const isPasswordCorrect = await bcryptjs.compare(
@@ -84,7 +84,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user._id?.toString();
+        token.id = user.id?.toString();
         token.image = user.image;
       }
       return token;

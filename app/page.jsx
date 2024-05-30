@@ -1,53 +1,13 @@
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Image from "next/image";
-import config from "@/config";
 import ShortUrlForm from "@/components/ShortUrlForm";
 import ProductHunt from "@/components/ProductHunt";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import UrlCount from "@/components/UrlCount";
 
-const getShortenUrlCount = async () => {
-  try {
-    const res = await fetch(`${config.domain}/api/countLinks`, {
-      cache: "no-cache",
-    });
-    if (res.status === 500) {
-      return 0;
-    }
-
-    return await res.json();
-  } catch (error) {
-    console.log(error?.message);
-    return 0;
-  }
-};
-
-const UrlCount = ({ count }) => {
-  return (
-    <div className={"relative pt-12 md:pt-24"}>
-      <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-950 to-transparent" />
-      <h4
-        className={
-          "headline text-center text-3xl !leading-normal  md:text-6xl md:leading-tight capitalize"
-        }
-      >
-        Over{" "}
-        <span
-          className={
-            "inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-bold border-b border-dashed"
-          }
-        >
-          {count?.toLocaleString() ?? 0}
-        </span>{" "}
-        URL&apos;s Shortened <br /> and Counting!
-      </h4>
-    </div>
-  );
-};
-
-export default async function Home() {
-  const shortenUrlCount = await getShortenUrlCount();
+export default function Home() {
   return (
     <div className="relative">
       <div className="w-52 h-52 absolute left-1/2 top-1/2 filter blur-[12rem] bg-gradient-to-r from-teal-900 to-transparent" />
@@ -92,7 +52,7 @@ export default async function Home() {
           />
         </MaxWidthWrapper>
         <WhyChooseUs />
-        <UrlCount count={shortenUrlCount ?? 0} />
+        <UrlCount />
         <Testimonials />
       </main>
       <Footer />

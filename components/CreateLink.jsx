@@ -154,7 +154,7 @@ const CreateLink = () => {
                         alt=""
                         width={1920}
                         height={720}
-                        className="w-full h-full"
+                        className="w-full h-full max-h-[250px] object-cover object-top"
                       />
                       <p className="truncate bg-black/75 text-white absolute bottom-4 inset-x-2 px-3 py-1 rounded-xl text-sm w-fit max-w-sm">
                         {metadata.title}
@@ -172,13 +172,19 @@ const CreateLink = () => {
                       <div className="border-b h-1 w-full" />
                     </div>
                     <div className="overflow-hidden border">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col space-y-4 text-sm">
-                        <img src={metadata.image} alt="" />
+                      <div className="h-[250px] overflow-hidden w-full flex items-center justify-center flex-col space-y-4 text-sm">
+                        <img
+                          src={metadata.image}
+                          alt=""
+                          className="object-cover object-top"
+                        />
                       </div>
                       <div className="space-y-1 w-full border-t p-2">
-                        <p className="text-sm ">{host}</p>
+                        <p className="text-sm text-muted-foreground">{host}</p>
                         <h3 className="truncate">{metadata.title}</h3>
-                        <p className="text-sm">{metadata.description}</p>
+                        <p className="text-sm opacity-90">
+                          {metadata.description}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -192,12 +198,16 @@ const CreateLink = () => {
                       <div className="border-b h-1 w-full" />
                     </div>
                     <div className="overflow-hidden border">
-                      <div className="h-[250px] w-full flex items-center justify-center flex-col space-y-4 text-sm">
-                        <img src={metadata.image} alt="" />
+                      <div className="h-[250px] overflow-hidden w-full flex items-center justify-center flex-col space-y-4 text-sm">
+                        <img
+                          src={metadata.image}
+                          alt=""
+                          className="object-cover object-top"
+                        />
                       </div>
                       <div className="space-y-1 w-full border-t p-2">
                         <h3 className="truncate">{metadata.title}</h3>
-                        <p className="text-sm">{host}</p>
+                        <p className="text-sm text-muted-foreground">{host}</p>
                       </div>
                     </div>
                   </div>

@@ -8,7 +8,7 @@ import axios from "axios";
 import dbConnect from "@/db";
 import UserModel from "@/models/User";
 import { getSuperHero } from "@/lib/utils";
-import bcryptjs from "bcryptjs"
+import bcryptjs from "bcryptjs";
 
 export default async function revalidate({ tag, path }) {
   if (tag) {
@@ -29,8 +29,6 @@ export const getClicksOverTime = async () => {
   const data = await res.json();
   return data;
 };
-
-
 
 export const signInWithGoogle = async () => {
   try {
@@ -68,3 +66,8 @@ export const logOut = async () => {
     redirect("/");
   }
 };
+
+export const signInServerAction = async (formData) => {
+  await signIn("credentials", formData);
+};
+

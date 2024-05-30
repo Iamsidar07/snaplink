@@ -1,3 +1,4 @@
+"use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -10,9 +11,16 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "@/auth";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader } from "lucide-react";
+import { signInServerAction } from "@/actions";
+import { useState } from "react";
 
-export default async function SignInPage() {
+export default function SignInPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
       <Card className="mx-auto max-w-md w-full">
@@ -25,8 +33,19 @@ export default async function SignInPage() {
         <CardContent>
           <form
             action={async (formData) => {
-              "use server";
-              await signIn("credentials", formData);
+              try {
+                setIsLoading(true);
+                await signInServerAction(formData);
+                router.push("/dashboard");
+              } catch (error) {
+                toast({
+                  title: error.message || "Something went wrong!",
+                  description: "Something went wrong! Please try again later.",
+                  variant: "destructive",
+                });
+              } finally {
+                setIsLoading(false);
+              }
             }}
             className="grid gap-4"
           >
@@ -45,11 +64,13 @@ export default async function SignInPage() {
               <Input id="password" type="password" name="password" />
             </div>
             <button
+              disabled={isLoading}
               type="submit"
               className={buttonVariants({
                 className: "w-full",
               })}
             >
+              {isLoading && <Loader className="animate-spin mr-2 w-5 h-5" />}
               Login
             </button>
           </form>
