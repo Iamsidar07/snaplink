@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import UserButton from "./UserButton";
+import { buttonVariants } from "./ui/button";
 
 const AuthButton = ({ session }) => {
   return (
