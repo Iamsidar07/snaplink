@@ -17,7 +17,7 @@ const TopPerformingLinks = () => {
     };
   });
   return (
-    <div className="">
+    <div>
       <Card>
         <CardHeader>
           <CardTitle>Top Performing Links</CardTitle>
@@ -27,10 +27,11 @@ const TopPerformingLinks = () => {
             data={chartdata}
             index="domain"
             categories={["Total Clicks"]}
-            colors={["black"]}
+            colors={["yellow"]}
             valueFormatter={dataFormatter}
             yAxisWidth={48}
             onValueChange={(v) => console.log(v)}
+            showGridLines={false}
           />
         </CardContent>
       </Card>

@@ -1,12 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { Button } from "../ui/button";
 import { BarList } from "@tremor/react";
 import { cn } from "@/lib/utils";
 import { ANALYTICS_EMOJIS, COUNTRY_FLAGS } from "@/constants";
+import { buttonVariants } from "../ui/button";
+import { Loader } from "lucide-react";
 
-const BarChart = ({ name = "", data }) => {
+const BarChart = ({ name = "", data, isLoading }) => {
   const [currentActiveTab, setCurrentActiveTab] = useState(null);
   useEffect(() => {
     if (Object.keys(data).length > 0) {
@@ -18,6 +19,7 @@ const BarChart = ({ name = "", data }) => {
   const BARLIST_DATA = Object.entries(data[currentActiveTab] || {}).map(
     ([item, itemCount]) => {
       if (currentActiveTab === "country" || currentActiveTab === "city") {
+
         const [city, country] = item.split(", ");
         return {
           name: currentActiveTab === "country" ? country : city,
@@ -25,7 +27,6 @@ const BarChart = ({ name = "", data }) => {
           icon: () => <p className="mr-2">{COUNTRY_FLAGS.get(country)}</p>,
         };
       }
-      console.log(item);
       return {
         name: itemCount._id,
         value: itemCount.count,
@@ -43,27 +44,32 @@ const BarChart = ({ name = "", data }) => {
         <div className="flex items-cente justify-between ">
           <h3>{name}</h3>
           <div className="flex items-center gap-3 ">
-            {options.map((option, i) => {
-              const isActive = currentActiveTab === option;
+            {options.map((option) => {
               return (
-                <Button
+                <button
                   onClick={() => setCurrentActiveTab(option)}
                   key={option}
-                  size={"sm"}
-                  variant={isActive ? "default" : "ghost"}
-                  className={cn("px-3 py-1 text-xs capitalize", {
-                    "font-semibold": currentActiveTab === option,
+                  className={buttonVariants({
+                    size: "xs",
+                    className: "px-2 py-1",
+                    variant: currentActiveTab === option ? "default" : "ghost",
                   })}
                 >
                   {option}
-                </Button>
+                </button>
               );
             })}
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <BarList color={"zinc"} data={BARLIST_DATA} />
+      <CardContent className="min-h-24">
+        {isLoading ? (
+          <div className="grid place-items-center w-full h-full">
+            <Loader className="animate-spin w-5 h-5" />
+          </div>
+        ) : (
+          <BarList data={BARLIST_DATA} color="zinc" />
+        )}
       </CardContent>
     </Card>
   );

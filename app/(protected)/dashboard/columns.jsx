@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import config from "@/config";
 import { convertToTimeAgo } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const columns = [
   {
@@ -39,16 +40,16 @@ export const columns = [
     cell: ({ row }) => {
       const { originalUrl } = row.original;
       const origin = new URL(originalUrl).origin;
-      console.log({ origin });
       return (
         <div className="flex items-center gap-2 group">
-          <Image
-            className="rounded"
-            width={30}
-            height={30}
-            alt="logo"
-            src={`https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`}
-          />
+          <Avatar className="w-8 h-8">
+            <AvatarImage
+              alt={origin}
+              src={`https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`}
+              className="object-contain"
+            />
+            <AvatarFallback className="uppercase">0</AvatarFallback>
+          </Avatar>
           <Link
             href={originalUrl}
             target="_blank"

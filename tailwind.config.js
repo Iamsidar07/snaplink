@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const { fontFamily } = require("tailwindcss/defaultTheme");
+//TODO : Edit tremor color for dark mode
 
 import colors from "tailwindcss/colors";
 const {
@@ -42,65 +43,34 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
-        // light mode
-        tremor: {
-          brand: {
-            faint: colors.blue[50],
-            muted: colors.blue[200],
-            subtle: colors.blue[400],
-            DEFAULT: colors.blue[500],
-            emphasis: colors.blue[700],
-            inverted: colors.white,
-          },
-          background: {
-            muted: colors.gray[50],
-            subtle: colors.gray[100],
-            DEFAULT: colors.white,
-            emphasis: colors.gray[700],
-          },
-          border: {
-            DEFAULT: colors.gray[200],
-          },
-          ring: {
-            DEFAULT: colors.gray[200],
-          },
-          content: {
-            subtle: colors.gray[400],
-            DEFAULT: colors.gray[500],
-            emphasis: colors.gray[700],
-            strong: colors.gray[900],
-            inverted: colors.white,
-          },
-        },
-
         // dark mode
         "dark-tremor": {
           brand: {
             faint: "#0B1229",
-            muted: colors.blue[950],
-            subtle: colors.blue[800],
-            DEFAULT: colors.blue[500],
-            emphasis: colors.blue[400],
-            inverted: colors.blue[950],
+            muted: "hsl(var(--muted))",
+            subtle: "hsl(var(--primary))",
+            DEFAULT: "hsl(var(--primary))",
+            emphasis: "hsl(var(--primary-foreground))",
+            inverted: "hsl(var(--foreground))",
           },
           background: {
-            muted: "#131A2B",
-            subtle: colors.gray[800],
-            DEFAULT: colors.gray[900],
-            emphasis: colors.gray[300],
+            muted: "#ffffff",
+            subtle: "hsl(var(--background))",
+            DEFAULT: "hsl(var(--card))",
+            emphasis: "hsl(var(--secondary-foreground))",
           },
           border: {
-            DEFAULT: colors.gray[800],
+            DEFAULT: "hsl(var(--border))",
           },
           ring: {
-            DEFAULT: colors.gray[800],
+            DEFAULT: "hsl(var(--ring))",
           },
           content: {
-            subtle: colors.gray[600],
-            DEFAULT: colors.gray[500],
-            emphasis: colors.gray[200],
-            strong: colors.gray[50],
-            inverted: colors.gray[950],
+            subtle: "hsl(var(--foreground))",
+            DEFAULT: "hsl(var(--foreground))",
+            emphasis: "hsl(var(--card-foreground))",
+            strong: "hsl(var(--foreground))",
+            inverted: "hsl(var(--card-foreground))",
           },
         },
         border: "hsl(var(--border))",
@@ -137,20 +107,7 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      boxShadow: {
-        // light
-        "tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        "tremor-card":
-          "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        "tremor-dropdown":
-          "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-        // dark
-        "dark-tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        "dark-tremor-card":
-          "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        "dark-tremor-dropdown":
-          "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-      },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -182,6 +139,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
       },
     },
   },
