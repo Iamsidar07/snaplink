@@ -5,10 +5,6 @@ import { signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import axios from "axios";
-import dbConnect from "@/db";
-import UserModel from "@/models/User";
-import { getSuperHero } from "@/lib/utils";
-import bcryptjs from "bcryptjs";
 
 export default async function revalidate({ tag, path }) {
   if (tag) {
