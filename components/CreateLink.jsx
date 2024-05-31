@@ -20,11 +20,15 @@ import { useToast } from "./ui/use-toast";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import config from "@/config";
 import { Skeleton } from "./ui/skeleton";
+import { generateShortLinkId } from "@/lib/utils";
+import generateUniqueId from "generate-unique-id";
+import { FacebookIcon, LinkedInIcon, TwitterIcon } from "@/lib/svg";
 
 const CreateLink = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [designationURL, setDesignationURL] = useState("");
+  const [shortLinkId, setShortLinkId] = useState("");
   const [host, setHost] = useState("");
   // metatagEndpoint
   const metatagEndpoint = new URL(config.dubMetatagEndpointUrl);
@@ -50,6 +54,7 @@ const CreateLink = () => {
       if (designationURL === "") return null;
       const res = await axios.post("/api/shortUrls", {
         originalUrl: url,
+        shortUrlId: shortLinkId,
       });
       return res.data;
     },
@@ -69,13 +74,20 @@ const CreateLink = () => {
     mutate(designationURL);
   };
 
+
   useEffect(() => {
     if (designationURL === "") return;
     const url = new URL(designationURL);
+    const id = generateUniqueId({
+      length: 8,
+      useLetters: true,
+    })
+    setShortLinkId(id);
     setHost(url.host);
-
     refetchMetadata();
   }, [designationURL, refetchMetadata]);
+
+  console.log(metadata);
   return (
     <div>
       <Drawer>
@@ -107,7 +119,7 @@ const CreateLink = () => {
                 )}
                 <h2 className="text-lg">Create a new link</h2>
               </div>
-              <form onSubmit={handleCreateLink}>
+              <form onSubmit={handleCreateLink} className="space-y-3">
                 <div className="space-y-3 px-4">
                   <Label htmlFor="url" className="text-sm">
                     Destination URL
@@ -119,6 +131,23 @@ const CreateLink = () => {
                     onChange={(e) => setDesignationURL(e.target.value)}
                     placeholder="https://ui.shadcn.com/docs/components/alert-dialog"
                   />
+                </div>
+                <div className="space-y-3 px-4">
+                  <Label htmlFor="shortLinkId" className="text-sm">
+                    Short Link
+                  </Label>
+                  <div className="flex items-stretch gap-1 5 border px-2 rounded text-sm">
+                    <div className="flex items-center px-2 text-muted-foreground">
+                      {config.domain.split("//")[1]}
+                    </div>
+                    <input
+                      name="shortLinkId"
+                      id="ShortLinkId"
+                      value={shortLinkId}
+                      onChange={(e) => setShortLinkId(e.target.value)}
+                      className="border-0 border-l rounded-none outline-none bg-transparent px-2 py-2"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col items-center justify-center h-14 sm:h-24  md:rounded-bl-2xl md:rounded-br-2xl z-10 mt-12 md:mt-0 md:absolute md:bottom-0 w-full border-t shadow">
                   <Button
@@ -144,7 +173,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <Twitter className="w-4 h-4 gap-1 " />
+                        <TwitterIcon/>
                         <p>Twitter</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -167,7 +196,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <Facebook className="w-4 h-4 gap-1 " />
+                        <FacebookIcon/>
                         <p>Facebook</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -193,7 +222,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <Linkedin className="w-4 h-4 gap-1 " />
+                        <LinkedInIcon/>
                         <p>Linkedin</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -219,7 +248,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center gap-1 ">
-                        <Twitter className="w-4 h-4 " />
+                        <TwitterIcon/>
                         <p>Twitter</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -241,7 +270,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center gap-1 ">
-                        <Facebook className="w-4 h-4 " />
+                        <FacebookIcon/>
                         <p>Facebook</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -269,7 +298,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <Linkedin className="w-4 h-4 gap-1 " />
+                        <LinkedInIcon/>
                         <p>Linkedin</p>
                       </div>
                       <div className="border-b h-1 w-full" />

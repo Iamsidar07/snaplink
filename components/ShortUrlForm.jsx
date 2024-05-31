@@ -37,7 +37,7 @@ const ShortUrlForm = ({ className }) => {
     },
   });
   const copyShortUrl = async () => {
-    await navigator.clipboard.writeText(config.domain + "/s/" + shortUrl);
+    await navigator.clipboard.writeText(config.domain + "/" + shortUrl);
     toast({
       description: "🔗 Url copied to your clipboard.",
     });
@@ -69,7 +69,7 @@ const ShortUrlForm = ({ className }) => {
         >
           <CopyIcon className="w-4 h-4 text-blue-500" />
           <span className="headline text-xs md:text-sm font-bold">
-            {`${config.domain}/s/${shortUrl}`}
+            {`${config.domain}/${shortUrl}`}
           </span>
         </div>
       )}
