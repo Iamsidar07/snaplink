@@ -16,11 +16,11 @@ import { Loader } from "lucide-react";
 import { login } from "@/actions";
 import { useState } from "react";
 import LoginWithGoogle from "@/components/auth/LoginWithGoogle";
+import SocialLogin from "@/components/auth/SocialLogin";
 
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLoading) return;
@@ -32,6 +32,7 @@ export default function SignInPage() {
       setIsLoading(true);
       await login({ name, email, password });
     } catch (error) {
+      console.log("error", error);
       toast({
         title: error.message || "Something went wrong!",
         description: "Something went wrong! Please try again later.",
@@ -41,7 +42,7 @@ export default function SignInPage() {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
       <Card className="mx-auto max-w-md w-full">
@@ -78,7 +79,7 @@ export default function SignInPage() {
               Login
             </button>
           </form>
-          <LoginWithGoogle />
+          <SocialLogin />
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/sign-up" className="underline">

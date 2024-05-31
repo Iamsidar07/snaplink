@@ -1,3 +1,4 @@
+"use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -11,9 +12,33 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAccount } from "@/actions";
-import LoginWithGoogle from "@/components/auth/LoginWithGoogle";
+import SocialLogin from "@/components/auth/SocialLogin";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function SignUpPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (isLoading) return;
+    const formData = new FormData(event.currentTarget);
+    try {
+      setIsLoading(true);
+      await createAccount(formData);
+    } catch (error) {
+      console.log("error", error);
+      toast({
+        title: error.message || "Something went wrong!",
+        description: "Something went wrong! Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <MaxWidthWrapper className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center relative w-full">
       <Card className="mx-auto max-w-md w-full">
@@ -24,7 +49,7 @@ export default function SignUpPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={createAccount} className="grid gap-4">
+          <form onSubmit={handleSubmit} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="name">Name</Label>
               <Input id="name" name="name" placeholder="Max" />
@@ -47,7 +72,7 @@ export default function SignUpPage() {
               Create an account
             </Button>
           </form>
-          <LoginWithGoogle />
+          <SocialLogin />
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
             <Link href="/sign-in" className="underline">

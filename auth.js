@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import bcryptjs from "bcryptjs";
 import config from "@/config";
@@ -10,6 +11,10 @@ export const providers = [
   GoogleProvider({
     clientId: config.googleClientId,
     clientSecret: config.googleClientSecret,
+  }),
+  GithubProvider({
+    clientId: config.githubClientId,
+    clientSecret: config.githubClientSecret,
   }),
   Credentials({
     id: "credentials",
@@ -27,10 +32,11 @@ export const providers = [
     authorize: async ({ email, password, name }) => {
       try {
         let user = null;
-        if (!email || !password) {
+        if (!email) {
           throw new Error("Email and password are required.");
         }
         user = await prisma.users.findFirst({ where: { email } });
+        if (!user.password) return null;
         if (!user) {
           // get random superhero name
           const superheroName = getSuperHero();
@@ -50,7 +56,7 @@ export const providers = [
 
         const isPasswordCorrect = await bcryptjs.compare(
           password,
-          user.password,
+          user.password
         );
         if (!isPasswordCorrect) {
           throw new Error("Invalid password.");
