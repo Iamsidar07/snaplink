@@ -10,7 +10,7 @@ dbConnect();
 // create shortUrl
 export const POST = auth(async (req) => {
   const reqBody = await req.json();
-  const { originalUrl } = reqBody;
+  const { originalUrl, shortUrlId } = reqBody;
   const session = req.auth;
   const userId = session?.user?.id;
   const isValidUrl = validateURL(originalUrl);
@@ -19,10 +19,12 @@ export const POST = auth(async (req) => {
   }
   // connect to db
   try {
-    const uniqueId = generateUniqueId({
-      length: 8,
-      useLetters: true,
-    });
+    const uniqueId = shortUrlId
+      ? shortUrlId
+      : generateUniqueId({
+          length: 8,
+          useLetters: true,
+        });
     const newUrl = await ShortUrl.create({
       originalUrl,
       shortUrl: uniqueId,

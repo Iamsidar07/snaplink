@@ -14,7 +14,7 @@ export const columns = [
     header: "Short Link",
     cell: ({ row }) => {
       const { shortUrl } = row.original;
-      const url = `${config.domain}/s/${shortUrl}`;
+      const url = `${config.domain}/${shortUrl}`;
       return (
         <div className="flex items-center gap-2 group">
           <Copy

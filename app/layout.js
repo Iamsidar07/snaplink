@@ -1,7 +1,6 @@
 import "./globals.css";
 import Provider from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
-import Navbar from "@/components/Navbar";
 import { cn, constructMetadata } from "@/lib/utils";
 import { Bricolage_Grotesque } from "next/font/google";
 
