@@ -28,17 +28,21 @@ const Navbar = async () => {
           <span className="md:text-xl font-bold">Snaplink</span>
         </Link>
         <div className="flex items-center gap-2">
-          {session?.user && (
+          {session?.user ? (
             <Link
               className={buttonVariants({ variant: "link" })}
               href="/dashboard"
             >
               dashboard
             </Link>
+          ) : (
+            <Link
+              className={buttonVariants({ variant: "link" })}
+              href="/sign-up"
+            >
+              sign up
+            </Link>
           )}
-          <Link className={buttonVariants({ variant: "link" })} href="/sign-up">
-            sign up
-          </Link>
 
           <AuthButton session={session} />
         </div>
