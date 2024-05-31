@@ -12,7 +12,7 @@ const Navbar = async () => {
   return (
     <nav
       className={cn(
-        "w-full backdrop-blur sticky top-0 z-50 px-4 py-4 bg-gradient-to-b from-background to-transparent",
+        "w-full backdrop-blur sticky top-0 z-50 px-4 py-4 bg-gradient-to-b from-background to-transparent"
       )}
     >
       <MaxWidthWrapper className="flex items-center justify-between w-full">
@@ -36,6 +36,10 @@ const Navbar = async () => {
               dashboard
             </Link>
           )}
+          <Link className={buttonVariants({ variant: "link" })} href="/sign-up">
+            sign up
+          </Link>
+
           <AuthButton session={session} />
         </div>
       </MaxWidthWrapper>
