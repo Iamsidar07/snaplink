@@ -20,7 +20,6 @@ import { useToast } from "./ui/use-toast";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import config from "@/config";
 import { Skeleton } from "./ui/skeleton";
-import { generateShortLinkId } from "@/lib/utils";
 import generateUniqueId from "generate-unique-id";
 import { FacebookIcon, LinkedInIcon, TwitterIcon } from "@/lib/svg";
 
@@ -31,6 +30,7 @@ const CreateLink = () => {
   const [shortLinkId, setShortLinkId] = useState("");
   const [host, setHost] = useState("");
   // metatagEndpoint
+
   const metatagEndpoint = new URL(config.dubMetatagEndpointUrl);
   const params = new URLSearchParams({
     url: designationURL,
@@ -74,14 +74,13 @@ const CreateLink = () => {
     mutate(designationURL);
   };
 
-
   useEffect(() => {
     if (designationURL === "") return;
     const url = new URL(designationURL);
     const id = generateUniqueId({
       length: 8,
       useLetters: true,
-    })
+    });
     setShortLinkId(id);
     setHost(url.host);
     refetchMetadata();
@@ -173,7 +172,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <TwitterIcon/>
+                        <TwitterIcon />
                         <p>Twitter</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -196,7 +195,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <FacebookIcon/>
+                        <FacebookIcon />
                         <p>Facebook</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -222,7 +221,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <LinkedInIcon/>
+                        <LinkedInIcon />
                         <p>Linkedin</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -248,7 +247,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center gap-1 ">
-                        <TwitterIcon/>
+                        <TwitterIcon />
                         <p>Twitter</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -270,7 +269,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center gap-1 ">
-                        <FacebookIcon/>
+                        <FacebookIcon />
                         <p>Facebook</p>
                       </div>
                       <div className="border-b h-1 w-full" />
@@ -298,7 +297,7 @@ const CreateLink = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="border-b h-1 w-full" />
                       <div className="flex items-center ">
-                        <LinkedInIcon/>
+                        <LinkedInIcon />
                         <p>Linkedin</p>
                       </div>
                       <div className="border-b h-1 w-full" />
