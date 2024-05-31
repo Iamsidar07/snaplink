@@ -25,15 +25,6 @@ export const getClicksOverTime = async () => {
   return data;
 };
 
-export const signInWithGoogle = async () => {
-  try {
-    await signIn("google");
-  } catch (error) {
-    console.log("Error", error);
-    throw Error(error);
-  }
-};
-
 export const createAccount = async (formData) => {
   try {
     const res = await fetch(config.domain + "/api/createAccount", {
@@ -56,4 +47,12 @@ export const login = async ({ email, password, name }) => {
     name,
     redirectTo: "/dashboard",
   });
+};
+
+export const signInWithGoogle = async () => {
+  await signIn("google");
+};
+
+export const signInWithGithub = async () => {
+  await signIn("github");
 };
