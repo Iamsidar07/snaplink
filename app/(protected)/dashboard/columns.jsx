@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Copy } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import config from "@/config";
 import { convertToTimeAgo } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -48,7 +47,7 @@ export const columns = [
               src={`https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`}
               className="object-contain"
             />
-            <AvatarFallback className="uppercase">0</AvatarFallback>
+            <AvatarFallback className="uppercase">{origin[0]}</AvatarFallback>
           </Avatar>
           <Link
             href={originalUrl}

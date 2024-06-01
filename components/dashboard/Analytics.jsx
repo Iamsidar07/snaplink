@@ -9,8 +9,9 @@ import AnalyticsCard from "./AnalyticsCard";
 import useClicksOverTime from "@/hooks/useClicksOverTime";
 
 const Analytics = () => {
-  const { data: totalClicks = 0 } = useTotalClicks();
-  const { data: clicksOverTime = [], isClicksOverTimeLoading } =
+  const { data: totalClicks = 0, isLoading: isTotalClicksLoading } =
+    useTotalClicks();
+  const { data: clicksOverTime = [], isLoading: isClicksOverTimeLoading } =
     useClicksOverTime();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState(TIME_PERIOD_DATA.at(-1));
@@ -29,7 +30,6 @@ const Analytics = () => {
       clicks: dataFormatter(clicks),
     };
   });
-
 
   return (
     <div className="md:col-span-2">
@@ -78,7 +78,8 @@ const Analytics = () => {
       <AnalyticsCard
         totalClicks={totalClicks}
         data={chartdata}
-        isLoading={isClicksOverTimeLoading}
+        isClicksOverTimeLoading={isClicksOverTimeLoading}
+        isTotalClicksLoading={isTotalClicksLoading}
       />
     </div>
   );

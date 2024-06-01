@@ -1,4 +1,5 @@
 import config from "@/config";
+import { Suspense } from "react";
 
 const getShortenUrlCount = async () => {
   try {
@@ -8,10 +9,9 @@ const getShortenUrlCount = async () => {
     if (res.status === 500) {
       return 0;
     }
-
     return await res.json();
   } catch (error) {
-    console.log(error?.message);
+    console.log("Failed to get shorten url count:", error);
     return 0;
   }
 };
@@ -32,7 +32,9 @@ const UrlCount = async () => {
             "inline-block text-[#ECA23E] px-1 mx-1.5 sm:px-4 relative font-bold border-b border-dashed"
           }
         >
-          {count?.toLocaleString() ?? 0}
+          <Suspense fallback={<span>Loading...</span>}>
+            {count?.toLocaleString()}
+          </Suspense>
         </span>{" "}
         URL&apos;s Shortened <br /> and Counting!
       </h4>

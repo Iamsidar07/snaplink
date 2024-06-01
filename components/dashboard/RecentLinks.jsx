@@ -10,7 +10,7 @@ import {
   TableHead,
 } from "../ui/table";
 import { convertToTimeAgo } from "@/lib/utils";
-import { LinkIcon } from "lucide-react";
+import { LinkIcon, Loader } from "lucide-react";
 import Link from "next/link";
 import useUserLinks from "@/hooks/useUserLinks";
 
@@ -20,7 +20,7 @@ const RecentLinks = () => {
   return (
     <Card className="">
       <CardHeader>
-        <CardTitle>Recent Links {links.length}</CardTitle>
+        <CardTitle>Recent Links</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -32,6 +32,19 @@ const RecentLinks = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {isLoading && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <div className="flex items-center justify-center h-full">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center text-gray-500 dark:text-gray-400">
+                        <Loader className="animate-spin" />
+                      </div>
+                    </div>
+                  </div>
+                </TableCell>
+              </TableRow>
+            )}
             {links.slice(0, 5).map((link) => (
               <TableRow key={link.createdAt}>
                 <TableCell>
