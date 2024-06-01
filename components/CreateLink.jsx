@@ -1,14 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Link,
-  Twitter,
-  Image as ImageIcon,
-  Facebook,
-  Linkedin,
-  Loader,
-  Globe,
-} from "lucide-react";
+import { Link, Image as ImageIcon, Loader, Globe } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
 import Image from "next/image";
@@ -178,7 +170,7 @@ const CreateLink = () => {
                       <div className="border-b h-1 w-full" />
                     </div>
                     <div className="rounded-2xl overflow-hidden border relative">
-                      <img
+                      <Image
                         src={metadata.image}
                         alt=""
                         width={1920}
@@ -202,9 +194,11 @@ const CreateLink = () => {
                     </div>
                     <div className="overflow-hidden border">
                       <div className="h-[250px] overflow-hidden w-full flex items-center justify-center flex-col space-y-4 text-sm">
-                        <img
+                        <Image
                           src={metadata.image}
                           alt=""
+                          width={1920}
+                          height={720}
                           className="object-cover object-top"
                         />
                       </div>
@@ -228,9 +222,11 @@ const CreateLink = () => {
                     </div>
                     <div className="overflow-hidden border">
                       <div className="h-[250px] overflow-hidden w-full flex items-center justify-center flex-col space-y-4 text-sm">
-                        <img
+                        <Image
                           src={metadata.image}
                           alt=""
+                          width={1920}
+                          height={720}
                           className="object-cover object-top"
                         />
                       </div>
