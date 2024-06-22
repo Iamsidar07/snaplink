@@ -1,4 +1,9 @@
-export const publicRoutes = ["/", "/api/clicks", "/api/countLinks"];
+export const publicRoutes = [
+  "/",
+  "/api/clicks",
+  "/api/countLinks",
+  "/api/shortUrls",
+];
 
 export const authRoutes = ["/sign-in", "/sign-up"];
 
