@@ -1,7 +1,7 @@
 "use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -15,11 +15,14 @@ import { createAccount } from "@/actions";
 import SocialLogin from "@/components/auth/SocialLogin";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isLoading) return;
@@ -27,6 +30,7 @@ export default function SignUpPage() {
     try {
       setIsLoading(true);
       await createAccount(formData);
+      router.push("/");
     } catch (error) {
       console.log("error", error);
       toast({
@@ -68,9 +72,16 @@ export default function SignUpPage() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" name="password" />
             </div>
-            <Button type="submit" className="w-full">
-              Create an account
-            </Button>
+            <button
+              disabled={isLoading}
+              type="submit"
+              className={buttonVariants({
+                className: "w-full",
+              })}
+            >
+              {isLoading && <Loader className="animate-spin mr-2 w-5 h-5" />}
+              Create Account
+            </button>
           </form>
           <SocialLogin />
           <div className="mt-4 text-center text-sm">

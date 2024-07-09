@@ -15,7 +15,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { Loader } from "lucide-react";
 import { login } from "@/actions";
 import { useState } from "react";
-import LoginWithGoogle from "@/components/auth/LoginWithGoogle";
 import SocialLogin from "@/components/auth/SocialLogin";
 
 export default function SignInPage() {
@@ -25,12 +24,11 @@ export default function SignInPage() {
     event.preventDefault();
     if (isLoading) return;
     const formData = new FormData(event.currentTarget);
-    const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
     try {
       setIsLoading(true);
-      await login({ name, email, password });
+      await login({ email, password });
     } catch (error) {
       console.log("error", error);
       toast({

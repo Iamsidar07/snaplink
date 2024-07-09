@@ -36,7 +36,7 @@ export const providers = [
           throw new Error("Email and password are required.");
         }
         user = await prisma.users.findFirst({ where: { email } });
-        if (!user.password) return null;
+        if (user && !user.password) return null;
         if (!user) {
           // get random superhero name
           const superheroName = getSuperHero();
@@ -56,7 +56,7 @@ export const providers = [
 
         const isPasswordCorrect = await bcryptjs.compare(
           password,
-          user.password
+          user.password,
         );
         if (!isPasswordCorrect) {
           throw new Error("Invalid password.");

@@ -78,7 +78,6 @@ const CreateLink = () => {
     refetchMetadata();
   }, [designationURL, refetchMetadata]);
 
-  console.log(metadata);
   return (
     <div>
       <Drawer>

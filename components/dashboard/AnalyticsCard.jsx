@@ -36,7 +36,6 @@ const AnalyticsCard = ({
             colors={["yellow"]}
             valueFormatter={dataFormatter}
             yAxisWidth={60}
-            onValueChange={(v) => console.log(v)}
             showGridLines={false}
             autoMinValue
             showXAxis={false}

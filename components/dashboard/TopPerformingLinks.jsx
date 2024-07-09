@@ -36,7 +36,6 @@ const TopPerformingLinks = () => {
               colors={["yellow"]}
               valueFormatter={dataFormatter}
               yAxisWidth={48}
-              onValueChange={(v) => console.log(v)}
               showGridLines={false}
             />
           )}

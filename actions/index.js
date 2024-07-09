@@ -34,17 +34,16 @@ export const createAccount = async (formData) => {
     if (!res.ok) {
       throw new Error("Something went wrong");
     }
-    redirect("/sign-in");
   } catch (error) {
     console.log("Error", error);
+    throw error;
   }
 };
 
-export const login = async ({ email, password, name }) => {
+export const login = async ({ email, password }) => {
   await signIn("credentials", {
     email,
     password,
-    name,
     redirectTo: "/dashboard",
   });
 };
