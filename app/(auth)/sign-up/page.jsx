@@ -1,7 +1,7 @@
 "use client";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,15 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createAccount } from "@/actions";
+import { createAccount, login } from "@/actions";
 import SocialLogin from "@/components/auth/SocialLogin";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 
 export default function SignUpPage() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -30,7 +28,19 @@ export default function SignUpPage() {
     try {
       setIsLoading(true);
       await createAccount(formData);
-      router.push("/");
+      toast({
+        title: "Account has been created",
+      });
+      toast({
+        title: "Signing you in...",
+      });
+      await login({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      });
+      toast({
+        title: "You will be redirect soon...",
+      });
     } catch (error) {
       console.log("error", error);
       toast({
