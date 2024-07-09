@@ -24,7 +24,10 @@ export default auth((req) => {
     return null;
   }
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL("/sign-in", nextUrl));
+    if (nextUrl.pathname.length !== 9) {
+      return Response.redirect(new URL("/sign-in", nextUrl));
+    }
+    return null;
   }
   return null;
 });
