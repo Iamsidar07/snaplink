@@ -58,7 +58,7 @@ const ShortUrlForm = ({ className }) => {
           onChange={(e) => setOriginalUrl(e.target.value)}
           placeholder="Enter the link here"
         />
-        <Button disabled={isPending} type="submit">
+        <Button disabled={isPending || originalUrl.length === 0} type="submit">
           Shorten URL
         </Button>
       </form>

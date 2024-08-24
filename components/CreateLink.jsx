@@ -141,7 +141,7 @@ const CreateLink = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center h-14 sm:h-24  md:rounded-bl-2xl md:rounded-br-2xl z-10 mt-12 md:mt-0 md:absolute md:bottom-0 w-full border-t shadow">
                   <Button
-                    disabled={isPending}
+                    disabled={isPending || designationURL.length === 0}
                     type="submit"
                     className="w-full md:max-w-sm"
                   >
