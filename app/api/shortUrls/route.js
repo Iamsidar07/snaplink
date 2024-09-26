@@ -13,6 +13,7 @@ export const POST = auth(async (req) => {
   const { originalUrl, shortUrlId } = reqBody;
   const session = req.auth;
   const userId = session?.user?.id;
+  console.log({ userId }, typeof userId);
   const isValidUrl = validateURL(originalUrl);
   if (!isValidUrl) {
     return Response.json("Invalid URL", { status: 400 });
