@@ -25,11 +25,14 @@ export const POST = auth(async (req) => {
           length: 8,
           useLetters: true,
         });
-    const newUrl = await ShortUrl.create({
+    const newUrlData = {
       originalUrl,
       shortUrl: uniqueId,
-      userId: new mongoose.Types.ObjectId(userId) ?? null,
-    });
+    };
+    if (userId) {
+      newUrlData["userId"] = userId;
+    }
+    const newUrl = await ShortUrl.create(newUrlData);
     console.log("POST api/shortUrls-> Done");
     return Response.json(newUrl.shortUrl, { status: 201 });
   } catch (error) {
