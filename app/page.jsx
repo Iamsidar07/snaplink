@@ -16,7 +16,7 @@ export default function Home() {
       <div className="w-52 h-52 absolute left-1/4 top-[12rem] filter blur-[10rem] bg-gradient-to-r from-yellow-900 to-transparent" />
       <main className="overflow-x-hidden pb-12 md:pb-24">
         <ProductHunt />
-        <MaxWidthWrapper className="w-full mx-auto flex flex-col items-center py-12 md:py-24">
+        <MaxWidthWrapper className="w-full px-2 sm:px-0 mx-auto flex flex-col items-center py-6 md:py-24">
           <div className="w-full border-x border-dashed">
             <div className="border-x border-dashed p-8 w-fit mx-auto">
               <div className="p-px mx-auto w-fit rounded-3xl bg-gradient-to-r from-orange-700  to-blue-900 ">
@@ -26,7 +26,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
           <h1 className="text-center  border-y border-dashed w-full">
             Shorten. Share. Simplify.
           </h1>
@@ -42,15 +41,17 @@ export default function Home() {
           </div>
           <div className="h-24 w-full max-w-xl border-x border-dashed"></div>
         </MaxWidthWrapper>
-        <MaxWidthWrapper className="bg-gradient-to-b from-zinc-900  to-zinc-950 p-2 mt-12 border rounded-2xl">
-          <Image
-            src={`/dashboard.png`}
-            alt="hero"
-            height={1080}
-            width={1920}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top"
-            draggable={false}
-          />
+        <MaxWidthWrapper className="p-2 sm:p-0 mt-0 sm:mt-12 ">
+          <div className="bg-gradient-to-b from-zinc-900  to-zinc-950 p-2 border rounded-2xl">
+            <Image
+              src={`/dashboard.png`}
+              alt="hero"
+              height={1080}
+              width={1920}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top"
+              draggable={false}
+            />
+          </div>
         </MaxWidthWrapper>
         <WhyChooseUs />
         <UrlCount />

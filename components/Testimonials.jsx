@@ -23,11 +23,11 @@ const testimonials = [
 ];
 const Testimonials = () => {
   return (
-    <MaxWidthWrapper className="py-16 md:py-32">
+    <MaxWidthWrapper className="px-4 sm:px-0 py-16 md:py-32">
       <h2 className="capitalize text-left relative inline-block md:text-3xl font-bold">
         What other peoples are saying?
       </h2>
-      <div className="mt-8 md:mt-12 rounded-md max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex flex-col antialiased  dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <div className="mt-8 md:mt-12 rounded-md max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex flex-col antialiased  dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
         <InfiniteMovingCards
           items={testimonials}
           direction="right"

@@ -60,6 +60,10 @@
 }
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-b from-white via-zinc-50 to-gray-400;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 h1 {
   @apply text-[max(48px,min(5vw,76px))] font-bold gradient-text;

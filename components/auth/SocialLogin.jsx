@@ -5,7 +5,7 @@ import LoginWithGithub from "./LoginWithGithub";
 
 const SocialLogin = () => {
   return (
-    <div className="flex items-center gap-3 grid grid-cols-1 md:grid-cols-2">
+    <div className="flex flex-col gap-2 mt-4">
       <LoginWithGoogle />
       <LoginWithGithub />
     </div>

@@ -51,7 +51,9 @@ const RedirectToDesignationURL = ({ id }) => {
 
   return (
     <MaxWidthWrapper
-      className={"pt-12 space-y-4 grid place-content-center place-items-center"}
+      className={
+        "px-2 sm:px-0 pt-8 sm:pt-12 space-y-4 grid place-content-center place-items-center"
+      }
     >
       <Loader className="w-5 h-5 animate-spin" />
       <p>You are redirecting to your designation</p>

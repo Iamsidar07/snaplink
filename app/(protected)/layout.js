@@ -6,7 +6,7 @@ function DashboardLayout({ children }) {
   return (
     <div>
       <Navbar />
-      <div className="no-scrollbar h-[calc(100vh-60px)] md:h-auto w-full overflow-y-scroll">
+      <div className="px-2 sm:px-0 no-scrollbar h-[calc(100vh-60px)] md:h-auto w-full overflow-y-scroll">
         <Tabs />
         <MaxWidthWrapper className="flex-1 ">
           <div>{children}</div>

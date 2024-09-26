@@ -30,13 +30,13 @@ const WhyChooseUsCard = ({ feature: featureItem, index }) => {
 
 const WhyChooseUs = () => {
   return (
-    <div className="w-full h-full relative border-b border-[#333]">
+    <div className="w-full h-full relative border-b border-[#333] -px-4 sm:px-0">
       <div className="absolute inset-x-0 h-1/2 bg-gradient-to-t from-[#111111] to-transparent bottom-0 -z-[1]" />
-      <div className="pt-16 md:pt-32 max-w-7xl mx-auto">
+      <div className="pt-16 md:pt-32 max-w-7xl mx-auto px-4 sm:px-0">
         <h2 className="capitalize text-left relative inline-block font-bold">
           Why choose snaplink?
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16 md:mt-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16 md:mt-28 p-4">
           {FEATURES.map((featureItem, i) => (
             <WhyChooseUsCard key={i} feature={featureItem} index={i} />
           ))}
